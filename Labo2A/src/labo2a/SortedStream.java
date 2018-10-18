@@ -18,6 +18,7 @@ import java.util.stream.Stream;
  */
 public class SortedStream {
     
+<<<<<<< HEAD
     public void sort(){
         Stream<Student> sortedStream = this.studentenMaker().get();
         sortedStream.sorted(Comparator.comparing(Student::getAchternaam).thenComparing(Student::getVoornaam).thenComparing(Student::getStudentennummer)).forEach(s -> System.out.println(s.toString()));
@@ -34,4 +35,9 @@ public class SortedStream {
         Supplier<Stream<Student>> sup = () -> studenten.stream();
         return sup;
     }
+=======
+//    public Supplier<Stream<Student>> studentenMaker(){
+//        Supplier<Stream<Student>> sup = 
+//    }
+>>>>>>> 2e9e3d0a4d910a601f808ef8cf30e871ec5001a0
 }
