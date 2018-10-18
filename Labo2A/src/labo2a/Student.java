@@ -14,9 +14,10 @@ public class Student {
     private String achternaam;
     private int studentennummer;
     
-    public Student(String voornaam, String achternaam){
+    public Student(String voornaam, String achternaam, int studentennummer){
         this.voornaam = voornaam;
         this.achternaam = achternaam;
+        this.studentennummer = studentennummer;
     }
 
     public String getVoornaam() {
@@ -42,5 +43,11 @@ public class Student {
     public void setStudentennummer(int studentennummer) {
         this.studentennummer = studentennummer;
     }
+
+    @Override
+    public String toString() {
+        return "Student{" + "voornaam= " + voornaam + ", achternaam= " + achternaam + ", studentennummer= " + studentennummer + '}';
+    }
    
+
 }

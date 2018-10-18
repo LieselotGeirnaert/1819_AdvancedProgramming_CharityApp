@@ -101,4 +101,10 @@ public class Eindwerk implements Comparable<Eindwerk>{
        }
        
     }
+
+    @Override
+    public String toString() {
+        return "Eindwerk{" + "titel= " + titel + ", jaartal= " + jaartal + ", opleiding= " + opleiding + ", student= " + student + '}';
+    }
+    
 }
