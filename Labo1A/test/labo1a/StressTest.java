@@ -6,6 +6,7 @@
 package labo1a;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Random;
 import org.junit.After;
@@ -51,8 +52,14 @@ public class StressTest {
      */
     @Test
     public void testGetEindwerkenVanOpleiding() {
+         /* start timing */
+        long startTime = (new Date()).getTime();
         System.out.println("getEindwerkenVanOpleiding");
-        this.collectie.getEindwerkenVanOpleiding("ICT");     
+        this.collectie.getEindwerkenVanOpleiding("ICT");  
+        /* stop timing */
+        long stopTime = (new Date()).getTime();
+        long time = stopTime - startTime;
+        System.out.println(time);
     }
 
 
