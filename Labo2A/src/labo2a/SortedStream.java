@@ -14,7 +14,7 @@ import java.util.stream.Stream;
  */
 public class SortedStream {
     
-    public Supplier<Stream<Student>> studentenMaker(){
-        Supplier<Stream<Student>> sup = 
-    }
+//    public Supplier<Stream<Student>> studentenMaker(){
+//        Supplier<Stream<Student>> sup = 
+//    }
 }
