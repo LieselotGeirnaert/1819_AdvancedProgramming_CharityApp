@@ -7,6 +7,7 @@ package labo2a;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 import java.util.SortedSet;
 import java.util.TreeSet;
@@ -30,7 +31,8 @@ public class FilterStream {
     
     public void filterEndT(){
         Stream<Eindwerk> eindwerkenStream = this.eindwerkenMaker().get();
-        eindwerkenStream.filter(e -> e.getOpleiding().endsWith("T")).collect(Collectors.groupingBy(Eindwerk::getOpleiding, mapping(Eindwerk::getOpleiding, toSet()))).entrySet();
+
+        eindwerkenStream.filter(e -> e.getOpleiding().endsWith("T")).collect(Collectors.groupingBy(Eindwerk::getOpleiding));
     }
     
     private Supplier<Stream<Eindwerk>> eindwerkenMaker(){
