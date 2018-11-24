@@ -1,0 +1,37 @@
+{
+  "generator-jhipster": {
+    "promptValues": {
+      "packageName": "com.char1.app"
+    },
+    "jhipsterVersion": "5.7.0",
+    "applicationType": "monolith",
+    "baseName": "char1",
+    "packageName": "com.char1.app",
+    "packageFolder": "com/char1/app",
+    "serverPort": "8080",
+    "authenticationType": "jwt",
+    "cacheProvider": "ehcache",
+    "enableHibernateCache": true,
+    "websocket": false,
+    "databaseType": "sql",
+    "devDatabaseType": "mysql",
+    "prodDatabaseType": "mysql",
+    "searchEngine": false,
+    "messageBroker": false,
+    "serviceDiscoveryType": false,
+    "buildTool": "maven",
+    "enableSwaggerCodegen": true,
+    "jwtSecretKey": "ZTNmNzI4YjllMmJjYjhmY2Q1NGQ3NWJiZjIxZDVhNzAxNTA0Y2QzNjBjM2FlNWViMDMwOTYwNTE4OThmYzJiNTdiZjE2NjBmYTQ0NzFlMzE3NjNjNjAxNTgzMzU0ZTUyNDc3OTVhODgxMmIzNGUwNjhkZDQyMWQ3MGNkNDJhZjg=",
+    "clientFramework": "react",
+    "useSass": true,
+    "clientPackageManager": "npm",
+    "testFrameworks": [
+      "gatling",
+      "cucumber",
+      "protractor"
+    ],
+    "jhiPrefix": "jhi",
+    "otherModules": [],
+    "enableTranslation": false
+  }
+}
