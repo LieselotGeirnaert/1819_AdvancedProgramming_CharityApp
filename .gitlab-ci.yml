@@ -1,7 +1,7 @@
 cache:
     paths:
-        - .target/
-        - .mvn/
+        - $REPO_LOC/target/
+        - $REPO_LOC/.mvn/
 
 variables:
     REPO_LOC: './spring'
