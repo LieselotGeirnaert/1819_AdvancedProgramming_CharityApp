@@ -3,7 +3,7 @@ cache:
         - .target/
 
 variables:
-    REPO_LOC: '-Dmaven.repo.local=./spring'
+    REPO_LOC: './spring'
 
 stages:
     - build
@@ -12,22 +12,22 @@ stages:
     - deploy
 
 before_script:
-    - chmod +x ./mvnw
+    - chmod +x $REPO_LOC/mvnw
 
 maven-compile:
     stage: build
     script:
-        - ./mvnw compile $REPO_LOC
+        - ./mvnw compile -Dmaven.repo.local=$REPO_LOC
 
 maven-test:
     stage: test
     script:
-        - ./mvnw test $REPO_LOC
+        - ./mvnw test -Dmaven.repo.local=$REPO_LOC
 
 maven-package:
     stage: package
     script:
-        - ./mvnw package $REPO_LOC
+        - ./mvnw package -Dmaven.repo.local=$REPO_LOC
     artifacts:
         paths:
             - target/*.war
