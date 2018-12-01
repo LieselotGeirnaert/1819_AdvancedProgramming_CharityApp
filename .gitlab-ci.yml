@@ -12,23 +12,23 @@ stages:
     - deploy
 
 before_script:
-    - chmod +x $REPO_LOC/mvnw
-    - ls -alR $REPO_LOC
+    - cd $REPO_LOC
+    - chmod +x ./mvnw
 
 maven-compile:
     stage: build
     script:
-        - $REPO_LOC/mvnw compile -Dmaven.repo.local=$REPO_LOC
+        - ./mvnw compile
 
 maven-test:
     stage: test
     script:
-        - $REPO_LOC/mvnw test -Dmaven.repo.local=$REPO_LOC
+        - ./mvnw test
 
 maven-package:
     stage: package
     script:
-        - $REPO_LOC/mvnw package -Dmaven.repo.local=$REPO_LOC
+        - ./mvnw package
     artifacts:
         paths:
             - target/*.war
