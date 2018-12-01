@@ -4,6 +4,7 @@
     <groupId>com.char1</groupId>
     <artifactId>goal2give-rest-server</artifactId>
     <version>0.0.1-SNAPSHOT</version>
+    <packaging>war</packaging>
 
     <!-- Define the parent pom -->
     <parent>
