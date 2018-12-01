@@ -40,7 +40,7 @@ maven-package:
             - $REPO_LOC/target/*.war
         expire_in: 1 month
 
-# maven-deploy:
-#     stage: deploy $REPO_LOC
-#     script:
-#         - ./mvnw tomcat7:redeploy -Dmaven.repo.local=$MAVEN_USER_HOME
+maven-deploy:
+    stage: deploy
+    script:
+        - mvn tomcat7:redeploy
