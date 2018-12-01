@@ -18,17 +18,17 @@ before_script:
 maven-compile:
     stage: build
     script:
-        - $REPO_LOC/mvnw compile
+        - $REPO_LOC/mvnw compile -Dmaven.repo.local=$REPO_LOC
 
 maven-test:
     stage: test
     script:
-        - $REPO_LOC/mvnw test
+        - $REPO_LOC/mvnw test -Dmaven.repo.local=$REPO_LOC
 
 maven-package:
     stage: package
     script:
-        - $REPO_LOC/mvnw package
+        - $REPO_LOC/mvnw package -Dmaven.repo.local=$REPO_LOC
     artifacts:
         paths:
             - target/*.war
