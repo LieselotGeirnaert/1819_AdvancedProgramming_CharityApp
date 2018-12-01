@@ -1,6 +1,7 @@
 cache:
     paths:
         - .target/
+        - .mvn/
 
 variables:
     REPO_LOC: './spring'
@@ -14,6 +15,7 @@ stages:
 before_script:
     - cd $REPO_LOC
     - chmod +x ./mvnw
+    - ./mvnw dependency:go-offline
 
 maven-compile:
     stage: build
