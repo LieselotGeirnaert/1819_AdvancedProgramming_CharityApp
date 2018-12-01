@@ -11,3 +11,8 @@ Source: http://bennet-schulz.com/2018/04/12/quicktip-use-a-maven-wrapper/
 
 Unix: `./mvnw clean install`  
 Windows: `.\mvnw.cmd clean install`
+
+### Running Spring boot
+
+Unix: `./mvnw spring-boot:run`  
+Windows: `.\mvnw.cmd spring-boot:run`

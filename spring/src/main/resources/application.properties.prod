@@ -1,8 +1,13 @@
+######################################################################
+#  Rename this file to application.properties for local development  #
+#         Change the config below to your local environment          #
+######################################################################
+
 # Automatically update the database
 spring.jpa.hibernate.ddl-auto=update
 
 # The database connection URL
-spring.datasource.url=jdbc:mysql://10.129.32.15:3306/char1Robin?useSSL=false&useLegacyDatetimeCode=false&serverTimezone=UTC
+spring.datasource.url=jdbc:mysql://localhost:3306/char1?useSSL=false&useLegacyDatetimeCode=false&serverTimezone=UTC
 
 # Username
 spring.datasource.username=root
