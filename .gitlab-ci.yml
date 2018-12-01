@@ -9,7 +9,6 @@ stages:
     - initialize
     - build
     - test
-    - package
     - deploy
 
 before_script:
@@ -32,16 +31,11 @@ maven-test:
     script:
         - ./mvnw test
 
-maven-package:
-    stage: package
-    script:
-        - ./mvnw package
-    artifacts:
-        paths:
-            - $REPO_LOC/target/*.war
-        expire_in: 1 month
-
 maven-deploy:
     stage: deploy
     script:
         - mvn tomcat7:redeploy
+    artifacts:
+        paths:
+            - $REPO_LOC/target/*.war
+        expire_in: 1 month
