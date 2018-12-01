@@ -15,6 +15,7 @@ stages:
 before_script:
     - cd $REPO_LOC
     - chmod +x ./mvnw
+    - (cd ls)
     - (cd $REPO_LOC/src/main/resources && mv application.properties.prod application.properties)
 
 maven-fetch:
