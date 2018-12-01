@@ -1,0 +1,36 @@
+cache:
+    paths:
+        - .target/
+
+stages:
+    - build
+    - test
+    - package
+    - deploy
+
+before_script:
+    - chmod +x ./mvnw
+
+maven-compile:
+    stage: build
+    script:
+        - ./mvnw compile
+
+maven-test:
+    stage: test
+    script:
+        - ./mvnw test
+
+maven-package:
+    stage: package
+    script:
+        - ./mvnw package
+    artifacts:
+        paths:
+            - target/*.war
+        expire_in: 1 month
+
+maven-deploy:
+    stage: deploy
+    script:
+        - ./mvnw tomcat7:redeploy -Dmaven.repo.local=$MAVEN_USER_HOME
