@@ -6,7 +6,6 @@ variables:
     REPO_LOC: './spring'
 
 stages:
-    - initialize
     - build
     - test
     - deploy
@@ -15,11 +14,6 @@ before_script:
     - cd $REPO_LOC
     - chmod +x ./mvnw
     - (cd src/main/resources && mv application.properties.prod application.properties)
-
-maven-fetch:
-    stage: initialize
-    script:
-        - ./mvnw dependency:go-offline
 
 maven-compile:
     stage: build
