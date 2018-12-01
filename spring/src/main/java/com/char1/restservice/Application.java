@@ -4,6 +4,7 @@ import com.char1.restservice.entity.User;
 import com.char1.restservice.repository.UserRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
