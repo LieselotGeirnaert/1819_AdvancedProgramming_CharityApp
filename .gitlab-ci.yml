@@ -1,12 +1,12 @@
 cache:
     paths:
         - $REPO_LOC/target/
-        - $REPO_LOC/.mvn/
 
 variables:
     REPO_LOC: './spring'
 
 stages:
+    - initialize
     - build
     - test
     - package
@@ -15,7 +15,11 @@ stages:
 before_script:
     - cd $REPO_LOC
     - chmod +x ./mvnw
-    - ./mvnw dependency:go-offline
+
+maven-fetch:
+    stage: initialize
+    script:
+        - ./mvnw dependency:go-offline
 
 maven-compile:
     stage: build
@@ -33,7 +37,7 @@ maven-package:
         - ./mvnw package
     artifacts:
         paths:
-            - target/*.war
+            - $REPO_LOC/target/*.war
         expire_in: 1 month
 
 # maven-deploy:
