@@ -33,7 +33,7 @@ maven-test:
 maven-deploy:
     stage: deploy
     script:
-        - ./mvnw package spring-boot:repackage tomcat7:redeploy $PROD_PROFILE
+        - ./mvnw package spring-boot:repackage tomcat7:redeploy-only -DskipTests=true $PROD_PROFILE
         - mvn tomcat7:redeploy $PROD_PROFILE
     artifacts:
         paths:
