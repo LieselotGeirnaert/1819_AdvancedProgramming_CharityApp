@@ -1,4 +1,4 @@
-package com.char1.restservice.entity;
+package com.char1.api.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
