@@ -34,7 +34,7 @@ maven-deploy:
     stage: deploy
     script:
         - ./mvnw install spring-boot:repackage -DskipTests=true $PROD_PROFILE
-        - mvn tomcat7:deploy-only $PROD_PROFILE
+        - mvn tomcat7:redeploy $PROD_PROFILE
     artifacts:
         paths:
         - $REPO_LOC/target/*.war
