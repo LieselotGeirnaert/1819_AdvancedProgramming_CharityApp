@@ -18,7 +18,6 @@ before_script:
 maven-compile:
     stage: build
     script:
-        - ./mvnw validate $PROD_PROFILE
         - ./mvnw compile $PROD_PROFILE
         - ./mvnw test-compile $PROD_PROFILE
 
@@ -30,7 +29,7 @@ maven-test:
 maven-deploy:
     stage: deploy
     script:
-        - ./mvnw spring-boot:repackage $PROD_PROFILE
+        - ./mvnw install spring-boot:repackage -DskipTests=true $PROD_PROFILE
         - mvn tomcat7:deploy-only $PROD_PROFILE
     artifacts:
         paths:
