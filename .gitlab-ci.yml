@@ -5,6 +5,7 @@ cache:
 
 variables:
     REPO_LOC: './spring'
+    PROD_PROFILE: '-Dspring.profiles.active=prod'
 
 stages:
     - build
@@ -18,12 +19,12 @@ before_script:
 maven-compile:
     stage: build
     script:
-        - ./mvnw test-compile
+        - ./mvnw test-compile $PROD_PROFILE
 
 maven-test:
     stage: test
     script:
-        - ./mvnw test
+        - ./mvnw test $PROD_PROFILE
     artifacts:
         paths:
         - $REPO_LOC/target/surfire-reports/*
@@ -32,7 +33,7 @@ maven-test:
 maven-deploy:
     stage: deploy
     script:
-        - ./mvnw package tomcat7:redeploy-only -s .mvn/wrapper/settings.xml -DskipTests=true
+        - ./mvnw package tomcat7:redeploy-only -s .mvn/wrapper/settings.xml -DskipTests=true $PROD_PROFILE
     artifacts:
         paths:
         - $REPO_LOC/target/*.war
