@@ -1,23 +1,31 @@
 package com.char1.api.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import org.joda.time.DateTime;
+
+import javax.persistence.*;
 
 @Entity
 public class User {
 
     @Id
-    private String username;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private int id;
+    private String firstName;
+    private String lastName;
     private String password;
-    private String name;
-    private String email;
+    private String EmailAddress;
+    private DateTime passwordResetDate;
+    private String passwordReset;
 
-    public String getUsername() {
-        return username;
+    @OneToOne
+    private BankAccount bankAccount;
+
+    public String getLastName() {
+        return lastName;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public String getPassword() {
@@ -28,25 +36,62 @@ public class User {
         this.password = password;
     }
 
-    public String getName() {
-        return name;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
-    public String getEmail() {
-        return email;
+    public String getEmailAddress() {
+        return EmailAddress;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setEmailAddress(String emailAddress) {
+        this.EmailAddress = emailAddress;
+    }
+
+    public DateTime getPasswordResetDate() {
+        return passwordResetDate;
+    }
+
+    public void setPasswordResetDate(DateTime passwordResetDate) {
+        this.passwordResetDate = passwordResetDate;
+    }
+
+    public String getPasswordReset() {
+        return passwordReset;
+    }
+
+    public void setPasswordReset(String passwordReset) {
+        this.passwordReset = passwordReset;
+    }
+
+    public BankAccount getBankAccount() {
+        return bankAccount;
+    }
+
+    public void setBankAccount(BankAccount bankAccount) {
+        this.bankAccount = bankAccount;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     @Override
     public String toString() {
-        return "User{" + "username='" + username + '\'' + ", password='" + password + '\'' + ", name='" + name + '\''
-                + ", email='" + email + '\'' + '}';
+        return "User{" +
+                "firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", EmailAddress='" + EmailAddress + '\'' +
+                '}';
     }
+
+
 }
