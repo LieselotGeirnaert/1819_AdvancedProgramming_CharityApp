@@ -4,6 +4,7 @@ cache:
 
 variables:
     REPO_LOC: './spring'
+    PROD_PROFILE: '-Dprofile=prod'
 
 stages:
     - build
@@ -13,22 +14,21 @@ stages:
 before_script:
     - cd $REPO_LOC
     - chmod +x ./mvnw
-    - (cd src/main/resources && mv application.properties.prod application.properties)
 
 maven-compile:
     stage: build
     script:
-        - ./mvnw compile
+      - ./mvnw compile $PROD_PROFILE
 
 maven-test:
     stage: test
     script:
-        - ./mvnw test
+      - ./mvnw test $PROD_PROFILE
 
 maven-deploy:
     stage: deploy
     script:
-        - mvn tomcat7:redeploy
+      - mvn tomcat7:redeploy $PROD_PROFILE
     artifacts:
         paths:
             - $REPO_LOC/target/*.war
