@@ -4,7 +4,7 @@ cache:
 
 variables:
     REPO_LOC: './spring'
-    PROD_PROFILE: '-Dprofile=prod'
+    PROD_PROFILE: '-Dspring.profiles.active=prod'
 
 stages:
     - build
