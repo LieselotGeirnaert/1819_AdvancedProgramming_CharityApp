@@ -25,10 +25,9 @@ public class RestServerApplication extends SpringBootServletInitializer {
 	protected CommandLineRunner init(final UserRepository userRepository) {
 		return args -> {
 			User user = new User();
-			user.setUsername("admin");
 			user.setPassword("admin");
-			user.setName("Administrator");
-			user.setEmail("admin@javahelps.com");
+			user.setLastName("Administrator");
+			user.setEmailAddress("admin@char1.com");
 			userRepository.save(user);
 		};
 	}

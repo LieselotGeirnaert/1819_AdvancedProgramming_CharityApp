@@ -20,13 +20,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     protected void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(username -> {
-            User user = userRepository.getOne(username);
+        auth.userDetailsService(emailAddress -> {
+            User user = userRepository.getOne(emailAddress);
             if (user != null) {
-                return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(),
+                return new org.springframework.security.core.userdetails.User(user.getEmailAddress(), user.getPassword(),
                         true, true, true, true, AuthorityUtils.createAuthorityList("USER"));
             } else {
-                throw new UsernameNotFoundException("Could not find the user '" + username + "'");
+                throw new UsernameNotFoundException("Could not find the user '" + emailAddress + "'");
             }
         });
     }
