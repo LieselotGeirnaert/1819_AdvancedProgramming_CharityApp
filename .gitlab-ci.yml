@@ -18,6 +18,7 @@ before_script:
 maven-compile:
     stage: build
     script:
+        - ./mvnw validate $PROD_PROFILE
         - ./mvnw compile $PROD_PROFILE
         - ./mvnw test-compile $PROD_PROFILE
 
