@@ -1,0 +1,58 @@
+html {
+    background-color: #3C7A89;
+    font-family: 'Roboto', sans-serif;
+}
+
+.center {
+    color: white;
+    font-size: 400%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+#hamburger{
+    color: #7BCDBA;
+    text-decoration: none;
+    display: block;
+    float: right;
+    margin-right: 2rem;
+}
+
+#hamburger span {
+    font-size: 400%;
+}
+
+#overlaymenu {
+    background-color: #2E4756;
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+#closeoverlay{
+    color: #7BCDBA;
+    text-decoration: none;
+    display: block;
+    float: left;
+    margin-left: 2rem;
+}
+
+#closeoverlay span {
+    font-size: 400%;
+}
+
+.overlaycenter {
+    color: white;
+    font-size: 200%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}

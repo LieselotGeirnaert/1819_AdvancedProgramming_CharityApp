@@ -1,0 +1,79 @@
+<html>
+    <head>
+        <title>Goal2Give</title>
+        <link rel="stylesheet" type="text/css" href="css/start.css">
+        <link rel="stylesheet" type="text/css" href="css/style.css">
+        <link rel="stylesheet" type="text/css" href="css/index.css">
+        <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    </head>
+    <body>
+        <section id="content" class="center">
+            <header>
+                <img alt='Goal2Give Logo' src='img/Logo.png' id='logo'/>
+                <h1>Goal 2 Give</h1>
+            </header>
+            <navbar>
+                <ul>
+                    <li><a href="#" id="loginbutton">Login</a></li>
+                    <li><a href="#" id="registerbutton">Registreer</a></li>
+                </ul>
+            </navbar>
+            <section id="login">
+                <form id="loginform">
+                    <label class="inp">
+                        <input type="email" name="email" placeholder="&nbsp;">
+                        <span class="label">Emailadres</span>
+                        <span class="border"></span>
+                    </label>
+
+                    <label class="inp">
+                        <input type="password" name="password" placeholder="&nbsp;">
+                        <span class="label">Wachtwoord</span>
+                        <span class="border"></span>
+                    </label>
+                    
+                    <input type="submit" value="Aanmelden" class="submitbutton">
+                </form>
+            </section>
+            <section id="register" style="display: none;">
+                <form id="registerform">
+                    <label class="inp">
+                        <input type="text" name="prename" placeholder="&nbsp;">
+                        <span class="label">Voornaam</span>
+                        <span class="border"></span>
+                    </label>
+
+                    <label class="inp">
+                        <input type="text" name="lastname" placeholder="&nbsp;">
+                        <span class="label">Achternaam</span>
+                        <span class="border"></span>
+                    </label>
+
+                    <label class="inp">
+                        <input type="email" name="email" placeholder="&nbsp;">
+                        <span class="label">Emailadres</span>
+                        <span class="border"></span>
+                    </label>
+
+                    <label class="inp">
+                        <input type="password" name="password" placeholder="&nbsp;">
+                        <span class="label">Wachtwoord</span>
+                        <span class="border"></span>
+                    </label>
+
+                    <label class="inp">
+                        <input type="password" name="repeatpassword" placeholder="&nbsp;">
+                        <span class="label">Herhaal wachtwoord</span>
+                        <span class="border"></span>
+                    </label>
+                    
+                    <input type="submit" value="Registreer" class="submitbutton">
+                </form>
+            </section>
+        </section>
+
+        <script src="vendor/jquery-3.3.1.min.js"></script>
+        <script src="js/scripts.js"></script>
+        <script src="js/index.js"></script>
+    </body>
+</html>
