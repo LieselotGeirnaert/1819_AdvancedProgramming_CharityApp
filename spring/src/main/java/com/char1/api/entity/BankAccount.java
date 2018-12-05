@@ -5,6 +5,8 @@ import javax.persistence.*;
 @Entity
 public class BankAccount {
 
+
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
@@ -16,6 +18,14 @@ public class BankAccount {
 
     public void setBankAccount(String bankAccount) {
         BankAccount = bankAccount;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     @Override

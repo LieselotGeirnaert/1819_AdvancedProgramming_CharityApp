@@ -13,7 +13,7 @@ public class User {
     private String firstName;
     private String lastName;
     private String password;
-    private String EmailAddress;
+    private String emailAddress;
     private DateTime passwordResetDate;
     private String passwordReset;
 
@@ -45,11 +45,11 @@ public class User {
     }
 
     public String getEmailAddress() {
-        return EmailAddress;
+        return emailAddress;
     }
 
     public void setEmailAddress(String emailAddress) {
-        this.EmailAddress = emailAddress;
+        this.emailAddress = emailAddress;
     }
 
     public DateTime getPasswordResetDate() {
@@ -89,7 +89,7 @@ public class User {
         return "User{" +
                 "firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
-                ", EmailAddress='" + EmailAddress + '\'' +
+                ", EmailAddress='" + emailAddress + '\'' +
                 '}';
     }
 
