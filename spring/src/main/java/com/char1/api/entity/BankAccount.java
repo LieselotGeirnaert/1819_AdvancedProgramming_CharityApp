@@ -5,7 +5,7 @@ import javax.persistence.*;
 @Entity
 public class BankAccount {
 
-
+    public BankAccount() {}
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
