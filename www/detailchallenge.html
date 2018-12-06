@@ -1,0 +1,74 @@
+<html>
+  <head>
+    <title>Active Challenges - Goal2Give</title>
+    <link rel="stylesheet" type="text/css" href="css/start.css" />
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
+    <link rel="stylesheet" type="text/css" href="css/detailchallenge.css" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Roboto"
+      rel="stylesheet"
+    />
+  </head>
+
+  <body>
+    <!--
+      Voor de persoon die dit moet doen, Ik raad aan om display: none te verwijderen hier want da maakt debuggen ziek gemakkelijker.
+    -->
+    <section id="overlaymenu" style="display: none;">
+      <a id="closeoverlay" href="#"> <span>&#10006;</span> </a>
+      <!-- Insert overlaymenu hier -->
+      <section class="overlaycenter">
+        Hier moet dus het overlaymenu komen. Dat moet uiteraard maar een keer
+        geschreven worden en dan gecopy-paste.
+      </section>
+    </section>
+
+    <navbar>
+      <section>
+        <a id="hamburger" href="#"> <span>&#9776;</span> </a>
+      </section>
+    </navbar>
+    <section id="content" class="center">
+      <h1>Challenge</h1>
+      <h2>Water drinken</h2>
+      <p class="title">5 glazen water drinken per dag</p>
+      <h3>vooruitgang</h3>
+      <section class="challenge__day">
+        <h4>vandaag</h4>
+        <div class="progressbar">
+          <div class="progressbar__status" style="width:20%"></div>
+        </div>
+      </section>
+      <section class="challenge__day">
+        <h4>gisteren</h4>
+        <div class="progressbar">
+          <div class="progressbar__status" style="width:90%"></div>
+        </div>
+      </section>
+      <section class="challenge__day">
+        <h4>eergisteren</h4>
+        <div class="progressbar">
+          <div class="progressbar__status" style="width:100%"></div>
+        </div>
+      </section>
+      <section class="challenge__day">
+        <h4>24/11</h4>
+        <div class="progressbar">
+          <div class="progressbar__status" style="width:97%"></div>
+        </div>
+      </section>
+      <section class="challenge__day challenge__day--last">
+        <h4>...</h4>
+      </section>
+      <h3>Donatie</h3>
+      <section class="donation">
+        <p class="donation__company">Rode Kruis</p>
+        <p class="donation__money">€5</p>
+      </section>
+      <a href="" class="btn">doneren</a>
+    </section>
+    <script src="vendor/jquery-3.3.1.min.js"></script>
+    <script src="js/scripts.js"></script>
+    <script src="js/activechallenges.js"></script>
+  </body>
+</html>
