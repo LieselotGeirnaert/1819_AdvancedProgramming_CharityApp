@@ -1,0 +1,19 @@
+html {
+    background-color: #efefef;
+}
+
+h1 {
+    color: #3C7A89;
+    font-size: 1em;
+}
+
+.submitbutton {
+    background-color: white;
+    text-transform: uppercase;
+    color: #3C7A89;
+    border: 5px solid #7BCDBA;
+    padding: 1.5rem 10rem;
+    border-radius: 100px;
+    margin-top: 4rem;
+    font-size: 200%;
+}
