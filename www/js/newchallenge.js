@@ -1,8 +1,3 @@
-<<<<<<< HEAD
-$(window).on('load', function() {
-
-});
-=======
    ////////////////////////////////////
   // prerequisite utility functions //
  // the real stuff starts below    //
@@ -232,4 +227,3 @@ f: {
 	}
 }}
 window.onload = form.f.init.register
->>>>>>> bavo-challenge
