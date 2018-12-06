@@ -1,0 +1,89 @@
+html {
+  background-color: #e5e5e5;
+}
+
+.center {
+  top: 300px;
+}
+
+h1 {
+  color: #3c7a89;
+}
+
+h2 {
+  color: #7bcdba;
+}
+
+h3 {
+  color: #3c7a89;
+  padding: 100px 0px 30px;
+  text-transform: uppercase;
+}
+
+p.title {
+  background-color: #16262e;
+  border-radius: 10px;
+  padding: 100px;
+  width: 80%;
+}
+
+.challenge__day {
+  background-color: #3c7a89;
+  border-radius: 10px;
+  height: 250px;
+  margin: 20px;
+  width: 80%;
+}
+
+.challenge__day--last {
+  height: 135px;
+  text-align: center;
+}
+
+.challenge__day h4 {
+  font-weight: 100;
+  padding: 45px;
+  text-transform: uppercase;
+}
+
+.progressbar {
+  background-color: #16262e;
+  height: 25px;
+  margin: 35px auto 5px;
+  width: 90%;
+}
+
+.progressbar__status {
+  background-color: #7bcdba;
+  height: 25px;
+}
+
+.donation {
+  border-radius: 10px;
+  display: flex;
+  flex-direction: row;
+  font-size: 125%;
+  height: 100px;
+  text-align: center;
+  width: 80%;
+}
+
+.donation__company {
+  background-color: #7bcdba;
+  border-radius: 10px 0px 0px 10px;
+  color: #16262e;
+  padding: 20px;
+  width: 80%;
+}
+
+.donation__money {
+  background-color: #3c7a89;
+  border-radius: 0px 10px 10px 0px;
+  color: #e5e5e5;
+  padding: 20px;
+  width: 20%;
+}
+
+.btn {
+  color: #3c7a89;
+}
