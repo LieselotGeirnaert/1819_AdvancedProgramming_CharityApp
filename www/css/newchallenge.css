@@ -1,21 +1,18 @@
 html {
-    background-color: #efefef;
+  background-color: #efefef;
 }
 
 h1 {
-    color: #3C7A89;
+  color: #3c7a89;
 }
 
-.submitbutton {
-    text-transform: uppercase;
-    color: #3C7A89;
-    border: 5px solid #7BCDBA;
-    padding: 1.3rem 10rem;
-    border-radius: 100px;
-    margin-top: 8rem;
-    font-size: 6rem;
+.dropdown {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
 
+/* 
 label.dropdown {
     border-radius: 2px;
     color: #16262e;
@@ -287,4 +284,4 @@ p{
 #charity__label p {
     display: inline-block;
     margin: 0;
-}
+} */
