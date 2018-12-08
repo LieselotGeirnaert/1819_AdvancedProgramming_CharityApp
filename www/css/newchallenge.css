@@ -6,282 +6,66 @@ h1 {
   color: #3c7a89;
 }
 
-.dropdown {
+label,
+input,
+option,
+span {
+  color: #2e4756;
+}
+
+select {
+  margin: 30px;
+}
+
+.input--underline {
+  border-bottom-color: #2e4756;
+  margin: 15px 30px;
+  padding-bottom: 0px;
+}
+
+#count .input--underline {
+  text-align: center;
+  width: 5rem;
+}
+
+#info .input--underline {
+  text-align: center;
+  width: 15rem;
+}
+
+#category select,
+#challenge select {
+  width: 45rem;
+}
+
+#start input,
+#end input {
+  width: 29rem;
+}
+
+#addChallenge__form {
   display: flex;
-  flex-direction: row;
-  justify-content: space-between;
+  flex-direction: column;
+  align-items: center;
 }
 
-/* 
-label.dropdown {
-    border-radius: 2px;
-    color: #16262e;
-    display: block;
-    margin: 16px;
-    max-width: 800px;
-    padding: 8px;
-    opacity: 0;
-    position: relative;
-    -webkit-transition-property: opacity;
-    transition-property: opacity;
-    z-index: 1;
+#info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-label.dropdown span {
-    color: inherit;
-    display: block;
-    font-size: 1.3em;
-    height: 30px;
-    line-height: 30px;
-    left: 9px;
-    pointer-events: none;
-    position: absolute;
-    top: 32px;
-    -webkit-transform: scale(1) translateY(0);
-            transform: scale(1) translateY(0);
-    -webkit-transition-property: color, font-size, top;
-    transition-property: color, font-size, top;
-    z-index: 1;
+#info > span {
+  align-items: baseline;
+  display: flex;
+  flex-wrap: wrap;
 }
 
-label.dropdown span.required::after {
-    color: inherit;
-    content: "*";
-    display: block;
-    height: 30px;
-    left: -30px;
-    line-height: 30px;
-    position: absolute;
-    text-align: center;
-    top: 0;
-    width: 20px;
+#challenge,
+#count,
+#end {
+  margin-bottom: 8rem;
 }
-
-.error label.dropdown span {
-    color: #F02318;
+.btn {
+  color: #3c7a89;
 }
-
-label.dropdown .psuedo_select {
-    background: rgba(255, 255, 255, 0);
-    position: relative;
-    border-color: #16262e;
-    border-style: solid;
-    border-width: 0 0 2px 0;
-    color: #16262e;
-    cursor: pointer;
-    font-size: 0.8em;
-    height: 50px;
-    line-height: 50px;
-    margin: 34px 0 0 0;
-    min-width: 150px;
-    padding-top: 40px;
-    outline: 0;
-    z-index: 1;
-}
-
-label.dropdown .psuedo_select::after {
-    background: url("data:image/svg+xml;utf8,<svg fill='#666' height='50' viewBox='0 0 24 24' width='50' xmlns='http://www.w3.org/2000/svg'> <path d='M7.41 7.84L12 12.42l4.59-4.58L18 9.25l-6 6-6-6z'/> <path d='M0-.75h24v24H0z' fill='none'/> </svg>"), no-repeat;
-    content: "";
-    height: 50px;
-    width: 50px;
-    position: absolute;
-    top: -20px;
-    right: 0;
-    -webkit-transition-property: background;
-    transition-property: background;
-}
-
-label.dropdown .psuedo_select .selected {
-    height: 40px;
-    left: 1px;
-    line-height: 40px;
-    opacity: 0;
-    position: absolute;
-    top: 0;
-    -webkit-transform: translateY(40px);
-            transform: translateY(40px);
-    -webkit-transition-property: opacity, -webkit-transform;
-    transition-property: opacity, -webkit-transform;
-    transition-property: opacity, transform;
-    transition-property: opacity, transform, -webkit-transform;
-    will-change: transform;
-}
-
-label.dropdown .psuedo_select ul {
-    background-color: #efefef;  
-    box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.14);
-    display: block;
-    height: 0;
-    list-style: none;
-    margin-top: 2px;
-    opacity: 0;
-    overflow: hidden;
-    padding: 0 1px;
-    pointer-events: none;
-    -webkit-transition-property: height, opacity;
-    transition-property: height, opacity;
-    width: 100%;
-    z-index: 2;
-}
-
-label.dropdown .psuedo_select ul li {
-    background: #efefef;
-    height: 60px;
-    padding: 8px 4px;
-}
-
-label.dropdown .deselect {
-    height: 100vh;
-    left: 0;
-    position: fixed;
-    top: 0;
-    width: 100vw;
-    z-index: -1;
-}
-
-label.dropdown.focused {
-    color: #3C7A89;
-}
-
-label.dropdown.focused .psuedo_select {
-    border-color: #3C7A89;
-}
-
-label.dropdown.focused .psuedo_select::after {
-    background: url("data:image/svg+xml;utf8,<svg fill='#007BED' height='50' viewBox='0 0 24 24' width='50' xmlns='http://www.w3.org/2000/svg'> <path d='M7.41 7.84L12 12.42l4.59-4.58L18 9.25l-6 6-6-6z'/> <path d='M0-.75h24v24H0z' fill='none'/> </svg>"), no-repeat;
-}
-
-label.dropdown.focused .psuedo_select ul {
-    opacity: 1;
-    pointer-events: all;
-}
-
-p{
-    font-size: 4rem;
-    color:  #16262e;
-}
-
-.textfield p{
-   display: inline-block;
-}
-
-.textfield input {
-    border: 0;
-    border-bottom: 2px solid #3C7A89;
-    width: 100%;
-    font-size: 4rem;
-    line-height: 4rem;
-    text-align: center;
-    padding: 10px;
-    background: transparent;
-        color:#3C7A89;
-}
-
-
-.textfield input:focus {
-    outline: 0;
-        color:#3C7A89;
-}
-
-#category {
-    width: 400px;
-}
-
-#challenge {
-    width: 400px;
-}
-#per_day {
-    width: 70px;
-    margin-right: 5px;
-}
-
-#start_date {
-    width: 270px;
-}
-
-#end_date {
-    width: 270px;
-}
-
-#qualification {
-    width: 170px;
-    display: inline-block;
-}
-
-#qualification .selected{
-    color: #3C7A89;
-}
-
-#donation {
-    width: 100px;
-    margin-left: 10px;
-    margin-right: 10px;
-}
-
-#charity {
-    width: 450px;
-    display: inline-block;
-    margin-top: 20px;
-}
-
-#charity .selected{
-    color: #3C7A89;
-}
-
-#addchallengeform {
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    margin-top: 10px;
-}
-
-#category__label {
-    margin-top: 80px;
-    margin-bottom: 20px;
-}
-
-#challenge__label {
-    margin-top: 20px;
-    margin-bottom: 20px;
-}
-
-#per_day__label {
-    margin-top: 60px;
-    margin-bottom: 60px;
-}
-
-#start_date__label {
-    margin-top: 20px;
-    margin-bottom: 20px;
-}
-
-#start_date__label p {
-   margin-right: 40px;
-}
-
-#end_date__label {
-    margin-top: 20px;
-    margin-bottom: 20px;
-}
-
-#end_date__label p {
-    margin-right: 30px;
-}
-
-#qualification__label {
-    margin-top: 60px;
-}
-
-#qualification__label p {
-    display: inline-block;
-}
-
-#donation__label p {
-   display: inline-block;
-   margin-top: 40px;
-}
-
-#charity__label p {
-    display: inline-block;
-    margin: 0;
-} */
