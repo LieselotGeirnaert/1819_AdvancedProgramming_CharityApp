@@ -2,25 +2,34 @@ html {
   background-color: #e5e5e5;
 }
 
-.center {
-  top: 300px;
-}
-
 h1 {
   color: #3c7a89;
+  padding-bottom: 0rem;
 }
 
 h2 {
   color: #7bcdba;
+  font-size: 6rem;
 }
 
 h3 {
   color: #3c7a89;
-  padding: 100px 0px 30px;
+  padding: 10rem 0rem 3rem;
   text-transform: uppercase;
 }
 
-p.title {
+h4 {
+  color: #e5e5e5;
+  font-weight: 100;
+  padding: 4rem 4rem 4rem;
+  text-transform: uppercase;
+}
+
+p {
+  color: #e5e5e5;
+}
+
+p.detail {
   background-color: #16262e;
   border-radius: 10px;
   padding: 100px;
@@ -30,20 +39,14 @@ p.title {
 .challenge__day {
   background-color: #3c7a89;
   border-radius: 10px;
-  height: 250px;
-  margin: 20px;
+  height: 22rem;
+  margin: 2rem;
   width: 80%;
 }
 
 .challenge__day--last {
   height: 135px;
   text-align: center;
-}
-
-.challenge__day h4 {
-  font-weight: 100;
-  padding: 45px;
-  text-transform: uppercase;
 }
 
 .progressbar {
