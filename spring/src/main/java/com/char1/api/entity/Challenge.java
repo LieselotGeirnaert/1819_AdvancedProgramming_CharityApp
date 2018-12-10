@@ -20,7 +20,6 @@ public class Challenge {
     @OneToMany
     private Set<Category> category;
 
-
     public String getTitle() {
         return title;
     }

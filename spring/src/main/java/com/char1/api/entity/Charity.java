@@ -19,7 +19,6 @@ public class Charity {
 
     public Charity(){}
 
-
     public Charity(String name, String description, String linkToLogo) {
         this.name = name;
         this.description = description;

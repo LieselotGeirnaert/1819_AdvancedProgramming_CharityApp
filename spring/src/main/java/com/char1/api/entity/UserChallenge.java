@@ -1,5 +1,9 @@
 package com.char1.api.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.joda.time.DateTime;
 
 import javax.persistence.*;
@@ -19,13 +23,16 @@ public class UserChallenge {
     private DateTime deadlineDate;
     private int amountToDonate;
 
-    @ManyToOne
+    @ManyToOne(cascade =  CascadeType.ALL)
+    @JoinColumn(name="challenge_id")
     private Challenge challenge;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name="user_id")
     private User user;
 
     @ManyToOne
+    @JoinColumn(name="charity_id")
     private Charity charity;
 
     public boolean isCompleted() {
@@ -90,5 +97,17 @@ public class UserChallenge {
 
     public void setCharity(Charity charity) {
         this.charity = charity;
+    }
+
+    @Override
+    public String toString() {
+        return "UserChallenge{" +
+                "id=" + id +
+                ", completed=" + completed +
+                ", completeToDonate=" + completeToDonate +
+                ", startDate=" + startDate +
+                ", deadlineDate=" + deadlineDate +
+                ", amountToDonate=" + amountToDonate +
+                '}';
     }
 }
