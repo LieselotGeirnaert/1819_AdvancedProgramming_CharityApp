@@ -1,37 +1,78 @@
 html {
   background-color: #e5e5e5;
-}
-
-.center {
-  top: 300px;
+  height: 150%;
 }
 
 h1 {
   color: #3c7a89;
+  padding-bottom: 0rem;
 }
 
 h2 {
   color: #7bcdba;
+  font-size: 5rem;
 }
 
 h3 {
   color: #3c7a89;
-  padding: 100px 0px 30px;
+  padding: 10rem 0rem 3rem;
   text-transform: uppercase;
 }
 
-p.title {
+h4 {
+  color: #e5e5e5;
+  font-size: 3.5rem;
+  font-weight: 100;
+  padding: 4rem 4rem 0rem;
+  text-transform: uppercase;
+}
+
+p {
+  color: #e5e5e5;
+}
+
+.challenge__info {
   background-color: #16262e;
   border-radius: 10px;
-  padding: 100px;
+  padding: 4.5rem;
   width: 80%;
+}
+
+.challenge__info p {
+  font-weight: 100;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.challenge__info p:nth-child(2) {
+  font-weight: 300;
+  text-transform: none;
+}
+
+.challenge__period {
+  background-color: #7bcdba;
+  border-radius: 10px;
+  margin-top: 3rem;
+  padding: 4.5rem;
+  width: 80%;
+}
+
+.challenge__period div {
+  display: flex;
+  justify-content: space-between;
+}
+
+.challenge__period div:nth-child(1) {
+  font-size: 3.5rem;
+  font-weight: 300;
+  text-transform: uppercase;
 }
 
 .challenge__day {
   background-color: #3c7a89;
   border-radius: 10px;
-  height: 250px;
-  margin: 20px;
+  height: 18rem;
+  margin: 2rem;
   width: 80%;
 }
 
@@ -40,11 +81,11 @@ p.title {
   text-align: center;
 }
 
-.challenge__day h4 {
-  font-weight: 100;
-  padding: 45px;
-  text-transform: uppercase;
-}
+/* .challenge__day span {
+  color: #7bcdba;
+  font-size: 16rem;
+  width: 1rem;
+} */
 
 .progressbar {
   background-color: #16262e;
@@ -80,6 +121,7 @@ p.title {
   background-color: #3c7a89;
   border-radius: 0px 10px 10px 0px;
   color: #e5e5e5;
+  font-weight: 300;
   padding: 20px;
   width: 20%;
 }

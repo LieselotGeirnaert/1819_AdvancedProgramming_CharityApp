@@ -1,104 +1,116 @@
 <html>
-    <head>
-        <title>Create new challenge - Goal2Give</title>
-        <link rel="stylesheet" type="text/css" href="css/start.css">
-        <link rel="stylesheet" type="text/css" href="css/style.css">
-        <link rel="stylesheet" type="text/css" href="css/newchallenge.css">
-        <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
-    </head>
-    <body>
-        <!-- Voor de persoon die dit moet doen, Ik raad aan om display: none te verwijderen hier want da maakt debuggen ziek gemakkelijker.-->
-        <section id="overlaymenu" style="display: none;">
-            <a id="closeoverlay" href="#">
-                <span>&#10006;</span>
-            </a>
-            <!--
-                Insert overlaymenu hier
-            -->
-            <section class="overlaycenter">
-                    Hier moet dus het overlaymenu komen. Dat moet uiteraard maar een keer geschreven worden en dan gecopy-paste.
-            </section>
-        </section>
+  <head>
+    <title>Create new challenge - Goal2Give</title>
+    <link rel="stylesheet" type="text/css" href="css/start.css" />
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
+    <link rel="stylesheet" type="text/css" href="css/menu.css" />
+    <link rel="stylesheet" type="text/css" href="css/newchallenge.css" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <section id="overlaymenu">
+      <a id="closeoverlay" href="activechallenges.html">
+        <span>&#10006;</span>
+      </a>
+      <section class="overlaycenter">
+        <img src="" alt="" />
+        <ul>
+          <li><a href="">profiel</a></li>
+          <li><a href="">actieve challenges</a></li>
+          <li><a href="">challenge geschiedenis</a></li>
+          <li><a href="">goede doelen</a></li>
+          <li><a href="">afmelden</a></li>
+        </ul>
+      </section>
+    </section>
+    <navbar>
+      <a id="back" href="#"><span>&#8604;</span> </a>
+      <a id="hamburger" href="#"><span>&#9776;</span> </a>
+    </navbar>
+    <section id="content" class="center">
+      <h1>challenge<br />toevoegen</h1>
+      <section id="addChallenge">
+        <form id="addChallenge__form">
+          <div id="category">
+            <select name="category" id="category">
+              <option value="" disabled selected>Categorie</option>
+              <option value="optie1">Eerste optie</option>
+              <option value="optie2">Tweede optie</option>
+              <option value="optie3">Derde optie</option>
+              <option value="optie4">Vierde optie</option>
+            </select>
+          </div>
 
-        <navbar>
-            <section>
-                <a id="hamburger" href="#">
-                    <span>&#9776;</span>
-                </a>
-            </section>
-        </navbar>
-        <section id="content" class="center">
-        <h1>CHALLENGE<br/>TOEVOEGEN</h1>
-             <section id="addchallenge">
-                <form id="addchallengeform">
-                    <label id="category__label" class="dropdown" for="category"data-value="">
-                        <span>Category</span>
-                        <div id="category"class="psuedo_select"name="category">
-                            <span class="selected"></span>
-                            <ul id="category_options" class="options">
-                                <li class="option"data-value="opt_1">Option 1</li>
-                                <li class="option"data-value="opt_2">Option 2</li>
-                                <li class="option"data-value="opt_3">Option 3</li>
-                            </ul>
-                        </div>
-                    </label>
+          <div id="challenge">
+            <select name="challenge" id="challenge">
+              <option value="" disabled selected>Challenge</option>
+              <option value="optie1">Eerste optie</option>
+              <option value="optie2">Tweede optie</option>
+              <option value="optie3">Derde optie</option>
+              <option value="optie4">Vierde optie</option>
+            </select>
+          </div>
 
-                    <label id="challenge__label" class="dropdown" for="challenge"data-value="">
-                        <span>Challenge</span>
-                        <div id="challenge"class="psuedo_select"name="challenge">
-                            <span class="selected"></span>
-                            <ul id="challenge_options" class="options">
-                                <li class="option"data-value="opt_1">Option 1</li>
-                                <li class="option"data-value="opt_2">Option 2</li>
-                            </ul>
-                        </div>
-                    </label>
-                    
-                    <label id="per_day__label" class="textfield" for="per_day">
-                        <input type="text" id="per_day" name="per_day"><p> keer per dag</p>
-                    </label>
-                    
-                    <label id="start_date__label" class="textfield" for="start_date">
-                        <p>Start challenge </p><input type="date" id="start_date" name="start_date">
-                    </label>
-                   
-                    <label id="end_date__label" class="textfield" for="end_date">
-                        <p>Einde challenge </p><input type="date" id="end_date" name="end_date">
-                    </label>
+          <div id="count">
+            <input
+              type="number"
+              name="count"
+              class="input--underline"
+              min="1"
+            />
+            <label for="count">keer per dag</label>
+          </div>
 
-                    <label id="qualification__label" class="dropdown" for="qualification"data-value="">
-                        <p>Bij het </p>
-                        <div id="qualification"class="psuedo_select"name="qualification">
-                            <span class="selected"></span>
-                            <ul id="qualification_options" class="options">
-                                <li class="option"data-value="opt_1">goed</li>
-                                <li class="option"data-value="opt_2">slecht</li>
-                            </ul>
-                        </div>
-                        <p>uitvoeren van deze</p>
-                    </label>
+          <div id="start">
+            <label for="start">Start challenge</label>
+            <input type="date" name="start" class="input--underline" />
+          </div>
 
-                    <label id="donation__label" class="textfield" for="donation">
-                        <p>challenge doneer ik </p><input type="text" id="donation" name="donation"><p> euro</p>
-                    </label>
-                    
-                    <label id="charity__label" class="dropdown" for="charity"data-value="">
-                            <p>aan </p>
-                            <div id="charity"class="psuedo_select"name="charity">
-                                <span class="selected"></span>
-                                <ul id="qualification_options" class="options">
-                                    <li class="option"data-value="opt_1">goed</li>
-                                    <li class="option"data-value="opt_2">slecht</li>
-                                </ul>
-                            </div>
-                        </label>
-                    <input type="submit" value="Toevoegen" class="submitbutton">
-                </form>
-            </section>
-        </section>
+          <div id="end">
+            <label for="end">Einde challenge</label>
+            <input type="date" name="end" class="input--underline" />
+          </div>
 
-        <script src="vendor/jquery-3.3.1.min.js"></script>
-        <script src="js/scripts.js"></script>
-        <script src="js/newchallenge.js"></script>
-    </body>
+          <div id="info">
+            <span
+              >Bij het
+              <select name="result" id="result">
+                <option value="true" disabled selected>goed</option>
+                <option value="false">niet</option>
+              </select>
+              uitvoeren van deze
+            </span>
+            <span>
+              challenge doneer ik
+              <input
+                type="number"
+                name="amount"
+                min="0"
+                class="input--underline"
+              />
+              euro</span
+            >
+            <span>
+              aan
+              <select name="charity" id="charity">
+                <option value=""></option>
+                <option value="optie1">Eerste optie</option>
+                <option value="optie2">Tweede optie</option>
+                <option value="optie3">Derde optie</option>
+                <option value="optie4">Vierde optie</option>
+              </select>
+            </span>
+          </div>
+          <input type="submit" value="Toevoegen" class="btn" />
+        </form>
+      </section>
+    </section>
+
+    <script src="vendor/jquery-3.3.1.min.js"></script>
+    <script src="js/scripts.js"></script>
+    <script src="js/newchallenge.js"></script>
+  </body>
 </html>
