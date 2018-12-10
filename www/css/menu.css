@@ -18,9 +18,8 @@ a#closeoverlay > span {
 
 #overlaymenu {
   background-color: #2e4756;
-  display: flex;
+  display: none;
   flex-direction: column;
-
   height: 100%;
   width: 100%;
 }
