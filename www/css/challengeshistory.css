@@ -7,29 +7,23 @@ p {
 }
 
 .challengetile {
-  display: flex;
-  justify-content: center;
-  margin: 2rem 0rem;
-  width: 80%;
-}
-
-.challengetile__info {
   background-color: #2e4756;
   border-radius: 10px 0px 0px 10px;
   display: flex;
   flex-wrap: wrap;
   height: 30rem;
+  margin: 2rem 0rem;
   padding: 4rem 4rem;
   width: 80%;
 }
 
-.challengetile__info img {
+.challengetile img {
   background-color: gray;
   width: 15rem;
 }
 
 .challengetile__text {
-  padding-left: 3rem;
+  padding-left: 5rem;
 }
 
 .challengetile__text p:nth-child(1) {
@@ -48,17 +42,6 @@ p {
   font-weight: 200;
 }
 
-.challengetile__add {
-  align-items: center;
-  background-color: #7bcdba;
-  border-radius: 0px 10px 10px 0px;
-  display: flex;
-  font-size: 10rem;
-  height: 30rem;
-  justify-content: center;
-  width: 20%;
-}
-
 .progressbar {
   background-color: #16262e;
   height: 25px;
@@ -69,20 +52,4 @@ p {
 .progressbar__status {
   background-color: #7bcdba;
   height: 25px;
-}
-
-.addchallenge {
-  background-color: #7bcdba;
-  border-radius: 100%;
-  color: #e5e5e5;
-  height: 12rem;
-  margin-top: 35rem;
-  width: 12rem;
-}
-
-.addchallenge p {
-  font-size: 12rem;
-  margin: -15px;
-  text-align: center;
-  vertical-align: middle;
 }
