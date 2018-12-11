@@ -6,6 +6,8 @@ import java.util.Set;
 @Entity
 public class Challenge {
 
+    public Challenge() {}
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;

@@ -9,12 +9,22 @@ public class Charity {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
+    @Column(unique = true)
     private String name;
     private String description;
     private String linkToLogo;
 
     @OneToOne
     private BankAccount bankAccount;
+
+    public Charity(){}
+
+
+    public Charity(String name, String description, String linkToLogo) {
+        this.name = name;
+        this.description = description;
+        this.linkToLogo = linkToLogo;
+    }
 
     public String getName() {
         return name;

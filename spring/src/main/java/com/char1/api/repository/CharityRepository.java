@@ -6,4 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 public interface CharityRepository extends JpaRepository<Charity, String> {
 
     public Charity findById(int id);
+    public Charity findByName(String name);
 }

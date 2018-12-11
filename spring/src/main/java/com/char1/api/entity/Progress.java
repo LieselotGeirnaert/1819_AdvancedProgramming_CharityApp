@@ -7,6 +7,8 @@ import javax.persistence.*;
 @Entity
 public class Progress {
 
+    public Progress() {}
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
