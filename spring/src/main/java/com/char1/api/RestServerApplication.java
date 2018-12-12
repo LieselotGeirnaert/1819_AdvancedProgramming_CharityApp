@@ -8,8 +8,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 import org.springframework.context.annotation.Bean;
-import org.springframework.web.servlet.config.annotation.CorsRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 @SpringBootApplication // SpringBootServletInitializer needed for .WAR
 public class RestServerApplication extends SpringBootServletInitializer {
@@ -23,9 +21,4 @@ public class RestServerApplication extends SpringBootServletInitializer {
 		SpringApplication.run(RestServerApplication.class, args);
 	}
 
-	public class WebConfig extends WebMvcConfigurerAdapter {
-		@Override
-		public void addCorsMappings(CorsRegistry registry) {
-			registry.addMapping("/**");
-	}
 }
