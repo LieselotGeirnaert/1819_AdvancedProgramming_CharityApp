@@ -1,14 +1,10 @@
 package com.char1.api.entity;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import org.joda.time.DateTime;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 public class User {
@@ -20,6 +16,7 @@ public class User {
     private int id;
     private String firstName;
     private String lastName;
+    @JsonIgnore
     private String password;
     private String emailAddress;
     private DateTime passwordResetDate;

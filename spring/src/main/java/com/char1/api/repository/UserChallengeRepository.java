@@ -9,4 +9,5 @@ import java.util.List;
 public interface UserChallengeRepository extends JpaRepository<UserChallenge, String> {
     UserChallenge findById(int id);
     List<UserChallenge> findAllByUser(User user);
+    List<UserChallenge> findAllByUserAndAndCompleted(User user, boolean completed);
 }

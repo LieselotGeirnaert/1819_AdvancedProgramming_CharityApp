@@ -29,6 +29,7 @@ public class UserChallenge {
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="user_id")
+    @JsonIgnore
     private User user;
 
     @ManyToOne
@@ -82,6 +83,7 @@ public class UserChallenge {
     public void setChallenge(Challenge challenge) {
         this.challenge = challenge;
     }
+
 
     public User getUser() {
         return user;
