@@ -6,18 +6,21 @@ import com.char1.api.entity.UserChallenge;
 import com.char1.api.repository.ChallengeRepository;
 import com.char1.api.repository.UserChallengeRepository;
 import com.char1.api.repository.UserRepository;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import org.apache.commons.lang.math.NumberUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.awt.*;
 import java.util.List;
+
+import static org.springframework.web.bind.annotation.RequestMethod.GET;
 
 @RestController
 public class UserController {
@@ -34,11 +37,22 @@ public class UserController {
     }
 
     @GetMapping(value = "/user")
+    @ResponseBody
     public List<User> getAllUsers() {
         return userRepository.findAll();
     }
 
-    @GetMapping(value = "/user/{idUser}/challenge")
+    @RequestMapping(
+            value = "/user/{idUser}/challenge",
+            params = { "completed" },
+            method = GET)
+    public List<UserChallenge> getAllChallengesOfUserWithCompletion(@PathVariable String idUser, @RequestParam("completed") boolean completed) {
+        return userChallengeRepository.findAllByUserAndAndCompleted(getUser(idUser), completed);
+    }
+
+    @RequestMapping(
+            value = "/user/{idUser}/challenge",
+            method = GET)
     public List<UserChallenge> getAllChallengesOfUser(@PathVariable String idUser) {
         return userChallengeRepository.findAllByUser(getUser(idUser));
     }
