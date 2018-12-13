@@ -9,6 +9,14 @@ public class Progress {
 
     public Progress() {}
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
@@ -16,8 +24,6 @@ public class Progress {
     private DateTime entryDate;
     private int currentAmount;
 
-    @ManyToOne
-    private UserChallenge userChallenge;
 
     public DateTime getEntryDate() {
         return entryDate;
@@ -33,14 +39,6 @@ public class Progress {
 
     public void setCurrentAmount(int currentAmount) {
         this.currentAmount = currentAmount;
-    }
-
-    public UserChallenge getUserChallenge() {
-        return userChallenge;
-    }
-
-    public void setUserChallenge(UserChallenge userChallenge) {
-        this.userChallenge = userChallenge;
     }
 
     @Override

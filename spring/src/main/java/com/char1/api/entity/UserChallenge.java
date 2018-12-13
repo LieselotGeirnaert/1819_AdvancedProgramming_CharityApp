@@ -13,6 +13,14 @@ public class UserChallenge {
 
     public UserChallenge() {}
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
@@ -35,6 +43,18 @@ public class UserChallenge {
     @ManyToOne
     @JoinColumn(name="charity_id")
     private Charity charity;
+
+    public Progress getProgress() {
+        return progress;
+    }
+
+    public void setProgress(Progress progress) {
+        this.progress = progress;
+    }
+
+    @ManyToOne
+    @JoinColumn(name="progress_id")
+    private Progress progress;
 
     public boolean isCompleted() {
         return completed;
