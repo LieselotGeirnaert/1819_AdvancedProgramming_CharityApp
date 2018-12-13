@@ -7,6 +7,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.joda.time.DateTime;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class UserChallenge {
@@ -40,21 +41,17 @@ public class UserChallenge {
     @JsonIgnore
     private User user;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="charity_id")
     private Charity charity;
 
-    public Progress getProgress() {
-        return progress;
-    }
-
-    public void setProgress(Progress progress) {
+    public void setProgress(List<Progress> progress) {
         this.progress = progress;
     }
 
-    @ManyToOne
-    @JoinColumn(name="progress_id")
-    private Progress progress;
+    @OneToMany
+    @JsonManagedReference
+    private List<Progress> progress;
 
     public boolean isCompleted() {
         return completed;
