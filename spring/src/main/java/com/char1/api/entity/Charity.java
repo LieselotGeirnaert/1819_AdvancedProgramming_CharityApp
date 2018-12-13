@@ -20,6 +20,9 @@ public class Charity {
     @Column(unique = true)
     private String name;
     private String description;
+
+    @Lob
+    @Column
     private String linkToLogo;
 
     @OneToOne
