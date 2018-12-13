@@ -4,9 +4,7 @@ import com.char1.api.entity.Challenge;
 import com.char1.api.repository.ChallengeRepository;
 import org.apache.commons.lang.math.NumberUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -24,6 +22,11 @@ public class ChallengeController {
     @GetMapping(value = "/challenge")
     public List<Challenge> getAllChallenges() {
         return challengeRepository.findAll();
+    }
+
+    @PostMapping("/challenge")
+    public Challenge newChallenge(@RequestBody Challenge challenge) {
+        return challengeRepository.save(challenge);
     }
 
 }
