@@ -1,19 +1,16 @@
 package com.char1.api.repositories;
 
-import com.char1.api.RestServerApplication;
 import com.char1.api.entity.Charity;
 import com.char1.api.repository.CharityRepository;
-import com.char1.api.repository.UserRepository;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes={RestServerApplication.class})
+@SpringBootTest
 public class CharityRepositoryTests {
 
     @Autowired
