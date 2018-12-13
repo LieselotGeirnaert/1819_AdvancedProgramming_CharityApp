@@ -17,6 +17,24 @@ public class Challenge {
     private String unitToMeasure;
     private int amountToComplete;
 
+    public String getLinkToLogo() {
+        return linkToLogo;
+    }
+
+    public void setLinkToLogo(String linkToLogo) {
+        this.linkToLogo = linkToLogo;
+    }
+
+    private String linkToLogo;
+
+    public Set<Category> getCategory() {
+        return category;
+    }
+
+    public void setCategory(Set<Category> category) {
+        this.category = category;
+    }
+
     @OneToMany
     private Set<Category> category;
 

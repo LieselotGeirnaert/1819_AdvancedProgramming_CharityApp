@@ -36,6 +36,18 @@ public class UserChallenge {
     @JoinColumn(name="charity_id")
     private Charity charity;
 
+    public Progress getProgress() {
+        return progress;
+    }
+
+    public void setProgress(Progress progress) {
+        this.progress = progress;
+    }
+
+    @ManyToOne
+    @JoinColumn(name="progress_id")
+    private Progress progress;
+
     public boolean isCompleted() {
         return completed;
     }

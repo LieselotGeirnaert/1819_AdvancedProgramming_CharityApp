@@ -16,8 +16,6 @@ public class Progress {
     private DateTime entryDate;
     private int currentAmount;
 
-    @ManyToOne
-    private UserChallenge userChallenge;
 
     public DateTime getEntryDate() {
         return entryDate;
@@ -33,14 +31,6 @@ public class Progress {
 
     public void setCurrentAmount(int currentAmount) {
         this.currentAmount = currentAmount;
-    }
-
-    public UserChallenge getUserChallenge() {
-        return userChallenge;
-    }
-
-    public void setUserChallenge(UserChallenge userChallenge) {
-        this.userChallenge = userChallenge;
     }
 
     @Override
