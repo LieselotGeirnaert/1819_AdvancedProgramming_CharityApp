@@ -33,6 +33,8 @@ public class Challenge {
         this.linkToLogo = linkToLogo;
     }
 
+    @Lob
+    @Column
     private String linkToLogo;
 
     public Set<Category> getCategory() {
