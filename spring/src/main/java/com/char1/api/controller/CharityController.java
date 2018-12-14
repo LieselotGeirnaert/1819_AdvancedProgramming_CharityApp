@@ -1,34 +1,50 @@
 package com.char1.api.controller;
 
+import com.char1.api.controller.exception.DuplicateEntityException;
+import com.char1.api.controller.exception.EntityNotFoundException;
 import com.char1.api.entity.Charity;
 import com.char1.api.repository.CharityRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
+@RequestMapping(value = "/charity")
 public class CharityController {
 
     @Autowired
     CharityRepository charityRepository;
 
-    @GetMapping(value = "/charity/{id}")
-    public Charity charity(@PathVariable String id) {
-        return charityRepository.findById(Integer.parseInt(id));
+    private boolean charityExists(int id) {
+        Charity charity = charityRepository.findById(id);
+        if (charity == null) return false;
+        return true;
     }
 
-    @GetMapping(value = "/charity")
+    @GetMapping(value = "/{id}")
+    public Charity getCharity(@PathVariable int id) {
+        if (!charityExists(id)) throw new EntityNotFoundException();
+        return charityRepository.findById(id);
+    }
+
+    @GetMapping
     public List<Charity> getAllCharities() {
         return charityRepository.findAll();
     }
 
-    @PostMapping("/charity")
-    public Charity newCharity(@RequestBody Charity charity) {
+    @PostMapping
+    public Charity createCharity(@RequestBody Charity charity) {
+        Charity duplicatableCharity = charityRepository.findByName(charity.getName());
+        if (duplicatableCharity != null)
+            throw new DuplicateEntityException();
         return charityRepository.save(charity);
+    }
+
+    @DeleteMapping(value = "/{id}")
+    public void deleteCharity(@PathVariable int id) {
+        if (!charityExists(id)) throw new EntityNotFoundException();
+        charityRepository.deleteById(id);
+        return;
     }
 }
