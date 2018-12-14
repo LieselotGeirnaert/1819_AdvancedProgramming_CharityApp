@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import java.util.ArrayList;
 import org.joda.time.DateTime;
 
 import javax.persistence.*;
@@ -43,13 +44,13 @@ public class UserChallenge {
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="charity_id")
-    private Charity charity;
+    private Charity charity;  
 
     public void setProgress(List<Progress> progress) {
         this.progress = progress;
     }
 
-    @OneToMany
+    @OneToMany(mappedBy="userChallenge")
     @JsonManagedReference
     private List<Progress> progress;
 
