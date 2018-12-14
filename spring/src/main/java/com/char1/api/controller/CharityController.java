@@ -16,15 +16,9 @@ public class CharityController {
     @Autowired
     CharityRepository charityRepository;
 
-    private boolean charityExists(int id) {
-        Charity charity = charityRepository.findById(id);
-        if (charity == null) return false;
-        return true;
-    }
-
     @GetMapping(value = "/{id}")
     public Charity getCharity(@PathVariable int id) {
-        if (!charityExists(id)) throw new EntityNotFoundException();
+        if (!charityRepository.existsById(id)) throw new EntityNotFoundException();
         return charityRepository.findById(id);
     }
 
@@ -35,15 +29,13 @@ public class CharityController {
 
     @PostMapping
     public Charity createCharity(@RequestBody Charity charity) {
-        Charity duplicatableCharity = charityRepository.findByName(charity.getName());
-        if (duplicatableCharity != null)
-            throw new DuplicateEntityException();
+        if (charityRepository.existsByName(charity.getName())) throw new DuplicateEntityException();
         return charityRepository.save(charity);
     }
 
     @DeleteMapping(value = "/{id}")
     public void deleteCharity(@PathVariable int id) {
-        if (!charityExists(id)) throw new EntityNotFoundException();
+        if (!charityRepository.existsById(id)) throw new EntityNotFoundException();
         charityRepository.deleteById(id);
         return;
     }

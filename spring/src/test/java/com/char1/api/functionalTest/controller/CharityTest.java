@@ -31,7 +31,7 @@ public class CharityTest extends FunctionalTest {
     }
 
     @Before
-    public void fillWithDummyData() {
+    public void createDummyData() {
         dummyCharity = charityRepository.save(dummyCharity);
     }
 
