@@ -27,6 +27,11 @@ public class Progress {
     private DateTime entryDate;
     private int currentAmount;
 
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name="user_challenge_id")
+    @JsonBackReference
+    private UserChallenge userChallenge;
+    
     public UserChallenge getUserChallenge() {
         return userChallenge;
     }
@@ -34,11 +39,6 @@ public class Progress {
     public void setUserChallenge(UserChallenge userChallenge) {
         this.userChallenge = userChallenge;
     }
-
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name="user_challenge_id")
-    @JsonBackReference
-    UserChallenge userChallenge;
 
 
     public DateTime getEntryDate() {
