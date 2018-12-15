@@ -8,7 +8,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import static io.restassured.module.mockmvc.RestAssuredMockMvc.given;
+import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.equalTo;
 
 public class CategoryTest extends FunctionalTest {
@@ -39,7 +39,7 @@ public class CategoryTest extends FunctionalTest {
         Category FunCategory = new Category();
         FunCategory.setName("Fun");
 
-        given()
+        given().auth().oauth2(super.token)
                 .spec(super.requestSpecification)
                 .body(FunCategory)
                 .when().post("/category")
@@ -48,7 +48,7 @@ public class CategoryTest extends FunctionalTest {
 
     @Test
     public void createDuplicateCategory() {
-        given()
+        given().auth().oauth2(super.token)
                 .spec(super.requestSpecification)
                 .body(dummyCategory)
                 .when().post("/category")
@@ -59,7 +59,7 @@ public class CategoryTest extends FunctionalTest {
     public void getAllCategories() {
         createCategory();
 
-        given()
+        given().auth().oauth2(super.token)
                 .spec(super.requestSpecification)
                 .when().get("/category")
                 .then().statusCode(200).and().body("size()", equalTo(2));
@@ -67,7 +67,7 @@ public class CategoryTest extends FunctionalTest {
 
     @Test
     public void getCategory() {
-        given()
+        given().auth().oauth2(super.token)
                 .spec(super.requestSpecification)
                 .when().get("/category/" + dummyCategory.getId())
                 .then().statusCode(200);
@@ -75,7 +75,7 @@ public class CategoryTest extends FunctionalTest {
 
     @Test
     public void getCategoryWithInvalidId() {
-        given()
+        given().auth().oauth2(super.token)
                 .spec(super.requestSpecification)
                 .when().get("/category/1a")
                 .then().statusCode(400);
@@ -83,7 +83,7 @@ public class CategoryTest extends FunctionalTest {
 
     @Test
     public void getCategoryWithZeroId() {
-        given()
+        given().auth().oauth2(super.token)
                 .spec(super.requestSpecification)
                 .when().get("/category/0")
                 .then().statusCode(404);
@@ -91,7 +91,7 @@ public class CategoryTest extends FunctionalTest {
 
     @Test
     public void deleteCategoryWithInvalidId() {
-        given()
+        given().auth().oauth2(super.token)
                 .spec(super.requestSpecification)
                 .when().delete("/category/1a")
                 .then().statusCode(400);
@@ -99,7 +99,7 @@ public class CategoryTest extends FunctionalTest {
 
     @Test
     public void deleteCategoryWithZeroId() {
-        given()
+        given().auth().oauth2(super.token)
                 .spec(super.requestSpecification)
                 .when().delete("/category/0")
                 .then().statusCode(404);
@@ -107,7 +107,7 @@ public class CategoryTest extends FunctionalTest {
 
     @Test
     public void deleteCategory() {
-        given()
+        given().auth().oauth2(super.token)
                 .spec(super.requestSpecification)
                 .when().delete("/category/" + dummyCategory.getId())
                 .then().statusCode(200);

@@ -6,8 +6,10 @@ import com.char1.api.entity.UserChallenge;
 import com.char1.api.repository.ChallengeRepository;
 import com.char1.api.repository.UserChallengeRepository;
 import com.char1.api.repository.UserRepository;
+import edu.emory.mathcs.backport.java.util.Collections;
 import org.apache.commons.lang.math.NumberUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,8 +19,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.awt.*;
+import javax.servlet.http.HttpSession;
+import java.security.Principal;
 import java.util.List;
+import java.util.Map;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 
@@ -61,4 +65,10 @@ public class UserController {
     public User newUser(@RequestBody User user) {
         return userRepository.save(user);
     }
+
+
+
+
+
+
 }

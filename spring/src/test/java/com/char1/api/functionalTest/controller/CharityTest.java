@@ -9,7 +9,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import static io.restassured.module.mockmvc.RestAssuredMockMvc.given;
+import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.equalTo;
 
 public class CharityTest extends FunctionalTest {
@@ -50,7 +50,7 @@ public class CharityTest extends FunctionalTest {
         redCrossCharity.setLinkToLogo("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sK9ryrNh9A1ZsPoOi4l9wCT8xhhhhhhUDBAB7NpBRdKIBPc/MQYYYYTaeIBlf35tuiReMqht0SLhlUNOiRcMqhp0SLhlUNOiRcMqhh0SLhlUGs+QPZ0IMiUpSlKQvhmJ7O5/DP/aAAwDAQACAAMAAAAQ88888888888888888888888888888888888888NNNMa88888888888DAABW88888888888DAABW88888888888DAABW8888888sDDDAAAByDDD88888AAAAAAAAAAB88888AAAAAAAAABB88888CCCBAAACCCB8888DyyyBAABzyyE88888888DAABW88888888888DAABW88888888888pNNNT8888888888888888888888888888888888888/8QAJBEAAQEHBQEBAQAAAAAAAAAAAQARIDFRYZGxITBxofBBUOH/2gAIAQMBAT8Q/GJ2PVioLKgsqCyN9oItuRuWA54U9yNywHPCnuRuWA54U9gC+gDewqRuVSNyqRuUzfpFwAJbqiqRuVSNyhTFoMXfVUbfY4d9VRt9jh0gGvjQmJpiaYmgQYOMTTE0xNAjfeHddJiqbqpuqm6KiX1gOCiBf2VTdVN0RGEtmNywHPCnuRuWA54U9xiFLTgKg7VB2qDtQGSWfxv/xAAhEQABBAICAgMAAAAAAAAAAAAAAREgYTChMbEhUEFRkf/aAAgBAgEBPxD0zTisrKBjyOiGrk6IauTohq4EuN5eXj2hYCF5fJI2se/Hax78doZRlGWLKMoyif3iqORUVFQl4PqHCvgqKirD0Q1cnRDVyPZJWVlYsgi+m//EACYQAAIABQMFAAMBAAAAAAAAAAABESEwUfBAYcExQVBx0SBwsYH/2gAIAQEAAT8Q/RjJKLcEiOv6CCwgsILCCwgsILBhJoajp1Ft7gQVAs2bNmzZtFKz1cDcxT9HpnS/dWLSul+asWldL81YtK6X5qxaV0vzVi1+5q676RSmPIWiUaIlH8xBBBBBBSJsfUmyg4ZtLxm3co7iT+MIIIISe8DPiKVCgj2awulDZ105/HX+Af8AEX+Af8Rf4B/xF/gH/EX+Af8AEXUe+n/4i+j2P7xPnGjOuDGuDGuDGuDGuDOuCFGCPbioIjIfdebQlSjRw6GdcGNcGNcGNcDtGFhHVHRPf6lRURyYmT3J7k9ye5Oiu2Ys49tyZPcnuT3J3ROy1W5qxaV0vzVi0rpfmrFr/wA1Ytc+aUKlGd9Oh0Abgsno6Pcx2M34M34M34M34M34M34Ex2o6Jt0o+xKCgL9Ff//Z");
         redCrossCharity.setBankAccount(rodeKruisBankAccount);
 
-        given()
+        given().auth().oauth2(super.token)
                 .spec(super.requestSpecification)
                 .body(redCrossCharity)
                 .when().post("/charity")
@@ -70,7 +70,7 @@ public class CharityTest extends FunctionalTest {
     public void getAllCharities() {
         createCharity();
 
-        given()
+        given().auth().oauth2(super.token)
                 .spec(super.requestSpecification)
                 .when().get("/charity")
                 .then().statusCode(200).and().body("size()", equalTo(2));
@@ -78,7 +78,7 @@ public class CharityTest extends FunctionalTest {
 
     @Test
     public void getCharity() {
-        given()
+        given().auth().oauth2(super.token)
                 .spec(super.requestSpecification)
                 .when().get("/charity/" + dummyCharity.getId())
                 .then().statusCode(200);
@@ -86,7 +86,7 @@ public class CharityTest extends FunctionalTest {
 
     @Test
     public void getCharityWithInvalidId() {
-        given()
+        given().auth().oauth2(super.token)
                 .spec(super.requestSpecification)
                 .when().get("/charity/1a")
                 .then().statusCode(400);
@@ -94,7 +94,7 @@ public class CharityTest extends FunctionalTest {
 
     @Test
     public void getCharityWithZeroId() {
-        given()
+        given().auth().oauth2(super.token)
                 .spec(super.requestSpecification)
                 .when().get("/charity/0")
                 .then().statusCode(404);
@@ -102,7 +102,7 @@ public class CharityTest extends FunctionalTest {
 
     @Test
     public void deleteCharityWithInvalidId() {
-        given()
+        given().auth().oauth2(super.token)
                 .spec(super.requestSpecification)
                 .when().delete("/charity/1a")
                 .then().statusCode(400);
@@ -110,7 +110,7 @@ public class CharityTest extends FunctionalTest {
 
     @Test
     public void deleteCharityWithZeroId() {
-        given()
+        given().auth().oauth2(super.token)
                 .spec(super.requestSpecification)
                 .when().delete("/charity/0")
                 .then().statusCode(404);
@@ -118,7 +118,7 @@ public class CharityTest extends FunctionalTest {
 
     @Test
     public void deleteCharity() {
-        given()
+        given().auth().oauth2(super.token)
                 .spec(super.requestSpecification)
                 .when().delete("/charity/" + dummyCharity.getId())
                 .then().statusCode(200);
