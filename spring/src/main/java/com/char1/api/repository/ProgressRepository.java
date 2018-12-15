@@ -5,7 +5,7 @@ import com.char1.api.entity.UserChallenge;
 import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface ProgressRepository extends JpaRepository<Progress, String> {
+public interface ProgressRepository extends JpaRepository<Progress, Integer> {
     Progress findProgressById(int id);
     List<Progress> findAllProgressByUserChallenge(UserChallenge userChallenge);
 
