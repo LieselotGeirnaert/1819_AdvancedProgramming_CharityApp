@@ -3,12 +3,9 @@ package com.char1.api.controller;
 
 import com.char1.api.controller.exception.EntityNotFoundException;
 import com.char1.api.entity.Progress;
-import com.char1.api.entity.UserChallenge;
 import com.char1.api.repository.ProgressRepository;
 import com.char1.api.repository.UserChallengeRepository;
 import java.util.List;
-import java.util.Optional;
-import org.apache.commons.lang.math.NumberUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,7 +13,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -55,5 +51,5 @@ public class ProgressController {
         if (!progressRepository.existsById(id)) throw new EntityNotFoundException();
         progressRepository.deleteById(id);
         return;
-    }
+    }   
 }

@@ -8,5 +8,4 @@ import org.springframework.data.jpa.repository.JpaRepository;
 public interface ProgressRepository extends JpaRepository<Progress, Integer> {
     Progress findProgressById(int id);
     List<Progress> findAllProgressByUserChallenge(UserChallenge userChallenge);
-
 }
