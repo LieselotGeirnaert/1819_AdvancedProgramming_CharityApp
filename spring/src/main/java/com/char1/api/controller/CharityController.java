@@ -16,6 +16,7 @@ public class CharityController {
     @Autowired
     CharityRepository charityRepository;
 
+
     @GetMapping(value = "/{id}")
     public Charity getCharity(@PathVariable int id) {
         if (!charityRepository.existsById(id)) throw new EntityNotFoundException();

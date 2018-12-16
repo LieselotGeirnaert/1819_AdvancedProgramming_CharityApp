@@ -26,6 +26,9 @@ import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.context.WebApplicationContext;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import static io.restassured.RestAssured.given;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
@@ -52,16 +55,20 @@ public class FunctionalTest {
 
     protected String token;
 
+    private static final Logger LOGGER = Logger.getLogger(FunctionalTest.class.getName());
 
 
     public void obtainAccessToken(String username, String password) throws JSONException {
+
         Response response = given().auth().preemptive().basic("char1Client", "f2a1ed52710d4533bde25be6da03b6e3")
                 .formParam("grant_type", "password")
                 .formParam("username", username)
                 .formParam("password", password)
                 .formParam("scope", "read")
                 .when().post("/oauth/token");
+        LOGGER.log(Level.INFO, response.toString());
         JSONObject jsonObject = new JSONObject(response.getBody().asString());
+        LOGGER.log(Level.INFO, jsonObject.toString());
         token = jsonObject.get("access_token").toString();
     }
 
@@ -77,7 +84,7 @@ public class FunctionalTest {
         try {
             obtainAccessToken("test@tester.be", "hash");
         } catch (Exception e) {
-            System.out.println("couldnt get access token: " + e.getMessage());
+            LOGGER.log(Level.SEVERE,"couldnt get access token: " + e.getMessage());
 
         }
     }
