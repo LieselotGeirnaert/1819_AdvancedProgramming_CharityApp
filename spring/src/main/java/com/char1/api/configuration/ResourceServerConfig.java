@@ -32,9 +32,11 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
     public void configure(HttpSecurity http) throws Exception {
         http.requestMatchers()
             .and()
-            .authorizeRequests().anyRequest().authenticated()
+            .authorizeRequests()
             .antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
-            .antMatchers("charity/**", "challenge/**", "category/**", "user/**" ).authenticated()
+            .antMatchers(HttpMethod.POST, "/user").permitAll()
+            .antMatchers("/charity/**", "/challenge/**", "/category/**").authenticated()
+            .anyRequest().authenticated()
             .and()
             .formLogin()
             .and()
