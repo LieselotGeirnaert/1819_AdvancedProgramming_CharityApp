@@ -53,7 +53,7 @@ public class FunctionalTest {
 
     protected RequestSpecification requestSpecification;
 
-    protected String token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOlsiRW1ibGFNYWdhemluZVJlc3RBUEkiXSwidXNlcl9uYW1lIjoidGVzdEB0ZXN0ZXIuYmUiLCJzY29wZSI6WyJyZWFkIl0sImV4cCI6MTU0NDk2OTkwOCwiYXV0aG9yaXRpZXMiOlsiYWRtaW4iLCJ1c2VyIl0sImp0aSI6ImFmZDI5ODY5LTc1OWUtNDNjYy1hOGRlLTU4NDAwMjkyYmFhOCIsImNsaWVudF9pZCI6ImNoYXIxQ2xpZW50In0.vvKmHhhq6xNV7huit7vpA_nX5fKjSTfj4ytgPjKNj_Q";
+    protected String token;
 
     private static final Logger LOGGER = Logger.getLogger(FunctionalTest.class.getName());
 
@@ -83,9 +83,9 @@ public class FunctionalTest {
                 .setContentType(ContentType.JSON)
                 .build();
         try {
-            //obtainAccessToken("test@tester.be", "hash");
+            obtainAccessToken("test@tester.be", "hash");
         } catch (Exception e) {
-            //LOGGER.log(Level.SEVERE,"couldnt get access token: " + e.getMessage());
+            LOGGER.log(Level.SEVERE,"couldnt get access token: " + e.getMessage());
 
         }
     }
