@@ -6,27 +6,22 @@
 package com.char1.api.functionalTest.controller;
 
 import com.char1.api.RestServerApplication;
-import com.char1.api.controller.ProgressController;
-import com.char1.api.controller.UserController;
 import com.char1.api.entity.Challenge;
 import com.char1.api.entity.Progress;
 import com.char1.api.entity.User;
 import com.char1.api.entity.UserChallenge;
 import com.char1.api.functionalTest.FunctionalTest;
 import com.char1.api.repository.ProgressRepository;
-import com.char1.api.repository.UserChallengeRepository;
-import static io.restassured.module.mockmvc.RestAssuredMockMvc.given;
-import static org.hamcrest.Matchers.equalTo;
 import org.junit.After;
-import org.junit.AfterClass;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
-import static org.junit.Assert.*;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
+
+import static io.restassured.module.mockmvc.RestAssuredMockMvc.given;
+import static org.hamcrest.Matchers.equalTo;
 
 /**
  *
@@ -37,9 +32,6 @@ import org.springframework.test.context.junit4.SpringRunner;
 public class ProgressTest extends FunctionalTest{
     
     private Progress dummyProgress;
-
-    @Autowired
-    private UserChallengeRepository userChallengeRepository;
     
     @Autowired 
     private ProgressRepository progressRepository;
@@ -106,8 +98,24 @@ public class ProgressTest extends FunctionalTest{
     public void getProgressByUserChallengeId() {
         given()
                 .spec(super.requestSpecification)
-                .when().get("/progress/" + dummyProgress.getUserChallenge().getId() + "/userchallenge")
+                .when().get("/progress/userChallenge/" + dummyProgress.getUserChallenge().getId())
                 .then().statusCode(200);
+    }
+
+    @Test
+    public void getProgressByUserChallengeWithInvalidId() {
+        given()
+                .spec(super.requestSpecification)
+                .when().get("/progress/userChallenge/1a")
+                .then().statusCode(400);
+    }
+
+    @Test
+    public void getProgressByUserChallengeWithZeroId() {
+        given()
+                .spec(super.requestSpecification)
+                .when().get("/progress/userChallenge/0")
+                .then().statusCode(404);
     }
     
     @Test
