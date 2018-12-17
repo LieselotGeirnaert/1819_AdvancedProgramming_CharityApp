@@ -19,41 +19,41 @@
       </ul>
 
       <section id="login">
-        <form id="login__form">
+        <form id="login__form" action="/" method="post">
           <div class="input--underline">
             <label for="email">xxx</label>
-            <input type="email" name="email" placeholder="Emailadres" />
+            <input type="email" id="login__email" name="email" placeholder="Emailadres" />
           </div>
 
           <div class="input--underline">
             <label for="password">xxx</label>
-            <input type="password" name="password" placeholder="Wachtwoord" />
+            <input type="password" id="login__password" name="password" placeholder="Wachtwoord" />
           </div>
-          <input type="submit" value="Aanmelden" class="btn" />
+          <input type="submit" id="login" value="Aanmelden" class="btn" />
         </form>
       </section>
 
       <section id="register" style="display: none;">
-        <form id="register__form">
+        <form id="register__form" action="/" method="post">
           <div class="input--underline">
-            <input type="text" id="prename" name="prename" placeholder="Voornaam" />
+            <input type="text" id="register__prename" name="prename" placeholder="Voornaam" />
           </div>
 
           <div class="input--underline">
-            <input type="text" id="lastname" name="lastname" placeholder="Achternaam" />
+            <input type="text" id="register__lastname" name="lastname" placeholder="Achternaam" />
           </div>
 
           <div class="input--underline">
-            <input type="email" id="email" name="email" placeholder="Emailadres" />
+            <input type="email" id="register__email" name="email" placeholder="Emailadres" />
           </div>
 
           <div class="input--underline">
-            <input type="password" id="password" name="password" placeholder="Wachtwoord" />
+            <input type="password" id="register__password" name="password" placeholder="Wachtwoord" />
           </div>
 
           <div class="input--underline">
             <input
-              type="password" id="repeatpassword" name="repeatpassword" placeholder="Herhaal wachtwoord"
+              type="password" id="register__repeatpassword" name="repeatpassword" placeholder="Herhaal wachtwoord"
             />
           </div>
           <input type="submit" id="register" value="Registreer" class="btn" disabled="disabled" />
