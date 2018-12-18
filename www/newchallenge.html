@@ -32,30 +32,25 @@
       <h1>challenge<br />toevoegen</h1>
       <section id="addChallenge">
         <form id="addChallenge__form">
-          <div id="category">
+          <div id="category__block">
             <select name="category" id="category">
-              <option value="" disabled selected>Categorie</option>
-              <option value="optie1">Eerste optie</option>
-              <option value="optie2">Tweede optie</option>
-              <option value="optie3">Derde optie</option>
-              <option value="optie4">Vierde optie</option>
+              <option value="-1" disabled selected>Categorie</option>
             </select>
+            <span class="message message--error" id="errCategory"></span>
           </div>
 
-          <div id="challenge">
+          <div id="challenge__block">
             <select name="challenge" id="challenge">
-              <option value="" disabled selected>Challenge</option>
-              <option value="optie1">Eerste optie</option>
-              <option value="optie2">Tweede optie</option>
-              <option value="optie3">Derde optie</option>
-              <option value="optie4">Vierde optie</option>
+              <option value="-1" disabled selected>Challenge</option>
             </select>
+            <span class="message message--error" id="errChallenge"></span>
           </div>
 
-          <div id="count">
+          <div id="count_block">
             <input
               type="number"
               name="count"
+              id="count"
               class="input--underline"
               min="1"
             />
@@ -86,6 +81,7 @@
               <input
                 type="number"
                 name="amount"
+                id="amount"
                 min="0"
                 class="input--underline"
               />
@@ -95,10 +91,6 @@
               aan
               <select name="charity" id="charity">
                 <option value=""></option>
-                <option value="optie1">Eerste optie</option>
-                <option value="optie2">Tweede optie</option>
-                <option value="optie3">Derde optie</option>
-                <option value="optie4">Vierde optie</option>
               </select>
             </span>
           </div>
