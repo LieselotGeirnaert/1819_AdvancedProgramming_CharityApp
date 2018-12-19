@@ -1,9 +1,18 @@
 package com.char1.api.entity;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 @Entity
 public class Charity {
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -12,9 +21,12 @@ public class Charity {
     @Column(unique = true)
     private String name;
     private String description;
+
+    @Lob
+    @Column
     private String linkToLogo;
 
-    @OneToOne
+    @OneToOne(cascade = {CascadeType.ALL})
     private BankAccount bankAccount;
 
     public Charity(){}
@@ -55,6 +67,19 @@ public class Charity {
 
     public void setBankAccount(BankAccount bankAccount) {
         this.bankAccount = bankAccount;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Charity charity = (Charity) o;
+        return id == charity.id;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 
     @Override

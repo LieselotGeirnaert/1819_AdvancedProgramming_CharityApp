@@ -25,6 +25,23 @@ Windows: `.\mvnw.cmd spring-boot:run`
 
 http://10.129.32.15:8080
 
+### AUTHORIZATION
+
+voor testen via postman
+
+Authorization
+Oauth2.0
+
+Get new access token
+Access Token URL: localhost:8080/oauth/token
+Username: {username}
+Password: {password}
+ClientID: char1Client
+Client Secret: f2a1ed52710d4533bde25be6da03b6e3
+
+Use this token for your calls
+
+
 ## Available Rest Calls
 
 ### Charity

@@ -8,6 +8,14 @@ public class Challenge {
 
     public Challenge() {}
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
@@ -16,6 +24,26 @@ public class Challenge {
     private String description;
     private String unitToMeasure;
     private int amountToComplete;
+
+    public String getLinkToLogo() {
+        return linkToLogo;
+    }
+
+    public void setLinkToLogo(String linkToLogo) {
+        this.linkToLogo = linkToLogo;
+    }
+
+    @Lob
+    @Column
+    private String linkToLogo;
+
+    public Set<Category> getCategory() {
+        return category;
+    }
+
+    public void setCategory(Set<Category> category) {
+        this.category = category;
+    }
 
     @OneToMany
     private Set<Category> category;

@@ -4,14 +4,24 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import java.util.ArrayList;
 import org.joda.time.DateTime;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class UserChallenge {
 
     public UserChallenge() {}
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -32,9 +42,17 @@ public class UserChallenge {
     @JsonIgnore
     private User user;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="charity_id")
-    private Charity charity;
+    private Charity charity;  
+
+    public void setProgress(List<Progress> progress) {
+        this.progress = progress;
+    }
+
+    @OneToMany(mappedBy="userChallenge")
+    @JsonManagedReference
+    private List<Progress> progress;
 
     public boolean isCompleted() {
         return completed;

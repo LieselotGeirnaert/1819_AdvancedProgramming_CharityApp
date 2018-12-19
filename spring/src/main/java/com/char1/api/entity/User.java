@@ -3,20 +3,31 @@ package com.char1.api.entity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.joda.time.DateTime;
+import org.springframework.context.annotation.Bean;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class User {
 
     public User() {}
 
+
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
     private String firstName;
     private String lastName;
-    @JsonIgnore
+
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
     private String emailAddress;
     private DateTime passwordResetDate;
@@ -24,6 +35,22 @@ public class User {
 
     @OneToOne
     private BankAccount bankAccount;
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "user_role", joinColumns
+            = @JoinColumn(name = "user_id",
+            referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id",
+                    referencedColumnName = "id"))
+    private List<Role> roles;
+
+    public List<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(List<Role> roles) {
+        this.roles = roles;
+    }
 
     public String getLastName() {
         return lastName;
@@ -38,7 +65,7 @@ public class User {
     }
 
     public void setPassword(String password) {
-        this.password = password;
+        this.password = passwordEncoder().encode(password);
     }
 
     public String getFirstName() {
