@@ -31,7 +31,8 @@ public class Progress {
     @JoinColumn(name="user_challenge_id")
     @JsonBackReference
     private UserChallenge userChallenge;
-    
+
+    @JsonIgnore
     public UserChallenge getUserChallenge() {
         return userChallenge;
     }
@@ -39,7 +40,6 @@ public class Progress {
     public void setUserChallenge(UserChallenge userChallenge) {
         this.userChallenge = userChallenge;
     }
-
 
     public DateTime getEntryDate() {
         return entryDate;
