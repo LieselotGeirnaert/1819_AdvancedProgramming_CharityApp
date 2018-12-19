@@ -44,15 +44,20 @@ public class UserChallenge {
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="charity_id")
-    private Charity charity;  
+    private Charity charity;
+
+
+    @OneToMany(mappedBy="userChallenge")
+    @JsonManagedReference
+    private List<Progress> progress;
 
     public void setProgress(List<Progress> progress) {
         this.progress = progress;
     }
 
-    @OneToMany(mappedBy="userChallenge")
-    @JsonManagedReference
-    private List<Progress> progress;
+    public List<Progress> getProgress() {
+        return this.progress;
+    }
 
     public boolean isCompleted() {
         return completed;
@@ -101,7 +106,6 @@ public class UserChallenge {
     public void setChallenge(Challenge challenge) {
         this.challenge = challenge;
     }
-
 
     public User getUser() {
         return user;
