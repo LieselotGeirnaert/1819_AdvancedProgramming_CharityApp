@@ -32,6 +32,8 @@ public class UserChallenge {
     private DateTime startDate;
     private DateTime deadlineDate;
     private int amountToDonate;
+    private int amountToComplete;
+
 
     @ManyToOne(cascade =  CascadeType.ALL)
     @JoinColumn(name="challenge_id")
@@ -122,6 +124,14 @@ public class UserChallenge {
     public void setCharity(Charity charity) {
         this.charity = charity;
     }
+    
+        public int getAmountToComplete() {
+        return amountToComplete;
+    }
+
+    public void setAmountToComplete(int amountToComplete) {
+        this.amountToComplete = amountToComplete;
+    }
 
     @Override
     public String toString() {
@@ -132,6 +142,7 @@ public class UserChallenge {
                 ", startDate=" + startDate +
                 ", deadlineDate=" + deadlineDate +
                 ", amountToDonate=" + amountToDonate +
+                ", amountToComplete=" + amountToComplete +
                 '}';
     }
 }
