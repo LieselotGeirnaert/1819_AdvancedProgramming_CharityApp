@@ -6,11 +6,18 @@ p {
   color: #e5e5e5;
 }
 
+navbar {
+  justify-content: flex-end;
+}
+
+.challenges {
+  width: 80%;
+}
+
 .challengetile {
   display: flex;
   justify-content: center;
   margin: 2rem 0rem;
-  width: 80%;
 }
 
 .challengetile__info {
