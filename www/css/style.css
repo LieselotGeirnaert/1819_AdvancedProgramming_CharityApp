@@ -48,6 +48,11 @@ a {
   text-transform: uppercase;
 }
 
+.btn:disabled {
+  border-color: #2e4756;
+  color: #2e4756;
+}
+
 form {
   display: flex;
   flex-direction: column;
