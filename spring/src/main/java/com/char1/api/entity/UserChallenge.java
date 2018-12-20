@@ -51,15 +51,28 @@ public class UserChallenge {
 
     @OneToMany(mappedBy="userChallenge")
     @JsonManagedReference
+    @JsonIgnore
     private List<Progress> progress;
 
     public void setProgress(List<Progress> progress) {
         this.progress = progress;
     }
 
+    @JsonIgnore
     public List<Progress> getProgress() {
         return this.progress;
     }
+
+
+    public String getProgressPercentage() {
+        List<Progress> progresses = getProgress();
+        int currentAmount = 0;
+        for (Progress pr : progresses) {
+            currentAmount += pr.getCurrentAmount();
+        }
+        return Float.toString(((float)currentAmount / (float)this.amountToComplete) * (float) 100);
+    }
+
 
     public boolean isCompleted() {
         return completed;
