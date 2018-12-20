@@ -6,9 +6,12 @@
 package com.char1.api.controller;
 
 import com.char1.api.controller.exception.EntityNotFoundException;
+import com.char1.api.entity.User;
 import com.char1.api.entity.UserChallenge;
 import com.char1.api.repository.UserChallengeRepository;
+import com.char1.api.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.oauth2.provider.OAuth2Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -23,6 +26,9 @@ public class UserChallengeController {
 
     @Autowired
     UserChallengeRepository userChallengeRepository;
+
+    @Autowired
+    UserRepository userRepository;
     
     @GetMapping(value = "/{id}")
     public UserChallenge getUserChallengeById(@PathVariable int id) {
@@ -30,9 +36,16 @@ public class UserChallengeController {
         return userChallengeRepository.findById(id);
     }
 
+    @GetMapping(params = { "completed" })
+    public List<UserChallenge> getAllUserChallengesWithCompletedAndUser(OAuth2Authentication auth, @RequestParam("completed") boolean completed) {
+        System.out.println(auth.getPrincipal());
+        return userChallengeRepository.findAllByUserAndAndCompleted(userRepository.findUserByEmailAddress(auth.getPrincipal().toString()), completed);
+    }
+
     @GetMapping
-    public List<UserChallenge> getAllUserChallenges() {
-        return userChallengeRepository.findAll();
+    public List<UserChallenge> getAllUserChallengesWithUser(OAuth2Authentication auth) {
+        System.out.println(auth.getPrincipal());
+        return userChallengeRepository.findAllByUser(userRepository.findUserByEmailAddress(auth.getPrincipal().toString()));
     }
     
     @PostMapping
