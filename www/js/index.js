@@ -25,14 +25,6 @@ $(window).on("load", function() {
     $("#registerbutton").addClass("selected");
   });
 
-  $("#login__password").on("input", function(e) {
-    $("#login__form #login").removeAttr("disabled");
-  });
-
-  $("#register__repeatpassword").on("input", function(e) {
-    $("#register__form #register").removeAttr("disabled");
-  });
-
   function login(username, password) {
     //Display login section
     $("section#login").css("display", "block");
@@ -94,12 +86,15 @@ $(window).on("load", function() {
 
     $.ajax({
       url: "http://10.129.32.15:8080/user",
-      dataType: "json",
       type: "post",
+      dataType : "json",
+      contentType: "application/json",
       data: JSON.stringify({
+        bankAccount: null,
         firstName: prename,
         lastName: lastname,
         emailAddress: email,
+        password: password,
         passwordResetDate: null,
         passwordReset: null,
         bankAccount: null
@@ -114,7 +109,7 @@ $(window).on("load", function() {
     });
   });
 
-  $("#register__form input").on("change", function(e) {
+  $("#register__form input").on("input", function(e) {
     var prename = $("#register__form #register__prename").val();
     var lastname = $("#register__form #register__lastname").val();
     var email = $("#register__form #register__email").val();
@@ -138,6 +133,27 @@ $(window).on("load", function() {
       $("#register__form #register").removeAttr("disabled");
     } else {
       $("#register__form #register").attr("disabled", "disabled");
+    }
+  });
+
+  $("#login__form input").on("input", function(e) {
+    var email = $("#login__form #login__email").val();
+    var password = $("#login__form #login__password").val();
+
+    var valid = true;
+
+    if (
+      /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(
+        email
+      ) == false
+    )
+      valid = false;
+    if (password == "") valid = false;
+
+    if (valid) {
+      $("#login__form #login").removeAttr("disabled");
+    } else {
+      $("#login__form #login").attr("disabled", "disabled");
     }
   });
 
