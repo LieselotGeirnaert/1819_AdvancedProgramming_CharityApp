@@ -24,6 +24,30 @@ $(document).ready(function() {
 	});
 
 	$.ajax({
+		url: 'http://10.129.32.15:8080/challenge/',
+		type: 'get',
+		dataType: 'json',
+		beforeSend: function(xhr, settings) { 
+			var access_token = readCookie("access_token");
+			xhr.setRequestHeader('Authorization','Bearer ' + access_token);
+		},
+		success: function(data, textStatus, jqXHR) {
+			$.each(data,function(i,challenge){
+				var option="<option value="+challenge.id+">"+challenge.title+"</option>";
+				$(option).appendTo('#challenge'); 
+			});  
+		},
+		error : function(jqXhr, textStatus, errorThrown) {
+			//Check if the authentication was invalid, in which case return to index
+			if (jqXhr.status == 401) {
+				eraseCookie("access_token");
+				window.location.href = "index.html";
+			}
+			console.log( errorThrown );
+		}
+	});
+
+	$.ajax({
 		url: 'http://10.129.32.15:8080/charity',
 		type: 'get',
 		dataType: 'json',
@@ -52,7 +76,7 @@ $(document).ready(function() {
 	var validateCategory = function() {
 		var catOK = true;
 
-		var category = document.getElementById('#categorie');
+		var category = document.getElementById('category');
 
 		// check category
 		if (category.value <= '0') {
@@ -63,37 +87,6 @@ $(document).ready(function() {
 
 		return catOK;
 	}
-
-	$("#categorie").change(function() {
-			$.ajax({
-				url: 'http://10.129.32.15:8080/challenge',
-				type: 'get',
-				dataType: 'json',
-				beforeSend: function(xhr, settings) { 
-					var access_token = readCookie("access_token");
-					xhr.setRequestHeader('Authorization','Bearer ' + access_token);
-				},
-				data:{ 
-					// "VarA": VarA, 
-					// "VarB": VarB, 
-					// "VarC": VarC
-				},
-				success: function(data, textStatus, jqXHR) {
-					$.each(data,function(i,challenge){
-						var option="<option value="+challenge.id+">"+challenge.title+"</option>";
-						$(option).appendTo('#challenge'); 
-					});  
-				},
-				error : function(jqXHR, textStatus, errorThrown) {
-					//Check if the authentication was invalid, in which case return to index
-					if (jqXhr.status == 401) {
-						eraseCookie("access_token");
-						window.location.href = "index.html";
-					}
-					console.log( errorThrown );
-				}
-			});
-		});
 
 	var validateChallenge = function() {
 		var cahllOK = true;
@@ -110,6 +103,73 @@ $(document).ready(function() {
 		return cahllOK;
 	}
 
+	var getMeasure = function($challenge) {
+		$('#measure').html("");
+		if (validateChallenge()) {
+			$.ajax({
+				url: 'http://10.129.32.15:8080/challenge/' + $challenge,
+				type: 'get',
+				dataType: 'json',
+				beforeSend: function(xhr, settings) { 
+					var access_token = readCookie("access_token");
+					xhr.setRequestHeader('Authorization','Bearer ' + access_token);
+				},
+				success: function(data, textStatus, jqXHR) {
+					$('#measure').html(data.unitToMeasure);
+				},
+				error : function(jqXhr, textStatus, errorThrown) {
+					//Check if the authentication was invalid, in which case return to index
+					if (jqXhr.status == 401) {
+						eraseCookie("access_token");
+						window.location.href = "index.html";
+					}
+					console.log( errorThrown );
+				}
+			});
+		}
+	}
+
+	$("#category").change(function() {
+		$('#challenge').find('option').remove();
+		if (validateCategory()) {
+			var $category = $(this).val();
+			$.ajax({
+				url: 'http://10.129.32.15:8080/challenge/' + $category + '/category',
+				type: 'get',
+				dataType: 'json',
+				beforeSend: function(xhr, settings) { 
+					var access_token = readCookie("access_token");
+					xhr.setRequestHeader('Authorization','Bearer ' + access_token);
+				},
+				success: function(data, textStatus, jqXHR) {
+					$.each(data,function(i,challenge){
+						var option="<option value="+challenge.id+">"+challenge.title+"</option>";
+						$(option).appendTo('#challenge'); 
+					});
+
+					var $challenge = $("#challenge").val();
+					getMeasure($challenge);
+				},
+				error : function(jqXhr, textStatus, errorThrown) {
+					//Check if the authentication was invalid, in which case return to index
+					if (jqXhr.status == 401) {
+						eraseCookie("access_token");
+						window.location.href = "index.html";
+					}
+					console.log( errorThrown );
+				}
+			});
+		}
+	});
+
+	$("#challenge").change(function() {
+		getMeasure($(this).val());
+	});
+
+	
+
+	
+
 
 
 	var validateForm = function() {
@@ -123,7 +183,6 @@ $(document).ready(function() {
 		var amount = document.getElementById('amount');
 		var charity = document.getElementById('charity')
 
-		var catCheck = validateCategory();
 		var challCheck = validateChallenge();
 
 		// check count
@@ -161,11 +220,49 @@ $(document).ready(function() {
 
 		// draw conclusion
 		if (allOk) {
-			// show thank you
-			document.getElementById('form1').style.display = 'none';
-			document.getElementById('succes').style.display = 'block';
-			document.getElementById('summary').className = '';
+			// input shortcuts
+			var challenge = document.getElementById('challenge');
+			var count = document.getElementById('count');
+			var start = document.getElementById('start');
+			var end = document.getElementById('end');
+			var result = document.getElementById('result');
+			var amount = document.getElementById('amount');
+			var charity = document.getElementById('charity')
 
+			$.ajax({
+				url: 'http://10.129.32.15:8080/charity',
+				type: 'post',
+				dataType: 'json',
+				beforeSend: function(xhr, settings) { 
+					var access_token = readCookie("access_token");
+					xhr.setRequestHeader('Authorization','Bearer ' + access_token);
+				},
+				data: {
+					"amountToComplete": count.value,
+					"amountToDonate": amount.value,
+					"challenge": {
+					  "id": challenge.value,
+					},
+					"charity": {
+					  "id": charity.value,
+					},
+					"completeToDonate": result.value,
+					"completed": false,
+					"deadlineDate": start.value,
+					"startDate": end.value
+				},
+				success: function(data, textStatus, jqXHR) {
+					window.location.href = "activechallenges.html";
+				},
+				error : function(jqXhr, textStatus, errorThrown) {
+					//Check if the authentication was invalid, in which case return to index
+					if (jqXhr.status == 401) {
+						eraseCookie("access_token");
+						window.location.href = "index.html";
+					}
+					console.log( errorThrown );
+				}
+			});
 		} else {
 			// show summary
 			document.getElementById('summary').className = 'showSummary';
