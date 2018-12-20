@@ -23,7 +23,6 @@ public class Challenge {
     private String title;
     private String description;
     private String unitToMeasure;
-    private int amountToComplete;
 
     public String getLinkToLogo() {
         return linkToLogo;
@@ -72,21 +71,12 @@ public class Challenge {
         this.unitToMeasure = unitToMeasure;
     }
 
-    public int getAmountToComplete() {
-        return amountToComplete;
-    }
-
-    public void setAmountToComplete(int amountToComplete) {
-        this.amountToComplete = amountToComplete;
-    }
-
     @Override
     public String toString() {
         return "Challenge{" +
                 "title='" + title + '\'' +
                 ", description='" + description + '\'' +
                 ", unitToMeasure='" + unitToMeasure + '\'' +
-                ", amountToComplete=" + amountToComplete +
                 ", category=" + category +
                 '}';
     }

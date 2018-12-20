@@ -32,6 +32,8 @@ public class UserChallenge {
     private DateTime startDate;
     private DateTime deadlineDate;
     private int amountToDonate;
+    private int amountToComplete;
+
 
     @ManyToOne(cascade =  CascadeType.ALL)
     @JoinColumn(name="challenge_id")
@@ -44,15 +46,20 @@ public class UserChallenge {
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="charity_id")
-    private Charity charity;  
+    private Charity charity;
+
+
+    @OneToMany(mappedBy="userChallenge")
+    @JsonManagedReference
+    private List<Progress> progress;
 
     public void setProgress(List<Progress> progress) {
         this.progress = progress;
     }
 
-    @OneToMany(mappedBy="userChallenge")
-    @JsonManagedReference
-    private List<Progress> progress;
+    public List<Progress> getProgress() {
+        return this.progress;
+    }
 
     public boolean isCompleted() {
         return completed;
@@ -102,7 +109,6 @@ public class UserChallenge {
         this.challenge = challenge;
     }
 
-
     public User getUser() {
         return user;
     }
@@ -118,6 +124,14 @@ public class UserChallenge {
     public void setCharity(Charity charity) {
         this.charity = charity;
     }
+    
+        public int getAmountToComplete() {
+        return amountToComplete;
+    }
+
+    public void setAmountToComplete(int amountToComplete) {
+        this.amountToComplete = amountToComplete;
+    }
 
     @Override
     public String toString() {
@@ -128,6 +142,7 @@ public class UserChallenge {
                 ", startDate=" + startDate +
                 ", deadlineDate=" + deadlineDate +
                 ", amountToDonate=" + amountToDonate +
+                ", amountToComplete=" + amountToComplete +
                 '}';
     }
 }

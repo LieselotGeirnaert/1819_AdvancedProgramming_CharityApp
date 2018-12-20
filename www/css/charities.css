@@ -10,15 +10,18 @@ p {
   color: #e5e5e5;
 }
 
+.charities {
+  width: 80%;
+}
+
 .charitytile {
+  align-items: center;
   background-color: #2e4756;
   border-radius: 10px;
   display: flex;
   height: 30rem;
-  justify-content: center;
   margin: 2rem auto;
   padding: 4rem 4rem;
-  width: 80%;
 }
 
 .charitytile img {
@@ -36,6 +39,7 @@ p {
   font-size: 4.5rem;
   font-weight: 500;
   text-transform: uppercase;
+  width: 100%;
 }
 
 .charitytile__info p:nth-child(2) {
