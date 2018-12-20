@@ -12,11 +12,11 @@ $(document).ready(function() {
       $.each(data, function(i, challenge) {
         var charity =
           '<section class="charitytile"><img src="' +
-          data.linkToLogo +
+          challenge.linkToLogo +
           '" alt=""><div class="charitytile__info"><p>' +
-          data.name +
+          challenge.name +
           "</p><p>" +
-          data.description +
+          challenge.description +
           "</p></div></section>";
         $(".charities").append(charity);
       });
