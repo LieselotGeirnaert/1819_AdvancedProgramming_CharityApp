@@ -3,7 +3,7 @@ package com.char1.api.entity;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import org.joda.time.DateTime;
+import org.joda.time.LocalDateTime;
 
 import javax.persistence.*;
 
@@ -24,7 +24,7 @@ public class Progress {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
-    private DateTime entryDate;
+    private LocalDateTime entryDate;
     private int currentAmount;
 
     @ManyToOne(cascade = CascadeType.ALL)
@@ -41,11 +41,11 @@ public class Progress {
         this.userChallenge = userChallenge;
     }
 
-    public DateTime getEntryDate() {
+    public LocalDateTime getEntryDate() {
         return entryDate;
     }
 
-    public void setEntryDate(DateTime entryDate) {
+    public void setEntryDate(LocalDateTime entryDate) {
         this.entryDate = entryDate;
     }
 
