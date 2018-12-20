@@ -9,7 +9,7 @@ $(document).ready(function() {
 		},
 		success: function(data, textStatus, jqXHR) {
 			$.each(data,function(i, userChallenge){
-				var chall ='<section class="challengetile"><a href="detailchallenge.html?id=' + userChallenge.id +'"><div class="challengetile__info"><img src="' + userChallenge.challenge.linktToLogo + '" alt=""><div class="challengetile__text"><p>' + userChallenge.challenge.category[0].name + '</p><p>' + userChallenge.challenge.description +'</p><p>'+ userChallenge.challenge.unitToMeasure +'</p></div><div class="progressbar"><div class="progressbar__status" style="width:'+ userChallenge.progress[userChallenge.progress.length - 1].currentAmount +'%"></div></div></div></a><div class="challengetile__add"><p>+</p></div></section>';
+				var chall ='<section class="challengetile"><a href="detailchallenge.html?id=' + userChallenge.id +'"><div class="challengetile__info"><img src="' + userChallenge.challenge.linkToLogo + '" alt=""><div class="challengetile__text"><p>' + userChallenge.challenge.category[0].name + '</p><p>' + userChallenge.challenge.description +'</p><p>'+ userChallenge.challenge.unitToMeasure +'</p></div><div class="progressbar"><div class="progressbar__status" style="width:'+ userChallenge.progress[userChallenge.progress.length - 1].currentAmount +'%"></div></div></div></a><div class="challengetile__add"><p>+</p></div></section>';
 				$("#challenges").append(chall); 
 			});  
 		},
