@@ -1,5 +1,4 @@
 cache:
-    key: ${CI_PIPELINE_ID}
     paths:
         - $REPO_LOC/target/
 
