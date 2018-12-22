@@ -3,6 +3,7 @@ package com.char1.api.entity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.joda.time.DateTime;
+import org.joda.time.LocalDateTime;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -30,7 +31,7 @@ public class User {
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
     private String emailAddress;
-    private DateTime passwordResetDate;
+    private LocalDateTime passwordResetDate;
     private String passwordReset;
 
     @OneToOne
@@ -84,11 +85,11 @@ public class User {
         this.emailAddress = emailAddress;
     }
 
-    public DateTime getPasswordResetDate() {
+    public LocalDateTime getPasswordResetDate() {
         return passwordResetDate;
     }
 
-    public void setPasswordResetDate(DateTime passwordResetDate) {
+    public void setPasswordResetDate(LocalDateTime passwordResetDate) {
         this.passwordResetDate = passwordResetDate;
     }
 

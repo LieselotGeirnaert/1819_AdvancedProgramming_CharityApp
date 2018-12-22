@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import java.util.ArrayList;
-import org.joda.time.DateTime;
+import org.joda.time.LocalDateTime;
 
 import javax.persistence.*;
 import java.util.List;
@@ -29,8 +29,8 @@ public class UserChallenge {
 
     private boolean completed;
     private boolean completeToDonate;
-    private DateTime startDate;
-    private DateTime deadlineDate;
+    private LocalDateTime startDate;
+    private LocalDateTime deadlineDate;
     private int amountToDonate;
     private int amountToComplete;
 
@@ -51,15 +51,32 @@ public class UserChallenge {
 
     @OneToMany(mappedBy="userChallenge")
     @JsonManagedReference
+    @JsonIgnore
     private List<Progress> progress;
 
     public void setProgress(List<Progress> progress) {
         this.progress = progress;
     }
 
+    @JsonIgnore
     public List<Progress> getProgress() {
         return this.progress;
     }
+
+
+    public String getProgressPercentage() {
+        List<Progress> progresses = getProgress();
+        int currentAmount = 0;
+        if (progresses != null ){
+            for (Progress pr : progresses) {
+                currentAmount += pr.getCurrentAmount();
+            }
+            return Float.toString(((float)currentAmount / (float)this.amountToComplete) * (float) 100);
+        } else {
+            return Integer.toString(currentAmount);
+        }
+    }
+
 
     public boolean isCompleted() {
         return completed;
@@ -77,19 +94,19 @@ public class UserChallenge {
         this.completeToDonate = completeToDonate;
     }
 
-    public DateTime getStartDate() {
+    public LocalDateTime getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(DateTime startDate) {
+    public void setStartDate(LocalDateTime startDate) {
         this.startDate = startDate;
     }
 
-    public DateTime getDeadlineDate() {
+    public LocalDateTime getDeadlineDate() {
         return deadlineDate;
     }
 
-    public void setDeadlineDate(DateTime deadlineDate) {
+    public void setDeadlineDate(LocalDateTime deadlineDate) {
         this.deadlineDate = deadlineDate;
     }
 
