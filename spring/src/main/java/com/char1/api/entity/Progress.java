@@ -3,6 +3,10 @@ package com.char1.api.entity;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.datatype.joda.deser.LocalDateTimeDeserializer;
+import com.fasterxml.jackson.datatype.joda.ser.LocalDateTimeSerializer;
 import org.joda.time.LocalDateTime;
 
 import javax.persistence.*;
@@ -24,6 +28,8 @@ public class Progress {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
+    @JsonDeserialize(using= LocalDateTimeDeserializer.class)
+    @JsonSerialize(using = LocalDateTimeSerializer.class)
     private LocalDateTime entryDate;
     private int currentAmount;
 

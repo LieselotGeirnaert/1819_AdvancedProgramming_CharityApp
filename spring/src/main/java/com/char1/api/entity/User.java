@@ -2,6 +2,10 @@ package com.char1.api.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.datatype.joda.deser.LocalDateTimeDeserializer;
+import com.fasterxml.jackson.datatype.joda.ser.LocalDateTimeSerializer;
 import org.joda.time.DateTime;
 import org.joda.time.LocalDateTime;
 import org.springframework.context.annotation.Bean;
@@ -31,6 +35,8 @@ public class User {
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
     private String emailAddress;
+    @JsonDeserialize(using= LocalDateTimeDeserializer.class)
+    @JsonSerialize(using = LocalDateTimeSerializer.class)
     private LocalDateTime passwordResetDate;
     private String passwordReset;
 
