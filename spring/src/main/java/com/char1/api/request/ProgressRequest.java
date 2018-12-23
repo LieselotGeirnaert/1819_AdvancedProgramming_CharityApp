@@ -1,6 +1,5 @@
 package com.char1.api.request;
 
-import org.joda.time.LocalDateTime;
 
 public class ProgressRequest {
     private int userChallengeId;
