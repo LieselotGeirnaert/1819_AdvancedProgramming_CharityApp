@@ -116,6 +116,8 @@ $(window).on("load", function() {
     var password = $("#register__form #register__password").val();
     var repeatpassword = $("#register__form #register__repeatpassword").val();
 
+    $(".inputinvalid").css("display", "none");
+
     var valid = true;
 
     if (prename == "") valid = false;
@@ -124,10 +126,19 @@ $(window).on("load", function() {
       /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(
         email
       ) == false
-    )
+    ) {
       valid = false;
+      if (email.length > 0) {
+        $(".invalid_email").css("display", "inline-block");
+      }
+    }
     if (password == "") valid = false;
-    if (password != repeatpassword) valid = false;
+    if (password != repeatpassword) {
+      valid = false;
+      if (password.length > 0 && repeatpassword.length > 0) {
+        $(".invalid_password").css("display", "inline-block");
+      }
+    }
 
     if (valid) {
       $("#register__form #register").removeAttr("disabled");

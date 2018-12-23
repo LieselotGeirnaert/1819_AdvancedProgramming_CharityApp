@@ -39,3 +39,8 @@ header #logo {
 #register .input--underline {
   margin: 20px 45px;
 }
+
+.inputinvalid {
+  display: none;
+  color: #7bcdba;
+}
