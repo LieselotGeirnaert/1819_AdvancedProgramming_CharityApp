@@ -61,6 +61,8 @@ $(window).on("load", function() {
         console.log(errorThrown);
         //Reenable login button
         $("#login__form #login").removeAttr("disabled");
+        //Display error icons
+        $(".invalid_login").css("display", "inline-block");
       }
     });
   }
@@ -129,14 +131,14 @@ $(window).on("load", function() {
     ) {
       valid = false;
       if (email.length > 0) {
-        $(".invalid_email").css("display", "inline-block");
+        $("#register__form .invalid_email").css("display", "inline-block");
       }
     }
     if (password == "") valid = false;
     if (password != repeatpassword) {
       valid = false;
       if (password.length > 0 && repeatpassword.length > 0) {
-        $(".invalid_password").css("display", "inline-block");
+        $("#register__form .invalid_password").css("display", "inline-block");
       }
     }
 
@@ -151,14 +153,20 @@ $(window).on("load", function() {
     var email = $("#login__form #login__email").val();
     var password = $("#login__form #login__password").val();
 
+    $("#login__form .inputinvalid").css("display", "none");
+
     var valid = true;
 
     if (
       /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(
         email
       ) == false
-    )
+    ) {
       valid = false;
+      if (email.length > 0) {
+        $("#login__form .invalid_email").css("display", "inline-block");
+      }
+    }
     if (password == "") valid = false;
 
     if (valid) {
