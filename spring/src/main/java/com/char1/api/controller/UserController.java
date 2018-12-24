@@ -10,6 +10,7 @@ import edu.emory.mathcs.backport.java.util.Collections;
 import org.apache.commons.lang.math.NumberUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.oauth2.provider.OAuth2Authentication;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -42,8 +43,8 @@ public class UserController {
 
     @GetMapping(value = "/user")
     @ResponseBody
-    public List<User> getAllUsers() {
-        return userRepository.findAll();
+    public User getUser(OAuth2Authentication auth) {
+        return userRepository.findUserByEmailAddress(auth.getPrincipal().toString());
     }
 
     @RequestMapping(
