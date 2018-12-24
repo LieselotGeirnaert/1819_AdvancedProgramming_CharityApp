@@ -10,7 +10,9 @@ $(document).ready(function() {
     success: function(data, textStatus, jqXHR) {
       $.each(data, function(i, challenge) {
         var chall =
-          '<section class="challengetile"><img src="' +
+          '<section class="challengetile"><a href="detailchallenge.html?id=' + 
+          challenge.id +
+          '"><img src="' +
           challenge.challenge.linkToLogo +
           '" alt=""><div class="challengetile__text"><p>' +
           challenge.challenge.category[0].name +
@@ -20,7 +22,7 @@ $(document).ready(function() {
           challenge.challenge.unitToMeasure +
           '</p></div><div class="progressbar"><div class="progressbar__status" style="width:' +
           challenge.challenge.progressPercentage +
-          '%"></div></div></section>';
+          '%"></div></div></a></section>';
         $("#challenges").append(chall);
       });
     },
