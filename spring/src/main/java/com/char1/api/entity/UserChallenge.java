@@ -1,5 +1,6 @@
 package com.char1.api.entity;
 
+import com.char1.api.utils.Char1Utils;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
@@ -73,31 +74,11 @@ public class UserChallenge {
     }
 
     public Float getProgressPercentage() {
-        List<TotalProgress> progresses = getTotalProgress();
-        float currentAmount = 0;
-        if (progresses != null ){
-            for (Progress pr : progresses) {
-                currentAmount += pr.getCurrentAmount();
-            }
-            return (currentAmount / this.amountToComplete) * 100;
-        } else {
-            return currentAmount;
-        }
+        return Char1Utils.calculateTotalProgress(this);
     }
 
     public Float getDailyProgressPercentage() {
-        List<DailyProgress> dailyProgresses = getDailyProgress();
-        dailyProgresses = dailyProgresses.stream().filter(progress -> LocalDate.now().isEqual(progress.getEntryDate().toLocalDate())).collect(Collectors.toList());
-
-        float currentAmount = 0;
-        if (dailyProgresses != null ){
-            for (DailyProgress pr : dailyProgresses) {
-                currentAmount += pr.getCurrentAmount();
-            }
-            return (currentAmount / this.amountToComplete) * 100;
-        } else {
-            return currentAmount;
-        }
+        return Char1Utils.calculateDailyProgress(this);
     }
 
     public int getAmountToCompleteDaily() {

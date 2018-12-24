@@ -2,6 +2,7 @@ package com.char1.api.controller;
 
 import com.char1.api.controller.exception.EntityNotFoundException;
 import com.char1.api.entity.DailyProgress;
+import com.char1.api.entity.TotalProgress;
 import com.char1.api.entity.UserChallenge;
 import com.char1.api.repository.DailyProgressRepository;
 import com.char1.api.repository.UserChallengeRepository;
@@ -52,9 +53,11 @@ public class DailyProgressController {
     @PostMapping
     public DailyProgress createDailyProgress(OAuth2Authentication auth, @RequestBody DailyProgressRequest progressRequest) {
         UserChallenge userChallenge = userChallengeService.getUserChallengeByIdSecure(progressRequest.getUserChallengeId(), auth.getPrincipal().toString());
-
         DailyProgress dailyProgress = progressService.newDailyProgress(userChallenge);
 
+        if (userChallenge.getDailyProgressPercentage() >= 100) {
+            progressService.newTotalProgress(userChallenge, 0);
+        }
         return dailyProgress;
 
     }

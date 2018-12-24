@@ -52,7 +52,7 @@ public class TotalProgressController {
     public TotalProgress createProgress(OAuth2Authentication auth, @RequestBody ProgressRequest progressRequest) {
         UserChallenge userChallenge = userChallengeService.getUserChallengeByIdSecure(progressRequest.getUserChallengeId(), auth.getPrincipal().toString());
 
-        TotalProgress progress = progressService.newTotalProgress(userChallenge);
+        TotalProgress progress = progressService.newTotalProgress(userChallenge, progressRequest.getCurrentAmount());
 
         if (progress.getUserChallenge().getProgressPercentage() >= 100) {
             progress.getUserChallenge().setCompleted(true);

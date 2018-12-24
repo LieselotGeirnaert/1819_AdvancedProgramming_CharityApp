@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
+import java.util.List;
 
 @Service
 public class ProgressServiceImpl implements ProgressService {
@@ -22,14 +23,14 @@ public class ProgressServiceImpl implements ProgressService {
     @Autowired
     DailyProgressRepository dailyProgressRepository;
 
-    public TotalProgress newTotalProgress(UserChallenge userChallenge) {
+    public TotalProgress newTotalProgress(UserChallenge userChallenge, int requestCurrentAmount) {
 
         TotalProgress totalProgress = new TotalProgress();
 
         totalProgress.setEntryDate(LocalDateTime.now());
         totalProgress.setUserChallenge(userChallenge);
 
-        if (totalProgress.getCurrentAmount() == 0) {
+        if (requestCurrentAmount == 0) {
             if (userChallenge.getStartDate() != null && userChallenge.getDeadlineDate() != null) {
                 long daysToComplete = ChronoUnit.DAYS.between(userChallenge.getStartDate(), userChallenge.getDeadlineDate());
                 totalProgress.setCurrentAmount(userChallenge.getAmountToComplete() / (int) daysToComplete);
@@ -37,7 +38,7 @@ public class ProgressServiceImpl implements ProgressService {
                 throw new UserChallengeDateTimeExeption();
             }
         } else {
-            totalProgress.setCurrentAmount(totalProgress.getCurrentAmount());
+            totalProgress.setCurrentAmount(requestCurrentAmount);
         }
         return totalProgressRepository.save(totalProgress);
     }
@@ -52,7 +53,4 @@ public class ProgressServiceImpl implements ProgressService {
 
         return dailyProgressRepository.save(dailyProgress);
     }
-
-
-
 }
