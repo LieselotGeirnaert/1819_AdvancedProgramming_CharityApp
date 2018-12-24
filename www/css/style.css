@@ -108,6 +108,10 @@ option {
   font-size: 2rem;
 }
 
+section#overlaymenu {
+  position: fixed;
+}
+
 #challenges {
   align-items: center;
   display: flex;
