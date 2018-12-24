@@ -1,6 +1,7 @@
 package com.char1.api.request;
 
-import org.joda.time.LocalDateTime;
+
+import java.time.LocalDateTime;
 
 public class UserChallengeRequest {
     private int amountToCoplete;
