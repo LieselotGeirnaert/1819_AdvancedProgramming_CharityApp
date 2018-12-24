@@ -6,7 +6,6 @@
 package com.char1.api.controller;
 
 import com.char1.api.controller.exception.EntityNotFoundException;
-import com.char1.api.entity.User;
 import com.char1.api.entity.UserChallenge;
 import com.char1.api.repository.ChallengeRepository;
 import com.char1.api.repository.CharityRepository;
@@ -60,7 +59,7 @@ public class UserChallengeController {
     @PostMapping
     public UserChallenge createUserChallenge(OAuth2Authentication auth, @RequestBody UserChallengeRequest userChallengeRequest) {
         UserChallenge userChallenge = new UserChallenge();
-        userChallenge.setAmountToComplete(userChallengeRequest.getAmountToCoplete());
+        userChallenge.setAmountToComplete(userChallengeRequest.getAmountToComplete());
         userChallenge.setAmountToDonate(userChallengeRequest.getAmountToDonate());
         userChallenge.setUser(userRepository.findUserByEmailAddress(auth.getPrincipal().toString()));
         userChallenge.setChallenge(challengeRepository.findById(userChallengeRequest.getChallengeId()));

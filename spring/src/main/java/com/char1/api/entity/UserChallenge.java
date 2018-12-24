@@ -4,10 +4,15 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 
-
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.chrono.ChronoLocalDateTime;
+import java.time.temporal.ChronoField;
+import java.time.temporal.ChronoUnit;
+import java.util.Calendar;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Entity
 public class UserChallenge {
@@ -32,7 +37,7 @@ public class UserChallenge {
     private LocalDateTime deadlineDate;
     private int amountToDonate;
     private int amountToComplete;
-
+    private int amountToCompleteDaily;
 
     @ManyToOne(cascade =  CascadeType.ALL)
     @JoinColumn(name="challenge_id")
@@ -51,31 +56,66 @@ public class UserChallenge {
     @OneToMany(mappedBy="userChallenge")
     @JsonManagedReference
     @JsonIgnore
-    private List<Progress> progress;
+    private List<TotalProgress> totalProgress;
 
-    public void setProgress(List<Progress> progress) {
-        this.progress = progress;
+    @OneToMany(mappedBy="userChallenge")
+    @JsonManagedReference
+    @JsonIgnore
+    private List<DailyProgress> dailyProgress;
+
+    public void setTotalProgress(List<TotalProgress> progress) {
+        this.totalProgress = progress;
     }
 
     @JsonIgnore
-    public List<Progress> getProgress() {
-        return this.progress;
+    public List<TotalProgress> getTotalProgress() {
+        return this.totalProgress;
     }
 
-
-    public String getProgressPercentage() {
-        List<Progress> progresses = getProgress();
-        int currentAmount = 0;
+    public Float getProgressPercentage() {
+        List<TotalProgress> progresses = getTotalProgress();
+        float currentAmount = 0;
         if (progresses != null ){
             for (Progress pr : progresses) {
                 currentAmount += pr.getCurrentAmount();
             }
-            return Float.toString(((float)currentAmount / (float)this.amountToComplete) * (float) 100);
+            return (currentAmount / this.amountToComplete) * 100;
         } else {
-            return Integer.toString(currentAmount);
+            return currentAmount;
         }
     }
 
+    public Float getDailyProgressPercentage() {
+        List<DailyProgress> dailyProgresses = getDailyProgress();
+        dailyProgresses = dailyProgresses.stream().filter(progress -> LocalDate.now().isEqual(progress.getEntryDate().toLocalDate())).collect(Collectors.toList());
+
+        float currentAmount = 0;
+        if (dailyProgresses != null ){
+            for (DailyProgress pr : dailyProgresses) {
+                currentAmount += pr.getCurrentAmount();
+            }
+            return (currentAmount / this.amountToComplete) * 100;
+        } else {
+            return currentAmount;
+        }
+    }
+
+    public int getAmountToCompleteDaily() {
+        return amountToCompleteDaily;
+    }
+
+    public void setAmountToCompleteDaily(int amountToCompleteDaily) {
+        this.amountToCompleteDaily = amountToCompleteDaily;
+    }
+
+    @JsonIgnore
+    public List<DailyProgress> getDailyProgress() {
+        return dailyProgress;
+    }
+
+    public void setDailyProgress(List<DailyProgress> dailyProgress) {
+        this.dailyProgress = dailyProgress;
+    }
 
     public boolean isCompleted() {
         return completed;

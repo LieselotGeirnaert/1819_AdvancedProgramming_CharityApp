@@ -6,7 +6,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
-@Entity
+
+@MappedSuperclass
 public class Progress {
 
     public Progress() {}

@@ -35,7 +35,7 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
             .authorizeRequests()
             .antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
             .antMatchers(HttpMethod.POST, "/user").permitAll()
-            .antMatchers("/charity/**", "/challenge/**", "/category/**").authenticated()
+            .antMatchers("/charity/**", "/challenge/**", "/category/**", "/dailyprogress/**", "/progress").authenticated()
             .anyRequest().authenticated()
             .and()
             .formLogin()
