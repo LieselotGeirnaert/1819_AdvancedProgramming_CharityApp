@@ -10,7 +10,7 @@ navbar {
   justify-content: flex-end;
 }
 
-.challenges {
+#challenges {
   width: 80%;
 }
 
@@ -30,8 +30,9 @@ navbar {
   width: 80%;
 }
 
-.challengetile__info img {
+.challengetile img {
   background-color: gray;
+  height: 15rem;
   width: 15rem;
 }
 
@@ -83,7 +84,7 @@ navbar {
   border-radius: 100%;
   color: #e5e5e5;
   height: 12rem;
-  margin-top: 35rem;
+  margin-top: 10rem;
   width: 12rem;
 }
 
@@ -92,4 +93,10 @@ navbar {
   margin: -15px;
   text-align: center;
   vertical-align: middle;
+}
+
+.nochallenges p {
+  font-size: 3.5rem;
+  text-align: center;
+  margin-bottom: 25px;
 }

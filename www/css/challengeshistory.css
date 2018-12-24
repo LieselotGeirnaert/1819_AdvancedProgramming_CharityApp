@@ -10,9 +10,24 @@ p {
   color: #e5e5e5;
 }
 
+#challenges {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+#challenges > p {
+  color: #2e4756;
+  font-weight: 300;
+  padding: 15rem 5rem;
+  text-align: center;
+  width: 70%;
+}
+
 .challengetile {
   background-color: #2e4756;
-  border-radius: 10px 0px 0px 10px;
+  border-radius: 10px;
   display: flex;
   flex-wrap: wrap;
   height: 30rem;
@@ -23,6 +38,7 @@ p {
 
 .challengetile img {
   background-color: gray;
+  height: 15rem;
   width: 15rem;
 }
 
