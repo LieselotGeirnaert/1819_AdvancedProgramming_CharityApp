@@ -23,7 +23,7 @@ $(document).ready(function() {
           '</p></div><div class="progressbar"><div class="progressbar__status" style="width:' +
           userChallenge.progress[userChallenge.progress.length - 1]
             .currentAmount +
-          '%"></div></div></div></a><div class="challengetile__add"><p>+</p></div></section>';
+          '%"></div></div></div></a><div class="challengetile__add"><p>&#10003;</p></div></section>';
         $("#challenges").append(chall);
       });
     },
