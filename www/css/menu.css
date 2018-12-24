@@ -37,11 +37,9 @@ a#closeoverlay > span {
 }
 
 .overlaycenter img {
-  background-color: gray;
-  border-radius: 100%;
-  height: 30rem;
-  margin: 12rem;
-  width: 30rem;
+  max-height: 20rem;
+  margin: 10rem;
+  max-width: 20rem;
 }
 
 .overlaycenter ul {
@@ -52,7 +50,11 @@ a#closeoverlay > span {
 }
 
 .overlaycenter li {
-  margin: 1rem;
+  margin: 2rem;
+}
+
+.overlaycenter li:nth-child(5) {
+  margin-top: 10rem;
 }
 
 .overlaycenter li a {

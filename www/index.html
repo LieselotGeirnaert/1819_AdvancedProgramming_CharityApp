@@ -25,6 +25,8 @@
         <form id="login__form" action="/" method="post">
           <div class="input--underline">
             <label for="login__email">xxx</label>
+            <span class="inputinvalid invalid_login">&#9888;</span>
+            <span class="inputinvalid invalid_email">&#9888;</span>
             <input
               type="email"
               id="login__email"
@@ -32,9 +34,11 @@
               placeholder="Emailadres"
             />
           </div>
+          <span class="inputinvalid invalid_email">Dit emailadres is niet geldig</span>
 
           <div class="input--underline">
             <label for="login__password">xxx</label>
+            <span class="inputinvalid invalid_login">&#9888;</span>
             <input
               type="password"
               id="login__password"
@@ -42,6 +46,8 @@
               placeholder="Wachtwoord"
             />
           </div>
+          <span class="inputinvalid invalid_login">Dit account is niet bekend</span>
+
           <input
             type="submit"
             id="login"
@@ -73,6 +79,7 @@
           </div>
 
           <div class="input--underline">
+            <span class="inputinvalid invalid_email">&#9888;</span>
             <input
               type="email"
               id="register__email"
@@ -80,8 +87,10 @@
               placeholder="Emailadres"
             />
           </div>
+          <span class="inputinvalid invalid_email">Dit emailadres is niet geldig</span>
 
           <div class="input--underline">
+            <span class="inputinvalid invalid_password">&#9888;</span>
             <input
               type="password"
               id="register__password"
@@ -91,6 +100,7 @@
           </div>
 
           <div class="input--underline">
+            <span class="inputinvalid invalid_password">&#9888;</span>
             <input
               type="password"
               id="register__repeatpassword"
@@ -98,6 +108,8 @@
               placeholder="Herhaal wachtwoord"
             />
           </div>
+          <span class="inputinvalid invalid_password">De wachtwoorden komen niet overeen</span>
+
           <input
             type="submit"
             id="register"

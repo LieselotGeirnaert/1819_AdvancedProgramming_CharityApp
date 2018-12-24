@@ -16,6 +16,14 @@ $(window).on("load", function() {
   });
 });
 
+$(".overlaycenter ul li a:contains('afmelden')").on("click", function(e) {
+  e.preventDefault();
+  e.stopPropagation();
+
+  eraseCookie("access_token");
+  window.location.href = "index.html";
+});
+
 function createCookie(name, value, days) {
   var expires;
 
