@@ -10,7 +10,7 @@ navbar {
   justify-content: flex-end;
 }
 
-.challenges {
+#challenges {
   width: 80%;
 }
 
