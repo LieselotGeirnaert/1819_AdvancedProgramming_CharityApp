@@ -11,7 +11,7 @@ $(document).ready(function() {
       //Do something with the returned data here
       $.each(data, function(i, challenge) {
         var charity =
-          '<section class="charitytile"><img src="' +
+          '<section class="charitytile collapsed"><img src="' +
           challenge.linkToLogo +
           '" alt=""><div class="charitytile__info"><p>' +
           challenge.name +
@@ -30,5 +30,13 @@ $(document).ready(function() {
       }
       console.log(errorThrown);
     }
+  });
+
+  $(".charities").on("click", ".charitytile", function(e) {
+    console.log("click");
+    $this = $(this);
+
+    $this.toggleClass("collapsed");
+    $this.toggleClass("extended");
   });
 });

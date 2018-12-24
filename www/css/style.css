@@ -111,3 +111,18 @@ option {
 section#overlaymenu {
   position: fixed;
 }
+
+#challenges {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+#challenges > p {
+  color: #2e4756;
+  font-weight: 300;
+  padding: 15rem 5rem;
+  text-align: center;
+  width: 70%;
+}

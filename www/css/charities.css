@@ -19,9 +19,14 @@ p {
   background-color: #2e4756;
   border-radius: 10px;
   display: flex;
-  height: 30rem;
+  /* height: 30rem; */
   margin: 2rem auto;
   padding: 4rem 4rem;
+}
+
+.charitytile.collapsed .charitytile__info p {
+  max-height: 10rem;
+  overflow: hidden;
 }
 
 .charitytile img {
