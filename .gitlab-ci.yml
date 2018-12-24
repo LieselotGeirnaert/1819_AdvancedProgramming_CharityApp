@@ -2,6 +2,8 @@ cache:
     key: "$CI_COMMIT_REF_SLUG"
     paths:
         - target/
+    only:
+        - backend-master
 
 variables:
     TEST_PROFILE: '-Dspring.profiles.active=test'
