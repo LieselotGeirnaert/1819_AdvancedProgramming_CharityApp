@@ -8,23 +8,36 @@ $(document).ready(function() {
       xhr.setRequestHeader("Authorization", "Bearer " + access_token);
     },
     success: function(data, textStatus, jqXHR) {
+      var completedChallenges = [];
       $.each(data, function(i, challenge) {
-        var chall =
-          '<section class="challengetile"><a href="detailchallenge.html?id=' + 
-          challenge.id +
-          '"><img src="' +
-          challenge.challenge.linkToLogo +
-          '" alt=""><div class="challengetile__text"><p>' +
-          challenge.challenge.category[0].name +
-          "</p><p>" +
-          challenge.challenge.description +
-          "</p><p>" +
-          challenge.challenge.unitToMeasure +
-          '</p></div><div class="progressbar"><div class="progressbar__status" style="width:' +
-          challenge.challenge.progressPercentage +
-          '%"></div></div></a></section>';
-        $("#challenges").append(chall);
+        if (challenge.completed == true) {
+          completedChallenges.push(challenge);
+        }
       });
+
+      if (completedChallenges.length > 0) {
+        $.each(completedChallenges, function(i, challenge) {
+          var chall =
+            '<a href="detailchallenge.html?id=' +
+            challenge.id +
+            '" class="challengetile"><img src="' +
+            challenge.challenge.linkToLogo +
+            '" alt=""><div class="challengetile__text"><p>' +
+            challenge.challenge.category[0].name +
+            "</p><p>" +
+            challenge.challenge.description +
+            "</p><p>" +
+            challenge.challenge.unitToMeasure +
+            '</p></div><div class="progressbar"><div class="progressbar__status" style="width:' +
+            challenge.challenge.progressPercentage +
+            '%"></div></div></a>';
+          $("#challenges").append(chall);
+        });
+      } else if (completedChallenges <= 0) {
+        var input =
+          "<p>nog geen be&euml;indigde challenges om weer te geven</p>";
+        $("#challenges").append(input);
+      }
     },
     error: function(jqXhr, textStatus, errorThrown) {
       //Check if the authentication was invalid, in which case return to index
