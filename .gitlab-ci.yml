@@ -4,6 +4,7 @@ stages:
 deploy:
     stage: deploy
     script:
-        - scp -r ./ root@10.129.32.15:/var/www/html
+        - ssh gitlab-deploy@10.129.32.15 "yes | rm -rf /var/www/html/*"
+        - scp -r ./ gitlab-deploy@10.129.32.15:/var/www/html
     only:
         - frontend-master
