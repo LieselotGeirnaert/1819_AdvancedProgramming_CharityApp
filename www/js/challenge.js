@@ -8,7 +8,6 @@ $(window).on('load', function() {
             xhr.setRequestHeader('Authorization','Bearer ' + access_token);
         },
         data:{ 
-            idChallenge : 
         },
         success: function(data, textStatus, jqXHR) {
             $.each(data,function(i,challenge){
