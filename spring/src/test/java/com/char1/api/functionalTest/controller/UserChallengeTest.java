@@ -98,12 +98,10 @@ public class UserChallengeTest extends FunctionalTest {
     @Before
     public void createDummyData() {
         secondUser = userRepository.save(secondUser);
-        dummyUserChallengeDifferentUser.setUser(this.userRepository.findUserByEmailAddress("test@user.be"));
-        dummyUserChallenge.setUser(this.userRepository.findUserByEmailAddress("peter@example.org"));
+        dummyUserChallengeDifferentUser.setUser(secondUser);
+        dummyUserChallenge.setUser(testUser);
         dummyUserChallengeDifferentUser = userChallengeRepository.save(dummyUserChallengeDifferentUser);
         dummyUserChallenge = userChallengeRepository.save(dummyUserChallenge);
-
-
     }
 
     @After

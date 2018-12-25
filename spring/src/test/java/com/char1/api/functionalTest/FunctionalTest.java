@@ -35,6 +35,8 @@ public class FunctionalTest {
     @Value("${server.base}")
     private String base;
 
+    protected User testUser;
+
     @Autowired
     private WebApplicationContext webAppContext;
 
@@ -74,7 +76,7 @@ public class FunctionalTest {
     }
 
     private void createTestUser(String emailAddress, String password) {
-        User testUser = new User();
+        testUser = new User();
         testUser.setEmailAddress(emailAddress);
         testUser.setPassword(password);
         testUser.setFirstName("Peter");
