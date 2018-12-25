@@ -32,7 +32,8 @@ public class UserChallenge {
     private LocalDateTime startDate;
     private LocalDateTime deadlineDate;
     private int amountToDonate;
-    private int amountToComplete;
+    @Column(name = "amount_to_complete")
+    private int amountToComplete = 0;
     private int amountToCompleteDaily;
 
     @ManyToOne(cascade =  CascadeType.ALL)
