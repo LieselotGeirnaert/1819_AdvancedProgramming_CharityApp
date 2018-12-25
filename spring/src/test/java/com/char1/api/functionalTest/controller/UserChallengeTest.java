@@ -13,10 +13,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
 import static org.hamcrest.Matchers.equalTo;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
-import java.time.temporal.TemporalUnit;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -70,6 +68,7 @@ public class UserChallengeTest extends FunctionalTest {
         dummyUserChallenge.setCompleteToDonate(true);
         dummyUserChallenge.setCharity(dummyCharity);
         dummyUserChallenge.setAmountToDonate(5);
+        dummyUserChallenge.setAmountToComplete(5);
         dummyUserChallenge.setChallenge(dummyChallenge);
 
         dummyUserChallenge.setStartDate(LocalDateTime.now());
@@ -84,6 +83,7 @@ public class UserChallengeTest extends FunctionalTest {
         dummyUserChallengeDifferentUser.setAmountToDonate(5);
         dummyUserChallengeDifferentUser.setChallenge(dummyChallenge);
         dummyUserChallengeDifferentUser.setStartDate(LocalDateTime.now());
+        dummyUserChallengeDifferentUser.setAmountToComplete(5);
         dummyUserChallengeDifferentUser.setAmountToCompleteDaily(5);
 
         BankAccount userBankAccount = new BankAccount();
@@ -160,7 +160,7 @@ public class UserChallengeTest extends FunctionalTest {
     public void getUserchallengeWithInvalidId() {
         given()
                 .spec(super.requestSpecification)
-                .when().get("/userchallenge/1a")
+                .when().get("/userchallenge/1aa")
                 .then().statusCode(400);
     }
 
