@@ -63,7 +63,7 @@ public class UserChallengeTest extends FunctionalTest {
         dummyUserChallenge.setCharity(dummyCharity);
         dummyUserChallenge.setAmountToDonate(5);
         dummyUserChallenge.setChallenge(dummyChallenge);
-        dummyUserChallenge.setUser(this.userRepository.findUserByEmailAddress("peter@example.org"));
+
         dummyUserChallenge.setStartDate(LocalDateTime.now());
         dummyUserChallenge.setAmountToCompleteDaily(5);
 
@@ -75,7 +75,6 @@ public class UserChallengeTest extends FunctionalTest {
         dummyUserChallengeDifferentUser.setCharity(dummyCharity);
         dummyUserChallengeDifferentUser.setAmountToDonate(5);
         dummyUserChallengeDifferentUser.setChallenge(dummyChallenge);
-        dummyUserChallengeDifferentUser.setUser(this.userRepository.findUserByEmailAddress("peter@example.org"));
         dummyUserChallengeDifferentUser.setStartDate(LocalDateTime.now());
         dummyUserChallengeDifferentUser.setAmountToCompleteDaily(5);
 
@@ -92,9 +91,12 @@ public class UserChallengeTest extends FunctionalTest {
 
     @Before
     public void createDummyData() {
+        secondUser = userRepository.save(secondUser);
+        dummyUserChallengeDifferentUser.setUser(this.userRepository.findUserByEmailAddress("test@user.be"));
+        dummyUserChallenge.setUser(this.userRepository.findUserByEmailAddress("peter@example.org"));
         dummyUserChallenge = userChallengeRepository.save(dummyUserChallenge);
         dummyUserChallengeDifferentUser = userChallengeRepository.save(dummyUserChallengeDifferentUser);
-        secondUser = userRepository.save(secondUser);
+
     }
 
     @After
