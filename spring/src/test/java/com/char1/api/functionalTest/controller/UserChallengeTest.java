@@ -2,6 +2,8 @@ package com.char1.api.functionalTest.controller;
 
 import com.char1.api.entity.*;
 import com.char1.api.functionalTest.FunctionalTest;
+import com.char1.api.repository.ChallengeRepository;
+import com.char1.api.repository.CharityRepository;
 import com.char1.api.repository.UserChallengeRepository;
 import com.char1.api.request.UserChallengeRequest;
 import org.junit.After;
@@ -24,15 +26,22 @@ public class UserChallengeTest extends FunctionalTest {
     private UserChallenge dummyUserChallenge;
     private UserChallenge dummyUserChallengeDifferentUser;
     private User secondUser;
+    private Challenge dummyChallenge;
+    private Charity dummyCharity;
 
     @Autowired
     private UserChallengeRepository userChallengeRepository;
+
+    @Autowired
+    private ChallengeRepository challengeRepository;
+
+    @Autowired
+    private CharityRepository charityRepository;
 
     public UserChallengeTest() {
         // Create Dummy data
         dummyUserChallenge = new UserChallenge();
 
-        Charity dummyCharity;
         BankAccount oxfamBankAccount = new BankAccount();
         oxfamBankAccount.setBankAccount("BE16720332171231");
         dummyCharity = new Charity();
@@ -48,7 +57,6 @@ public class UserChallengeTest extends FunctionalTest {
         dummyCategory.setName("Sports");
         dummyCategorySet.add(dummyCategory);
 
-        Challenge dummyChallenge;
         dummyChallenge = new Challenge();
         dummyChallenge.setId(1);
         dummyChallenge.setCategory(dummyCategorySet);
@@ -102,6 +110,9 @@ public class UserChallengeTest extends FunctionalTest {
     @After
     public void RemoveDummyData() {
         userChallengeRepository.deleteAll();
+        userRepository.deleteAll();
+        charityRepository.deleteAll();
+        challengeRepository.deleteAll();
     }
 
     @Test
@@ -109,8 +120,8 @@ public class UserChallengeTest extends FunctionalTest {
         UserChallengeRequest userChallengeRequest = new UserChallengeRequest();
         userChallengeRequest.setAmountToComplete(10);
         userChallengeRequest.setAmountToDonate(10);
-        userChallengeRequest.setChallengeId(1);
-        userChallengeRequest.setCharityId(1);
+        userChallengeRequest.setChallengeId(dummyChallenge.getId());
+        userChallengeRequest.setCharityId(dummyCharity.getId());
         userChallengeRequest.setDeadlineDate(LocalDateTime.now().plus(5l, ChronoUnit.DAYS));
         userChallengeRequest.setStartDate(LocalDateTime.now());
 
