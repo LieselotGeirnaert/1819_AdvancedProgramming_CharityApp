@@ -9,6 +9,8 @@ import java.time.LocalDateTime;
 
 import java.util.List;
 
+import static javax.persistence.CascadeType.*;
+
 
 @Entity
 public class UserChallenge {
@@ -36,16 +38,16 @@ public class UserChallenge {
     private int amountToComplete = 0;
     private int amountToCompleteDaily;
 
-    @ManyToOne(cascade =  CascadeType.ALL)
+    @ManyToOne(cascade={PERSIST, MERGE, REFRESH, DETACH})
     @JoinColumn(name="challenge_id")
     private Challenge challenge;
 
-    @ManyToOne(cascade = CascadeType.MERGE)
+    @ManyToOne(cascade={MERGE, REFRESH, DETACH})
     @JoinColumn(name="user_id")
     @JsonIgnore
     private User user;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade={PERSIST, MERGE, REFRESH, DETACH})
     @JoinColumn(name="charity_id")
     private Charity charity;
 

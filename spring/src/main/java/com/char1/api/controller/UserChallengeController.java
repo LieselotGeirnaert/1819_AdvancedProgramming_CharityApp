@@ -13,6 +13,7 @@ import com.char1.api.repository.CharityRepository;
 import com.char1.api.repository.UserChallengeRepository;
 import com.char1.api.repository.UserRepository;
 import com.char1.api.request.UserChallengeRequest;
+import com.char1.api.service.UserChallengeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.oauth2.provider.OAuth2Authentication;
 import org.springframework.web.bind.annotation.*;
@@ -38,10 +39,13 @@ public class UserChallengeController {
 
     @Autowired
     CharityRepository charityRepository;
+
+    @Autowired
+    UserChallengeService userChallengeService;
     
     @GetMapping(value = "/{id}")
     public UserChallenge getUserChallengeById(OAuth2Authentication auth, @PathVariable int id) {
-        UserChallenge userChallenge = getUserChallengeById(auth, id);
+        UserChallenge userChallenge = userChallengeService.getUserChallengeByIdSecure(id, auth.getPrincipal().toString());
         return userChallenge;
     }
 
@@ -75,7 +79,7 @@ public class UserChallengeController {
     
     @DeleteMapping(value = "/{id}")
     public void deleteUserChallenge(OAuth2Authentication auth, @PathVariable int id) {
-        UserChallenge userChallenge = getUserChallengeById(auth, id);
+        UserChallenge userChallenge = userChallengeService.getUserChallengeByIdSecure(id, auth.getPrincipal().toString());
         userChallengeRepository.delete(userChallenge);
     }
 }

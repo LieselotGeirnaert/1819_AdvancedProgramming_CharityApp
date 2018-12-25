@@ -9,11 +9,12 @@ import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import static javax.persistence.CascadeType.*;
+
 @Entity
 public class User {
 
     public User() {}
-
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -35,7 +36,7 @@ public class User {
     @OneToOne(cascade = {CascadeType.ALL})
     private BankAccount bankAccount;
 
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.EAGER, cascade={PERSIST, MERGE, REFRESH, DETACH})
     @JoinTable(name = "user_role", joinColumns
             = @JoinColumn(name = "user_id",
             referencedColumnName = "id"),

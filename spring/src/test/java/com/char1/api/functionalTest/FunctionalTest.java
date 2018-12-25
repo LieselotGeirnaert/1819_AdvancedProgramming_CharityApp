@@ -21,6 +21,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.web.context.WebApplicationContext;
 
+import javax.transaction.Transactional;
+
 import static io.restassured.module.mockmvc.RestAssuredMockMvc.given;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.httpBasic;
 
@@ -81,7 +83,7 @@ public class FunctionalTest {
         testUser.setPassword(password);
         testUser.setFirstName("Peter");
         testUser.setLastName("Baelish");
-        userRepository.save(testUser);
+        userRepository.saveAndFlush(testUser);
     }
 
     private String obtainAccessToken(String username, String password) {

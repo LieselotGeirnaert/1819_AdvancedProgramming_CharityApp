@@ -6,6 +6,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
+import static javax.persistence.CascadeType.*;
+
 
 @MappedSuperclass
 public class Progress {
@@ -27,7 +29,7 @@ public class Progress {
     private LocalDateTime entryDate;
     private int currentAmount;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade={PERSIST, MERGE, REFRESH, DETACH})
     @JoinColumn(name="user_challenge_id")
     @JsonBackReference
     private UserChallenge userChallenge;
