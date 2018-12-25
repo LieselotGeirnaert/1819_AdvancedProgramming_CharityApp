@@ -6,6 +6,7 @@
 package com.char1.api.controller;
 
 import com.char1.api.controller.exception.EntityNotFoundException;
+import com.char1.api.controller.exception.UnautherizedException;
 import com.char1.api.entity.UserChallenge;
 import com.char1.api.repository.ChallengeRepository;
 import com.char1.api.repository.CharityRepository;
@@ -39,9 +40,9 @@ public class UserChallengeController {
     CharityRepository charityRepository;
     
     @GetMapping(value = "/{id}")
-    public UserChallenge getUserChallengeById(@PathVariable int id) {
-        if (!userChallengeRepository.existsById(id)) throw new EntityNotFoundException();
-        return userChallengeRepository.findById(id);
+    public UserChallenge getUserChallengeById(OAuth2Authentication auth, @PathVariable int id) {
+        UserChallenge userChallenge = getUserChallengeById(auth, id);
+        return userChallenge;
     }
 
     @GetMapping(params = { "completed" })
@@ -72,8 +73,8 @@ public class UserChallengeController {
     }
     
     @DeleteMapping(value = "/{id}")
-    public void deleteUserChallenge(@PathVariable int id) {
-        if (!userChallengeRepository.existsById(id)) throw new EntityNotFoundException();
-        userChallengeRepository.deleteById(id);
+    public void deleteUserChallenge(OAuth2Authentication auth, @PathVariable int id) {
+        UserChallenge userChallenge = getUserChallengeById(auth, id);
+        userChallengeRepository.delete(userChallenge);
     }
 }

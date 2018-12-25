@@ -24,11 +24,6 @@ public class UserTest extends FunctionalTest {
     @Autowired
     private UserRepository userRepository;
 
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
-
     public UserTest() {
         // Create Dummy data
         BankAccount userBankAccount = new BankAccount();

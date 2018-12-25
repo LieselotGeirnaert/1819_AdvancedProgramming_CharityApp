@@ -54,12 +54,12 @@ public class UserChallenge {
     private Charity charity;
 
 
-    @OneToMany(mappedBy="userChallenge")
+    @OneToMany(mappedBy="userChallenge", cascade = CascadeType.ALL)
     @JsonManagedReference
     @JsonIgnore
     private List<TotalProgress> totalProgress;
 
-    @OneToMany(mappedBy="userChallenge")
+    @OneToMany(mappedBy="userChallenge", cascade = CascadeType.ALL)
     @JsonManagedReference
     @JsonIgnore
     private List<DailyProgress> dailyProgress;

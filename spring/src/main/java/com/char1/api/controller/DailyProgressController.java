@@ -33,23 +33,6 @@ public class DailyProgressController {
     @Autowired
     ProgressService progressService;
 
-    @GetMapping
-    public List<DailyProgress> getAllProgress() {
-        return dailyProgressRepository.findAll();
-    }
-
-    @GetMapping(value = "/userChallenge/{userChallengeId}")
-    public List<DailyProgress> getAllProgressByUserChallenge(@PathVariable int userChallengeId) {
-        if (!userChallengeRepository.existsById(userChallengeId)) throw new EntityNotFoundException();
-        return dailyProgressRepository.findAllDailyProgressByUserChallenge(userChallengeRepository.findById(userChallengeId));
-    }
-
-    @GetMapping(value = "/{id}")
-    public DailyProgress getProgressById(@PathVariable int id) {
-        if (!dailyProgressRepository.existsById(id)) throw new EntityNotFoundException();
-        return dailyProgressRepository.findDailyProgressById(id);
-    }
-
     @PostMapping
     public DailyProgress createDailyProgress(OAuth2Authentication auth, @RequestBody DailyProgressRequest progressRequest) {
         UserChallenge userChallenge = userChallengeService.getUserChallengeByIdSecure(progressRequest.getUserChallengeId(), auth.getPrincipal().toString());
@@ -62,10 +45,5 @@ public class DailyProgressController {
 
     }
 
-    @DeleteMapping(value = "/{id}")
-    public void deleteProgress(@PathVariable int id) {
-        if (!dailyProgressRepository.existsById(id)) throw new EntityNotFoundException();
-        dailyProgressRepository.deleteById(id);
-    }
 }
 

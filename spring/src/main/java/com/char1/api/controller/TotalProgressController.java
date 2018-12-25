@@ -13,8 +13,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.oauth2.provider.OAuth2Authentication;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @RestController
 @RequestMapping(value = "/progress")
 public class TotalProgressController {
@@ -31,22 +29,6 @@ public class TotalProgressController {
     @Autowired
     ProgressService progressService;
 
-    @GetMapping
-    public List<TotalProgress> getAllProgress() {
-        return totalProgressRepository.findAll();
-    }
-    
-    @GetMapping(value = "/userChallenge/{userChallengeId}")
-    public List<TotalProgress> getAllProgressByUserChallenge(@PathVariable int userChallengeId) {
-        if (!userChallengeRepository.existsById(userChallengeId)) throw new EntityNotFoundException();
-        return totalProgressRepository.findAllTotalProgressByUserChallenge(userChallengeRepository.findById(userChallengeId));
-   }
-    
-    @GetMapping(value = "/{id}")
-    public TotalProgress getProgressById(@PathVariable int id) {
-        if (!totalProgressRepository.existsById(id)) throw new EntityNotFoundException();
-        return totalProgressRepository.findTotalProgressById(id);
-   }
        
     @PostMapping
     public TotalProgress createProgress(OAuth2Authentication auth, @RequestBody ProgressRequest progressRequest) {
@@ -61,10 +43,4 @@ public class TotalProgressController {
         return progress;
 
     }
-
-    @DeleteMapping(value = "/{id}")
-    public void deleteProgress(@PathVariable int id) {
-        if (!totalProgressRepository.existsById(id)) throw new EntityNotFoundException();
-        totalProgressRepository.deleteById(id);
-    }   
 }
