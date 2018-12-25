@@ -1,5 +1,6 @@
 package com.char1.api.controller;
 
+import com.char1.api.controller.exception.DuplicateEntityException;
 import com.char1.api.entity.Challenge;
 import com.char1.api.entity.User;
 import com.char1.api.entity.UserChallenge;
@@ -36,40 +37,15 @@ public class UserController {
     @Autowired
     UserChallengeRepository userChallengeRepository;
 
-    @GetMapping(value = "/user/{idUser}")
-    public User getUser(@PathVariable String idUser) {
-        return userRepository.findByIdOrEmailAddress(NumberUtils.toInt(idUser), idUser);
-    }
-
     @GetMapping(value = "/user")
     @ResponseBody
     public User getUser(OAuth2Authentication auth) {
         return userRepository.findUserByEmailAddress(auth.getPrincipal().toString());
     }
 
-    @RequestMapping(
-            value = "/user/{idUser}/challenge",
-            params = { "completed" },
-            method = GET)
-    public List<UserChallenge> getAllChallengesOfUserWithCompletion(@PathVariable String idUser, @RequestParam("completed") boolean completed) {
-        return userChallengeRepository.findAllByUserAndAndCompleted(getUser(idUser), completed);
-    }
-
-    @RequestMapping(
-            value = "/user/{idUser}/challenge",
-            method = GET)
-    public List<UserChallenge> getAllChallengesOfUser(@PathVariable String idUser) {
-        return userChallengeRepository.findAllByUser(getUser(idUser));
-    }
-
     @PostMapping("/user")
     public User newUser(@RequestBody User user) {
+        if (userRepository.existsByEmailAddress(user.getEmailAddress())) throw new DuplicateEntityException();
         return userRepository.save(user);
     }
-
-
-
-
-
-
 }
