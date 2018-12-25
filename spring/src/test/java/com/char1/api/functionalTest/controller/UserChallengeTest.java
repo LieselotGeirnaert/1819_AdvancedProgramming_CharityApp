@@ -100,17 +100,8 @@ public class UserChallengeTest extends FunctionalTest {
         secondUser = userRepository.save(secondUser);
         dummyUserChallengeDifferentUser.setUser(secondUser);
         dummyUserChallenge.setUser(testUser);
-        System.out.println(dummyUserChallengeDifferentUser.isCompleted());
-        System.out.println(dummyUserChallengeDifferentUser.getDeadlineDate());
-        System.out.println(dummyUserChallengeDifferentUser.isCompleteToDonate());
-        System.out.println(dummyUserChallengeDifferentUser.getCharity());
-        System.out.println(dummyUserChallengeDifferentUser.getAmountToDonate());
-        System.out.println(dummyUserChallengeDifferentUser.getChallenge());
-        System.out.println(dummyUserChallengeDifferentUser.getStartDate());
-        System.out.println(dummyUserChallengeDifferentUser.getAmountToComplete());
-        System.out.println(dummyUserChallengeDifferentUser.getAmountToCompleteDaily());
-        userChallengeRepository.save(dummyUserChallengeDifferentUser);
         userChallengeRepository.save(dummyUserChallenge);
+        userChallengeRepository.save(dummyUserChallengeDifferentUser);
     }
 
     @After

@@ -5,6 +5,7 @@ import java.time.LocalDateTime;
 
 public class UserChallengeRequest {
     private int amountToComplete;
+    private int amountToCompleteDaily;
     private int amountToDonate;
     private int challengeId;
     private int charityId;
@@ -66,5 +67,13 @@ public class UserChallengeRequest {
 
     public void setStartDate(LocalDateTime startDate) {
         this.startDate = startDate;
+    }
+
+    public int getAmountToCompleteDaily() {
+        return amountToCompleteDaily;
+    }
+
+    public void setAmountToCompleteDaily(int amountToCompleteDaily) {
+        this.amountToCompleteDaily = amountToCompleteDaily;
     }
 }

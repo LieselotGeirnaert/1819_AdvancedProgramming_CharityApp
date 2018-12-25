@@ -69,6 +69,7 @@ public class UserChallengeController {
         userChallenge.setCompleteToDonate(userChallengeRequest.isCompleteToDonate());
         userChallenge.setStartDate(userChallengeRequest.getStartDate());
         userChallenge.setDeadlineDate(userChallengeRequest.getDeadlineDate());
+        userChallenge.setAmountToCompleteDaily(userChallengeRequest.getAmountToCompleteDaily());
         return userChallengeRepository.save(userChallenge);
     }
     
