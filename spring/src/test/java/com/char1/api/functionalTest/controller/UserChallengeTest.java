@@ -10,6 +10,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 
 import static org.hamcrest.Matchers.equalTo;
 import java.time.LocalDate;
@@ -21,6 +22,7 @@ import java.util.Set;
 
 import static io.restassured.module.mockmvc.RestAssuredMockMvc.given;
 
+@Transactional
 public class UserChallengeTest extends FunctionalTest {
 
     private UserChallenge dummyUserChallenge;
@@ -51,7 +53,7 @@ public class UserChallengeTest extends FunctionalTest {
         dummyCharity.setBankAccount(oxfamBankAccount);
 
         Set<Category> dummyCategorySet = new HashSet<>();
-        Category dummyCategory = new Category();
+        Category dummyCategory;
         dummyCategory = new Category();
         dummyCategory.setName("Sports");
         dummyCategorySet.add(dummyCategory);

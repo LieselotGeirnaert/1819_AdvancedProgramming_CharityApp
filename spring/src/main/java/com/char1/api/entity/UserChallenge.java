@@ -44,7 +44,7 @@ public class UserChallenge {
     @JoinColumn(name="challenge_id")
     private Challenge challenge;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name="user_id")
     @JsonIgnore
     private User user;
