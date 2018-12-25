@@ -24,14 +24,13 @@ public final class Char1Utils {
 
     public static float calculateDailyProgress(UserChallenge userChallenge) {
         List<DailyProgress> dailyProgresses = userChallenge.getDailyProgress();
-        dailyProgresses = dailyProgresses.stream().filter(progress -> LocalDate.now().isEqual(progress.getEntryDate().toLocalDate())).collect(Collectors.toList());
-
         float currentAmount = 0;
         if (dailyProgresses != null) {
+            dailyProgresses = dailyProgresses.stream().filter(progress -> LocalDate.now().isEqual(progress.getEntryDate().toLocalDate())).collect(Collectors.toList());
             for (DailyProgress pr : dailyProgresses) {
                 currentAmount += pr.getCurrentAmount();
             }
-            return (currentAmount / userChallenge.getAmountToCompleteDaily()) * 100;
+        return (currentAmount / userChallenge.getAmountToCompleteDaily()) * 100;
         } else {
             return currentAmount;
         }

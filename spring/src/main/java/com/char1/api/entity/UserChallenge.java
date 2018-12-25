@@ -4,16 +4,11 @@ import com.char1.api.utils.Char1Utils;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
-
 import javax.persistence.*;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.chrono.ChronoLocalDateTime;
-import java.time.temporal.ChronoField;
-import java.time.temporal.ChronoUnit;
-import java.util.Calendar;
+
 import java.util.List;
-import java.util.stream.Collectors;
+
 
 @Entity
 public class UserChallenge {
@@ -162,7 +157,7 @@ public class UserChallenge {
         this.charity = charity;
     }
     
-        public int getAmountToComplete() {
+    public int getAmountToComplete() {
         return amountToComplete;
     }
 

@@ -82,7 +82,7 @@ public class UserChallengeTest extends FunctionalTest {
         dummyUserChallengeDifferentUser.setAmountToDonate(5);
         dummyUserChallengeDifferentUser.setChallenge(dummyChallenge);
         dummyUserChallengeDifferentUser.setStartDate(LocalDateTime.now());
-        dummyUserChallengeDifferentUser.setAmountToComplete(5);
+        dummyUserChallengeDifferentUser.setAmountToComplete(50);
         dummyUserChallengeDifferentUser.setAmountToCompleteDaily(5);
 
         BankAccount userBankAccount = new BankAccount();
@@ -101,8 +101,8 @@ public class UserChallengeTest extends FunctionalTest {
         secondUser = userRepository.save(secondUser);
         dummyUserChallengeDifferentUser.setUser(secondUser);
         dummyUserChallenge.setUser(testUser);
-        dummyUserChallengeDifferentUser = userChallengeRepository.save(dummyUserChallengeDifferentUser);
-        dummyUserChallenge = userChallengeRepository.save(dummyUserChallenge);
+        userChallengeRepository.save(dummyUserChallengeDifferentUser);
+        userChallengeRepository.save(dummyUserChallenge);
     }
 
     @After
