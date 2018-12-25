@@ -33,7 +33,7 @@ public class User {
     private LocalDateTime passwordResetDate;
     private String passwordReset;
 
-    @OneToOne
+    @OneToOne(cascade = {CascadeType.ALL})
     private BankAccount bankAccount;
 
     @ManyToMany(fetch = FetchType.EAGER)

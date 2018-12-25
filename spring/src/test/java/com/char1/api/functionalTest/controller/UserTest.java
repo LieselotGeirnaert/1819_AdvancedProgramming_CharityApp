@@ -37,8 +37,9 @@ public class UserTest extends FunctionalTest {
         dummyUser.setEmailAddress("test@user.be");
         dummyUser.setFirstName("test");
         dummyUser.setLastName("tester");
-        dummyUser.setBankAccount(userBankAccount);
         dummyUser.setPassword(passwordEncoder().encode("password"));
+        dummyUser.setBankAccount(userBankAccount);
+
     }
 
     @Before
