@@ -67,9 +67,8 @@ public class UserChallengeTest extends FunctionalTest {
         dummyUserChallenge.setCompleteToDonate(true);
         dummyUserChallenge.setCharity(dummyCharity);
         dummyUserChallenge.setAmountToDonate(5);
-        dummyUserChallenge.setAmountToComplete(5);
+        dummyUserChallenge.setAmountToComplete(50);
         dummyUserChallenge.setChallenge(dummyChallenge);
-
         dummyUserChallenge.setStartDate(LocalDateTime.now());
         dummyUserChallenge.setAmountToCompleteDaily(5);
 
@@ -101,6 +100,15 @@ public class UserChallengeTest extends FunctionalTest {
         secondUser = userRepository.save(secondUser);
         dummyUserChallengeDifferentUser.setUser(secondUser);
         dummyUserChallenge.setUser(testUser);
+        System.out.println(dummyUserChallengeDifferentUser.isCompleted());
+        System.out.println(dummyUserChallengeDifferentUser.getDeadlineDate());
+        System.out.println(dummyUserChallengeDifferentUser.isCompleteToDonate());
+        System.out.println(dummyUserChallengeDifferentUser.getCharity());
+        System.out.println(dummyUserChallengeDifferentUser.getAmountToDonate());
+        System.out.println(dummyUserChallengeDifferentUser.getChallenge());
+        System.out.println(dummyUserChallengeDifferentUser.getStartDate());
+        System.out.println(dummyUserChallengeDifferentUser.getAmountToComplete());
+        System.out.println(dummyUserChallengeDifferentUser.getAmountToCompleteDaily());
         userChallengeRepository.save(dummyUserChallengeDifferentUser);
         userChallengeRepository.save(dummyUserChallenge);
     }
