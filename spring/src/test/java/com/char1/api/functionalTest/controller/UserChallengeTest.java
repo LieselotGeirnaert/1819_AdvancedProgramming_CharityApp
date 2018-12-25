@@ -20,7 +20,6 @@ import java.util.Set;
 
 import static io.restassured.module.mockmvc.RestAssuredMockMvc.given;
 
-@Transactional
 public class UserChallengeTest extends FunctionalTest {
 
     private UserChallenge dummyUserChallenge;
