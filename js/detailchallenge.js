@@ -13,6 +13,25 @@ $(document).ready(function() {
     },
     success: function(data, textStatus, jqXHR) {
       console.log(data);
+      var startdate = new Date(data.startDate);
+      var enddate = new Date(data.deadlineDate);
+
+      console.log(startdate);
+      $("#title").append(data.challenge.title);
+      $("#category").append(data.challenge.category.name);
+      $("#unit").append(data.challenge.unitToMeasure);
+      $("#start").append(
+        startdate.getDay() + "/" + startdate.getMonth() + "/" + startdate.getFullYear()
+      );
+      $("#end").append(
+        enddate.getDay() +
+          "/" +
+          enddate.getMonth() +
+          "/" +
+          enddate.getFullYear()
+      );
+      $("#charity").append(data.charity.name);
+      $("#amount").append(data.amountToDonate);
     },
     error: function(jqXhr, textStatus, errorThrown) {
       //Check if the authentication was invalid, in which case return to index

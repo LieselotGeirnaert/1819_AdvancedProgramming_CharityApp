@@ -10,7 +10,7 @@ $(document).ready(function() {
     success: function(data, textStatus, jqXHR) {
       var completedChallenges = [];
       $.each(data, function(i, challenge) {
-        if (challenge.completed == true) {
+        if (challenge.completed == false) {
           completedChallenges.push(challenge);
         }
       });
