@@ -41,4 +41,3 @@ maven-deploy:
         expire_in: 1 month
     only:
         - backend-master
-        - RobinW-74-GitlabCodeCoverage
