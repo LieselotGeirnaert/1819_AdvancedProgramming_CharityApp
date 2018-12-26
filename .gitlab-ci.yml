@@ -33,7 +33,7 @@ maven-deploy:
     stage: deploy
     script:
         - ./mvnw verify tomcat7:redeploy-only -s .mvn/wrapper/settings.xml -DskipTests=true $TEST_PROFILE
-        - echo "Coverage: $(/home/gitlab-runner/scripts/extract-coverage.sh target/site/jacoco/jacoco.xml)"
+        - echo "Line Code Coverage $(/home/gitlab-runner/scripts/extract-coverage.sh target/site/jacoco/jacoco.xml)%"
     artifacts:
         paths:
         - target/*.war
