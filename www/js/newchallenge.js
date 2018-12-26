@@ -216,8 +216,9 @@ $(document).ready(function() {
 		}
 
 		// check result
-		if (result != false || result != true){
+		if (result.value != 'false' && result.value != 'true') {
 			allOk = false;
+			console.log("error result");
 		}
 
 		return allOk;
@@ -255,13 +256,13 @@ $(document).ready(function() {
 					xhr.setRequestHeader('Authorization','Bearer ' + access_token);
 				},
 				data: {
-					"amountToComplete": count.value,
-					"amountToDonate": amount.value,
-					"challengeId": challenge.value,
-					"charityId": charity.value,
-					"completeToDonate": result.value,
-					"deadlineDate": start.value + ":00.000Z",
-					"startDate": end.value + ":00.000Z"
+					"amountToComplete": parseInt(count.value),
+					"amountToDonate": parseInt(amount.value),
+					"challengeId": parseInt(challenge.value),
+					"charityId": parseInt(charity.value),
+					"completeToDonate": (result.value == 'true'),
+					"deadlineDate": startDate.value + ":00.000Z",
+					"startDate": endDate.value + ":00.000Z"
 				},
 				success: function(data, textStatus, jqXHR) {
 					window.location.href = "activechallenges.html";
@@ -275,6 +276,7 @@ $(document).ready(function() {
 					console.log( errorThrown );
 				}
 			});
+			document.getElementById('summary').className = '';
 		} else {
 			// show summary
 			document.getElementById('summary').className = 'showSummary';
