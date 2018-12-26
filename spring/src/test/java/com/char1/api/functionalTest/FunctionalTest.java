@@ -15,13 +15,8 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.context.annotation.Bean;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.web.context.WebApplicationContext;
-
-import javax.transaction.Transactional;
 
 import static io.restassured.module.mockmvc.RestAssuredMockMvc.given;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.httpBasic;
@@ -37,20 +32,14 @@ public class FunctionalTest {
     @Value("${server.base}")
     private String base;
 
-    protected User testUser;
-
     @Autowired
     private WebApplicationContext webAppContext;
 
     @Autowired
-    protected UserRepository userRepository;
+    private UserRepository userRepository;
 
+    protected User authenticatedUser;
     protected MockMvcRequestSpecification requestSpecification;
-
-    @Bean
-    protected PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
 
     @Before
     public void setUp() {
@@ -59,7 +48,7 @@ public class FunctionalTest {
         String emailAddress = "peter@example.org";
         String password = "test";
 
-        createTestUser(emailAddress, password);
+        authenticatedUser = createTestUser(emailAddress, password);
 
         String oAuth2AccessToken = obtainAccessToken(emailAddress, password);
         requestSpecification = buildMockMvcRequestSpecification(oAuth2AccessToken);
@@ -77,17 +66,16 @@ public class FunctionalTest {
         RestAssuredMockMvc.webAppContextSetup(webAppContext);
     }
 
-    private void createTestUser(String emailAddress, String password) {
-        testUser = new User();
+    private User createTestUser(String emailAddress, String password) {
+        User testUser = new User();
         testUser.setEmailAddress(emailAddress);
         testUser.setPassword(password);
         testUser.setFirstName("Peter");
         testUser.setLastName("Baelish");
-        userRepository.saveAndFlush(testUser);
+        return userRepository.saveAndFlush(testUser);
     }
 
     private String obtainAccessToken(String username, String password) {
-
         return given().auth().with(httpBasic("char1Client", "f2a1ed52710d4533bde25be6da03b6e3"))
                 .formParam("grant_type", "password")
                 .formParam("username", username)
