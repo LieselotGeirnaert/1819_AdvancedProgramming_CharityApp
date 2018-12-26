@@ -1,6 +1,6 @@
 <html>
   <head>
-    <title>Active Challenges - Goal2Give</title>
+    <title>Detail Challenge - Goal2Give</title>
     <link rel="stylesheet" type="text/css" href="css/start.css" />
     <link rel="stylesheet" type="text/css" href="css/style.css" />
     <link rel="stylesheet" type="text/css" href="css/menu.css" />
@@ -30,10 +30,10 @@
     </navbar>
     <section id="content" class="center">
       <h1>Challenge</h1>
-      <h2>Water drinken</h2>
+      <h2 id="title">Water drinken</h2>
       <section class="challenge__info">
-        <p>gezondheid</p>
-        <p>5 glazen water drinken per dag</p>
+        <p id="category"></p>gezondheid</p>
+        <p id="amount">5 glazen water drinken per dag</p>
       </section>
       <section class="challenge__period">
         <div>
@@ -41,16 +41,16 @@
           <p>einde</p>
         </div>
         <div>
-          <p>1/12/2018</p>
+          <p id="start">1/12/2018</p>
           <p>-</p>
-          <p>31/12/2018</p>
+          <p id="end">31/12/2018</p>
         </div>
       </section>
       <h3>vooruitgang</h3>
       <section class="challenge__day">
         <h4>vandaag</h4>
         <div class="progressbar">
-          <div class="progressbar__status" style="width:20%"></div>
+          <!-- <div class="progressbar__status" style="width:20%"></div> -->
         </div>
       </section>
       <section class="challenge__day">
@@ -83,6 +83,6 @@
     </section>
     <script src="vendor/jquery-3.3.1.min.js"></script>
     <script src="js/scripts.js"></script>
-    <script src="js/activechallenges.js"></script>
+    <script src="js/detailchallenge.js"></script>
   </body>
 </html>
