@@ -1,0 +1,63 @@
+a#back > span {
+  color: #7bcdba;
+  font-size: 8rem;
+  margin-left: 2rem;
+}
+
+a#hamburger > span {
+  color: #7bcdba;
+  font-size: 7rem;
+  margin-right: 2rem;
+}
+
+a#closeoverlay > span {
+  color: #7bcdba;
+  font-size: 7rem;
+  margin-right: 2rem;
+}
+
+#overlaymenu {
+  background-color: #2e4756;
+  display: none;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+}
+
+#closeoverlay {
+  align-self: flex-end;
+}
+
+.overlaycenter {
+  align-items: center;
+  color: #efefef;
+  display: flex;
+  flex-direction: column;
+  font-size: 4.5rem;
+}
+
+.overlaycenter img {
+  max-height: 20rem;
+  margin: 10rem;
+  max-width: 20rem;
+}
+
+.overlaycenter ul {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  list-style: none;
+}
+
+.overlaycenter li {
+  margin: 2rem;
+}
+
+.overlaycenter li:nth-child(5) {
+  margin-top: 10rem;
+}
+
+.overlaycenter li a {
+  color: #efefef;
+  text-transform: uppercase;
+}
