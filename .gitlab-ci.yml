@@ -1,9 +1,9 @@
 cache:
+    key: "$CI_COMMIT_REF_SLUG"
     paths:
-        - $REPO_LOC/target/
+        - target/
 
 variables:
-    REPO_LOC: './spring'
     TEST_PROFILE: '-Dspring.profiles.active=test'
 
 stages:
@@ -12,7 +12,6 @@ stages:
     - deploy
 
 before_script:
-    - cd $REPO_LOC
     - chmod +x ./mvnw
 
 maven-compile:
@@ -26,7 +25,7 @@ maven-test:
         - ./mvnw test $TEST_PROFILE
     artifacts:
         paths:
-        - $REPO_LOC/target/surfire-reports/*
+        - target/surfire-reports/*
         expire_in: 1 week
 
 maven-deploy:
@@ -35,7 +34,7 @@ maven-deploy:
         - ./mvnw package tomcat7:redeploy-only -s .mvn/wrapper/settings.xml -DskipTests=true $TEST_PROFILE
     artifacts:
         paths:
-        - $REPO_LOC/target/*.war
+        - target/*.war
         expire_in: 1 month
     only:
-        - master
+        - backend-master
