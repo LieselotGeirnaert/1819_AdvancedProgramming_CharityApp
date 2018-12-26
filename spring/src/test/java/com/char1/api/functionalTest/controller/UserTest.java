@@ -8,14 +8,9 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
-
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 import static io.restassured.module.mockmvc.RestAssuredMockMvc.given;
+import static org.hamcrest.core.IsEqual.equalTo;
 
 public class UserTest extends FunctionalTest {
 
@@ -29,12 +24,11 @@ public class UserTest extends FunctionalTest {
         BankAccount userBankAccount = new BankAccount();
         userBankAccount.setBankAccount("BE16720332171231");
         dummyUser = new User();
-        dummyUser.setEmailAddress("test@user.be");
+        dummyUser.setEmailAddress("dummy@example.org");
         dummyUser.setFirstName("test");
         dummyUser.setLastName("tester");
-        dummyUser.setPassword(passwordEncoder().encode("password"));
+        dummyUser.setPassword("password");
         dummyUser.setBankAccount(userBankAccount);
-
     }
 
     @Before
@@ -52,11 +46,11 @@ public class UserTest extends FunctionalTest {
         BankAccount testBankAccount = new BankAccount();
         testBankAccount.setBankAccount("BE84166940171166");
         User user = new User();
-        user.setEmailAddress("test2@user.be");
+        user.setEmailAddress("dummy2@example.org");
         user.setFirstName("test2");
         user.setLastName("tester2");
+        user.setPassword("password");
         user.setBankAccount(testBankAccount);
-        user.setPassword(passwordEncoder().encode("password"));
 
         given()
                 .spec(super.requestSpecification)
@@ -79,6 +73,7 @@ public class UserTest extends FunctionalTest {
         given()
                 .spec(super.requestSpecification)
                 .when().get("/user")
-                .then().statusCode(200);
+                .then().statusCode(200)
+                .body("id", equalTo(authenticatedUser.getId()));
     }
 }

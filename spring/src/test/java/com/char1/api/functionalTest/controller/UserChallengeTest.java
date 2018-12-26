@@ -2,27 +2,20 @@ package com.char1.api.functionalTest.controller;
 
 import com.char1.api.entity.*;
 import com.char1.api.functionalTest.FunctionalTest;
-import com.char1.api.repository.CategoryRepository;
-import com.char1.api.repository.ChallengeRepository;
-import com.char1.api.repository.CharityRepository;
-import com.char1.api.repository.UserChallengeRepository;
+import com.char1.api.repository.*;
 import com.char1.api.request.UserChallengeRequest;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import javax.persistence.EntityManager;
-import javax.persistence.Persistence;
-import javax.transaction.Transactional;
-
-import static org.hamcrest.Matchers.equalTo;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.HashSet;
 import java.util.Set;
 
 import static io.restassured.module.mockmvc.RestAssuredMockMvc.given;
+import static org.hamcrest.Matchers.equalTo;
 
 public class UserChallengeTest extends FunctionalTest {
 
@@ -36,13 +29,12 @@ public class UserChallengeTest extends FunctionalTest {
 
     @Autowired
     private UserChallengeRepository userChallengeRepository;
-
+    @Autowired
+    private UserRepository userRepository;
     @Autowired
     private ChallengeRepository challengeRepository;
-
     @Autowired
     private CharityRepository charityRepository;
-
     @Autowired
     private CategoryRepository categoryRepository;
 
@@ -120,7 +112,7 @@ public class UserChallengeTest extends FunctionalTest {
         secondUser.setEmailAddress("test@user.be");
         secondUser.setFirstName("test");
         secondUser.setLastName("tester");
-        secondUser.setPassword(passwordEncoder().encode("password"));
+        secondUser.setPassword("password");
         secondUser.setBankAccount(userBankAccount);
 
     }
