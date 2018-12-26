@@ -39,5 +39,5 @@ maven-deploy:
         - target/*.war
         - target/site/jacoco
         expire_in: 1 month
-    only:
-        - backend-master
+#    only:
+#        - backend-master
