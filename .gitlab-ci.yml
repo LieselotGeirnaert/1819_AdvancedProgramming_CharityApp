@@ -24,17 +24,20 @@ maven-test:
     script:
         - ./mvnw test $TEST_PROFILE
     artifacts:
-        paths:
-        - target/surfire-reports/*
-        expire_in: 1 week
+        reports:
+            junit:
+            - target/surefire-reports/TEST-*.xml
+        expire_in: 1 month
 
 maven-deploy:
     stage: deploy
     script:
-        - ./mvnw package tomcat7:redeploy-only -s .mvn/wrapper/settings.xml -DskipTests=true $TEST_PROFILE
+        - ./mvnw verify tomcat7:redeploy-only -s .mvn/wrapper/settings.xml -DskipTests=true $TEST_PROFILE
+        - echo "Coverage: $(/home/gitlab-runner/scripts/extract-coverage.sh target/site/jacoco/jacoco.xml)"
     artifacts:
         paths:
         - target/*.war
+        - target/site/jacoco
         expire_in: 1 month
     only:
         - backend-master
