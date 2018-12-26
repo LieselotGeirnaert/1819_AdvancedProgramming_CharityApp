@@ -76,13 +76,12 @@ $(document).ready(function() {
 	var validateCategory = function() {
 		var catOK = true;
 
-		var category = document.getElementById('category');
+		var $category = $('#category');
 
 		// check category
-		if (category.value <= '0') {
+		if ($category.val() <= '0') {
 			catOK = false;
 			errormessages += "Gelieve een categorie te kiezen";	
-			
 		}
 
 		return catOK;
@@ -91,13 +90,12 @@ $(document).ready(function() {
 	var validateChallenge = function() {
 		var cahllOK = true;
 
-		var challenge = document.getElementById('challenge');
+		var $challenge = $('#challenge');
 
 		// check challenge
-		if (challenge.value <= '0') {
+		if ($challenge.val() <= '0') {
 			challOK = false;
 			errormessages += "Gelieve een challenge te kiezen";	
-			
 		}
 
 		return cahllOK;
@@ -170,12 +168,12 @@ $(document).ready(function() {
 		var allOk = true;
 
 		// input shortcuts
-		var count = document.getElementById('count');
-		var startDate = document.getElementById('startDate');
-		var endDate = document.getElementById('endDate');
-		var result = document.getElementById('result');
-		var amount = document.getElementById('amount');
-		var charity = document.getElementById('charity')
+		var $count = $('#count');
+		var $startDate = $('#startDate');
+		var $endDate = $('#endDate');
+		var $result = $('#result');
+		var $amount = $('#amount');
+		var $charity = $('#charity')
 
 		var challCheck = validateChallenge();
 
@@ -184,20 +182,20 @@ $(document).ready(function() {
 			allOk = false;
 		}
 		// check count
-		if (count.value <= '0') {
+		if ($count.val() <= '0') {
 			allOk = false;
-			errName.innerHTML = 'Gelieve een groter aantal dan 0 in te vullen';		
+			$errName.html('Gelieve een groter aantal dan 0 in te vullen');		
 		}
 
-		if (count.value == '') {
+		if ($count.val() == '') {
 			allOk = false;
-			errName.innerHTML = 'Gelieve een aantal in te vullen';		
+			$errName.html('Gelieve een aantal in te vullen');		
 		}
 		
 		// check charity
-		if (charity.value <= '0') {
+		if ($charity.val() <= '0') {
 			allOk = false;
-			errCountry.innerHTML = 'Gelieve een charity te kiezen';			
+			$errCountry.html('Gelieve een charity te kiezen');			
 		}
 
 		// check startDate
@@ -205,18 +203,18 @@ $(document).ready(function() {
 		// check endDate
 
 		// check amount
-		if (amount.value <= '0') {
+		if ($amount.val() <= '0') {
 			allOk = false;
 			errName.innerHTML = 'Gelieve een bedrag groter dan 0 in te vullen';		
 		}
 
-		if (amount.value == '') {
+		if ($amount.val() == '') {
 			allOk = false;
 			errName.innerHTML = 'Gelieve een bedrag in te vullen';		
 		}
 
 		// check result
-		if (result.value != 'false' && result.value != 'true') {
+		if ($result.val() != 'false' && $result.val() != 'true') {
 			allOk = false;
 			console.log("error result");
 		}
@@ -225,9 +223,9 @@ $(document).ready(function() {
 	}
 
 	// add novalidate to form
-	document.getElementById('addChallenge__form').setAttribute('novalidate', 'novalidate');
+	$('#addChallenge__form').attr('novalidate', 'novalidate');
 
-	document.getElementById('addChallenge__form').addEventListener('submit', function(e) {
+	$('#addChallenge__form').on('submit', function(e) {
 		// halt event
 		e.preventDefault();
 		e.stopPropagation();
@@ -238,13 +236,13 @@ $(document).ready(function() {
 		// draw conclusion
 		if (allOk) {
 			// input shortcuts
-			var challenge = document.getElementById('challenge');
-			var count = document.getElementById('count');
+			var $challenge = $('#challenge');
+			var $count = $('#count');
 			var $startDate = $('#startDate');
 			var $endDate = $('#endDate');
-			var result = document.getElementById('result');
-			var amount = document.getElementById('amount');
-			var charity = document.getElementById('charity')
+			var $result = $('#result');
+			var $amount = $('#amount');
+			var $charity = $('#charity')
 			
 			$.ajax({
 				url: 'http://10.129.32.15:8080/userchallenge',
@@ -256,11 +254,11 @@ $(document).ready(function() {
 					xhr.setRequestHeader('Authorization','Bearer ' + access_token);
 				},
 				data: JSON.stringify({
-					amountToComplete: parseInt(count.value),
-					amountToDonate: parseInt(amount.value),
-					challengeId: parseInt(challenge.value),
-					charityId: parseInt(charity.value),
-					completeToDonate: (result.value == 'true'),
+					amountToComplete: parseInt($count.val()),
+					amountToDonate: parseInt($amount.val()),
+					challengeId: parseInt($challenge.val()),
+					charityId: parseInt($charity.val()),
+					completeToDonate: ($result.val() == 'true'),
 					deadlineDate: $endDate.val() + "T00:00:00.000Z",
 					startDate: $startDate.val() + "T00:00:00.000Z"
 				  }),
@@ -277,11 +275,11 @@ $(document).ready(function() {
 					console.log( errorThrown );
 				}
 			});
-			document.getElementById('summary').className = '';
+			$('#summary').removeClass('showSummary');
 		} else {
 			// show summary
-			document.getElementById('summary').className = 'showSummary';
-			document.getElementById('summary').style.display = 'block';
+			$('#summary').addClass('showSummary');
+			$('#summary').css('display','block');
 		}
 
 	});
