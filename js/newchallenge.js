@@ -240,8 +240,8 @@ $(document).ready(function() {
 			// input shortcuts
 			var challenge = document.getElementById('challenge');
 			var count = document.getElementById('count');
-			var startDate = document.getElementById('startDate');
-			var endDate = document.getElementById('endDate');
+			var $startDate = $('#startDate');
+			var $endDate = $('#endDate');
 			var result = document.getElementById('result');
 			var amount = document.getElementById('amount');
 			var charity = document.getElementById('charity')
@@ -255,15 +255,16 @@ $(document).ready(function() {
 					var access_token = readCookie("access_token");
 					xhr.setRequestHeader('Authorization','Bearer ' + access_token);
 				},
-				data: {
-					"amountToComplete": parseInt(count.value),
-					"amountToDonate": parseInt(amount.value),
-					"challengeId": parseInt(challenge.value),
-					"charityId": parseInt(charity.value),
-					"completeToDonate": (result.value == 'true'),
-					"deadlineDate": startDate.value + ":00.000Z",
-					"startDate": endDate.value + ":00.000Z"
-				},
+				data: JSON.stringify({
+					amountToComplete: parseInt(count.value),
+					amountToDonate: parseInt(amount.value),
+					challengeId: parseInt(challenge.value),
+					charityId: parseInt(charity.value),
+					completeToDonate: (result.value == 'true'),
+					deadlineDate: $endDate.val() + "T00:00:00.000Z",
+					startDate: $startDate.val() + "T00:00:00.000Z"
+				  }),
+				  processData: false,
 				success: function(data, textStatus, jqXHR) {
 					window.location.href = "activechallenges.html";
 				},
