@@ -6,13 +6,14 @@
 package com.char1.api.controller;
 
 import com.char1.api.controller.exception.EntityNotFoundException;
-import com.char1.api.entity.User;
+import com.char1.api.controller.exception.UnautherizedException;
 import com.char1.api.entity.UserChallenge;
 import com.char1.api.repository.ChallengeRepository;
 import com.char1.api.repository.CharityRepository;
 import com.char1.api.repository.UserChallengeRepository;
 import com.char1.api.repository.UserRepository;
 import com.char1.api.request.UserChallengeRequest;
+import com.char1.api.service.UserChallengeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.oauth2.provider.OAuth2Authentication;
 import org.springframework.web.bind.annotation.*;
@@ -38,11 +39,14 @@ public class UserChallengeController {
 
     @Autowired
     CharityRepository charityRepository;
+
+    @Autowired
+    UserChallengeService userChallengeService;
     
     @GetMapping(value = "/{id}")
-    public UserChallenge getUserChallengeById(@PathVariable int id) {
-        if (!userChallengeRepository.existsById(id)) throw new EntityNotFoundException();
-        return userChallengeRepository.findById(id);
+    public UserChallenge getUserChallengeById(OAuth2Authentication auth, @PathVariable int id) {
+        UserChallenge userChallenge = userChallengeService.getUserChallengeByIdSecure(id, auth.getPrincipal().toString());
+        return userChallenge;
     }
 
     @GetMapping(params = { "completed" })
@@ -60,7 +64,7 @@ public class UserChallengeController {
     @PostMapping
     public UserChallenge createUserChallenge(OAuth2Authentication auth, @RequestBody UserChallengeRequest userChallengeRequest) {
         UserChallenge userChallenge = new UserChallenge();
-        userChallenge.setAmountToComplete(userChallengeRequest.getAmountToCoplete());
+        userChallenge.setAmountToComplete(userChallengeRequest.getAmountToComplete());
         userChallenge.setAmountToDonate(userChallengeRequest.getAmountToDonate());
         userChallenge.setUser(userRepository.findUserByEmailAddress(auth.getPrincipal().toString()));
         userChallenge.setChallenge(challengeRepository.findById(userChallengeRequest.getChallengeId()));
@@ -69,12 +73,13 @@ public class UserChallengeController {
         userChallenge.setCompleteToDonate(userChallengeRequest.isCompleteToDonate());
         userChallenge.setStartDate(userChallengeRequest.getStartDate());
         userChallenge.setDeadlineDate(userChallengeRequest.getDeadlineDate());
+        userChallenge.setAmountToCompleteDaily(userChallengeRequest.getAmountToCompleteDaily());
         return userChallengeRepository.save(userChallenge);
     }
     
     @DeleteMapping(value = "/{id}")
-    public void deleteUserChallenge(@PathVariable int id) {
-        if (!userChallengeRepository.existsById(id)) throw new EntityNotFoundException();
-        userChallengeRepository.deleteById(id);
+    public void deleteUserChallenge(OAuth2Authentication auth, @PathVariable int id) {
+        UserChallenge userChallenge = userChallengeService.getUserChallengeByIdSecure(id, auth.getPrincipal().toString());
+        userChallengeRepository.delete(userChallenge);
     }
 }

@@ -4,7 +4,8 @@ package com.char1.api.request;
 import java.time.LocalDateTime;
 
 public class UserChallengeRequest {
-    private int amountToCoplete;
+    private int amountToComplete;
+    private int amountToCompleteDaily;
     private int amountToDonate;
     private int challengeId;
     private int charityId;
@@ -12,12 +13,12 @@ public class UserChallengeRequest {
     private LocalDateTime deadlineDate;
     private LocalDateTime startDate;
 
-    public int getAmountToCoplete() {
-        return amountToCoplete;
+    public int getAmountToComplete() {
+        return amountToComplete;
     }
 
-    public void setAmountToCoplete(int amountToCoplete) {
-        this.amountToCoplete = amountToCoplete;
+    public void setAmountToComplete(int amountToComplete) {
+        this.amountToComplete = amountToComplete;
     }
 
     public int getAmountToDonate() {
@@ -66,5 +67,13 @@ public class UserChallengeRequest {
 
     public void setStartDate(LocalDateTime startDate) {
         this.startDate = startDate;
+    }
+
+    public int getAmountToCompleteDaily() {
+        return amountToCompleteDaily;
+    }
+
+    public void setAmountToCompleteDaily(int amountToCompleteDaily) {
+        this.amountToCompleteDaily = amountToCompleteDaily;
     }
 }

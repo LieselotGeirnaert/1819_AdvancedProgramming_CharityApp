@@ -1,13 +1,16 @@
 package com.char1.api.entity;
 
+import com.char1.api.utils.Char1Utils;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
-
-
 import javax.persistence.*;
 import java.time.LocalDateTime;
+
 import java.util.List;
+
+import static javax.persistence.CascadeType.*;
+
 
 @Entity
 public class UserChallenge {
@@ -31,51 +34,67 @@ public class UserChallenge {
     private LocalDateTime startDate;
     private LocalDateTime deadlineDate;
     private int amountToDonate;
-    private int amountToComplete;
+    @Column(name = "amount_to_complete")
+    private int amountToComplete = 0;
+    private int amountToCompleteDaily;
 
-
-    @ManyToOne(cascade =  CascadeType.ALL)
+    @ManyToOne(cascade={PERSIST, MERGE, REFRESH, DETACH})
     @JoinColumn(name="challenge_id")
     private Challenge challenge;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade={MERGE, REFRESH, DETACH})
     @JoinColumn(name="user_id")
     @JsonIgnore
     private User user;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade={PERSIST, MERGE, REFRESH, DETACH})
     @JoinColumn(name="charity_id")
     private Charity charity;
 
 
-    @OneToMany(mappedBy="userChallenge")
+    @OneToMany(mappedBy="userChallenge", cascade = CascadeType.ALL)
     @JsonManagedReference
     @JsonIgnore
-    private List<Progress> progress;
+    private List<TotalProgress> totalProgress;
 
-    public void setProgress(List<Progress> progress) {
-        this.progress = progress;
+    @OneToMany(mappedBy="userChallenge", cascade = CascadeType.ALL)
+    @JsonManagedReference
+    @JsonIgnore
+    private List<DailyProgress> dailyProgress;
+
+    public void setTotalProgress(List<TotalProgress> progress) {
+        this.totalProgress = progress;
     }
 
     @JsonIgnore
-    public List<Progress> getProgress() {
-        return this.progress;
+    public List<TotalProgress> getTotalProgress() {
+        return this.totalProgress;
     }
 
-
-    public String getProgressPercentage() {
-        List<Progress> progresses = getProgress();
-        int currentAmount = 0;
-        if (progresses != null ){
-            for (Progress pr : progresses) {
-                currentAmount += pr.getCurrentAmount();
-            }
-            return Float.toString(((float)currentAmount / (float)this.amountToComplete) * (float) 100);
-        } else {
-            return Integer.toString(currentAmount);
-        }
+    public Float getProgressPercentage() {
+        return Char1Utils.calculateTotalProgress(this);
     }
 
+    public Float getDailyProgressPercentage() {
+        return Char1Utils.calculateDailyProgress(this);
+    }
+
+    public int getAmountToCompleteDaily() {
+        return amountToCompleteDaily;
+    }
+
+    public void setAmountToCompleteDaily(int amountToCompleteDaily) {
+        this.amountToCompleteDaily = amountToCompleteDaily;
+    }
+
+    @JsonIgnore
+    public List<DailyProgress> getDailyProgress() {
+        return dailyProgress;
+    }
+
+    public void setDailyProgress(List<DailyProgress> dailyProgress) {
+        this.dailyProgress = dailyProgress;
+    }
 
     public boolean isCompleted() {
         return completed;
@@ -141,7 +160,7 @@ public class UserChallenge {
         this.charity = charity;
     }
     
-        public int getAmountToComplete() {
+    public int getAmountToComplete() {
         return amountToComplete;
     }
 

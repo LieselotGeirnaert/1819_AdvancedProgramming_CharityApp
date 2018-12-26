@@ -3,6 +3,8 @@ package com.char1.api.entity;
 import javax.persistence.*;
 import java.util.Set;
 
+import static javax.persistence.CascadeType.*;
+
 @Entity
 public class Challenge {
 
@@ -44,7 +46,7 @@ public class Challenge {
         this.category = category;
     }
 
-    @OneToMany
+    @OneToMany(cascade={PERSIST, MERGE, REFRESH, DETACH, REMOVE})
     private Set<Category> category;
 
     public String getTitle() {

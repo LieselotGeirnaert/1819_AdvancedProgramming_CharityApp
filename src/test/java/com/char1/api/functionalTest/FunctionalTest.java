@@ -38,6 +38,7 @@ public class FunctionalTest {
     @Autowired
     private UserRepository userRepository;
 
+    protected User authenticatedUser;
     protected MockMvcRequestSpecification requestSpecification;
 
     @Before
@@ -47,7 +48,7 @@ public class FunctionalTest {
         String emailAddress = "peter@example.org";
         String password = "test";
 
-        createTestUser(emailAddress, password);
+        authenticatedUser = createTestUser(emailAddress, password);
 
         String oAuth2AccessToken = obtainAccessToken(emailAddress, password);
         requestSpecification = buildMockMvcRequestSpecification(oAuth2AccessToken);
@@ -65,17 +66,16 @@ public class FunctionalTest {
         RestAssuredMockMvc.webAppContextSetup(webAppContext);
     }
 
-    private void createTestUser(String emailAddress, String password) {
+    private User createTestUser(String emailAddress, String password) {
         User testUser = new User();
         testUser.setEmailAddress(emailAddress);
         testUser.setPassword(password);
         testUser.setFirstName("Peter");
         testUser.setLastName("Baelish");
-        userRepository.save(testUser);
+        return userRepository.saveAndFlush(testUser);
     }
 
     private String obtainAccessToken(String username, String password) {
-
         return given().auth().with(httpBasic("char1Client", "f2a1ed52710d4533bde25be6da03b6e3"))
                 .formParam("grant_type", "password")
                 .formParam("username", username)

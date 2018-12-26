@@ -1,6 +1,5 @@
 package com.char1.api.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -10,11 +9,12 @@ import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import static javax.persistence.CascadeType.*;
+
 @Entity
 public class User {
 
     public User() {}
-
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -33,10 +33,10 @@ public class User {
     private LocalDateTime passwordResetDate;
     private String passwordReset;
 
-    @OneToOne
+    @OneToOne(cascade = {CascadeType.ALL})
     private BankAccount bankAccount;
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.EAGER, cascade={PERSIST, MERGE, REFRESH, DETACH})
     @JoinTable(name = "user_role", joinColumns
             = @JoinColumn(name = "user_id",
             referencedColumnName = "id"),
