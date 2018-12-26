@@ -1,5 +1,4 @@
 cache:
-    key: "$CI_COMMIT_REF_SLUG"
     paths:
         - target/
 
@@ -22,8 +21,11 @@ maven-compile:
 maven-test:
     stage: test
     script:
-        - ./mvnw test $TEST_PROFILE
+        - ./mvnw verify $TEST_PROFILE
+        - echo "Line Code Coverage $(/home/gitlab-runner/scripts/extract-coverage.sh target/site/jacoco/jacoco.xml)%"
     artifacts:
+        paths:
+            - target/site/jacoco
         reports:
             junit:
             - target/surefire-reports/TEST-*.xml
@@ -32,12 +34,10 @@ maven-test:
 maven-deploy:
     stage: deploy
     script:
-        - ./mvnw verify tomcat7:redeploy-only -s .mvn/wrapper/settings.xml -DskipTests=true $TEST_PROFILE
-        - echo "Line Code Coverage $(/home/gitlab-runner/scripts/extract-coverage.sh target/site/jacoco/jacoco.xml)%"
+        - ./mvnw tomcat7:redeploy-only -s .mvn/wrapper/settings.xml
     artifacts:
         paths:
         - target/*.war
-        - target/site/jacoco
         expire_in: 1 month
     only:
         - backend-master
