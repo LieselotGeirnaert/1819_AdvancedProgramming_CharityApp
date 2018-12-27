@@ -40,7 +40,7 @@ select {
 
 #start input,
 #end input {
-  width: 29rem;
+  width: 32rem;
 }
 
 #addChallenge__form {
@@ -68,8 +68,28 @@ select {
 }
 .btn {
   color: #3c7a89;
+  margin: 5rem 10rem 5rem 10rem;
 }
 
 #count {
   width: 60px;
+}
+
+#summary {
+  background-color: rgba(227, 64, 100, 0.2);
+	border: 4px ridge;
+	border-color: rgba(227, 64, 100, 0.2);
+	display: none;
+	margin: 1rem 0 3rem 0;
+	padding: 1rem;
+	overflow: hidden;
+  transition: padding 2s ease-in-out 2s, height 2s ease-in-out 2s;
+  font-size: 2.5rem;
+  color: #2e4756;
+}
+
+.showSummary {
+	display: block;
+	height: auto;
+	padding: 2rem;
 }

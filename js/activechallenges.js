@@ -14,6 +14,7 @@ $(document).ready(function() {
           completedChallenges.push(challenge);
         }
       });
+      
       if (completedChallenges.length > 0) {
         $.each(completedChallenges, function(i, userChallenge) {
           if (userChallenge.completed == false) {
@@ -30,7 +31,7 @@ $(document).ready(function() {
               userChallenge.challenge.unitToMeasure +
               '</p></div><div class="progressbar"><div class="progressbar__status" style="width:' +
               userChallenge.challenge.progressPercentage +
-              '%"></div></div></a><div class="challengetile__add"><p>+</p></div></section>';
+              '%"></div></div></a><div class="challengetile__add"><p>&#10003;</p></div></section>';
             $("#challenges").append(chall);
           }
         });
