@@ -19,8 +19,9 @@ $(document).ready(function() {
       if (activeChallenges.length > 0) {
         $.each(activeChallenges, function(i, userChallenge) {
           if (userChallenge.completed == false) {
+            var addCompleted = "";
             if (userChallenge.dailyProgressPercentage >= 100) {
-              $(".challengetile__add").addClass("completed");
+              addCompleted = "completed";
             }
             var chall =
               '<section class="challengetile"><a href="detailchallenge.html?id=' +
@@ -39,7 +40,7 @@ $(document).ready(function() {
               userChallenge.dailyProgressPercentage +
               '%"></div></div></div></a><div id="userchallenge-' +
               userChallenge.id +
-              '" class="challengetile__add"><p>&#10003;</p></div></section>';
+              '" class="challengetile__add ' + addCompleted + '"><p>&#10003;</p></div></section>';
             $("#challenges").append(chall);
           }
         });
@@ -80,12 +81,11 @@ $(document).ready(function() {
         }),
         processData: false,
         success: function(data, textStatus, jqXHR) {
-          if (data.dailyProgressPercentage <= 100) {
-            $that
+          $that
               .prev("a")
               .find(".progressbar__status")
-              .css("width", data.dailyProgressPercentage);
-          } else {
+              .css("width", data.dailyProgressPercentage + "%");
+          if (data.dailyProgressPercentage >= 100.0) {
             $that.addClass("completed");
           }
         },
