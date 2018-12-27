@@ -9,18 +9,17 @@ $(document).ready(function() {
     },
     success: function(data, textStatus, jQxhr) {
       //Do something with the returned data here
-      $.each(data, function(i, challenge) {
-        var charity =
+      $.each(data, function(i, charity) {
+        var $charity =
           '<section class="charitytile collapsed"><img src="' +
-          challenge.linkToLogo +
+          charity.linkToLogo +
           '" alt=""><div class="charitytile__info"><p>' +
-          challenge.name +
+          charity.name +
           "</p><p>" +
-          challenge.description +
+          charity.description +
           "</p></div></section>";
-        $(".charities").append(charity);
+        $(".charities").append($charity);
       });
-      console.log(data);
     },
     error: function(jqXhr, textStatus, errorThrown) {
       //Check if the authentication was invalid, in which case return to index
@@ -33,7 +32,6 @@ $(document).ready(function() {
   });
 
   $(".charities").on("click", ".charitytile", function(e) {
-    console.log("click");
     $this = $(this);
 
     $this.toggleClass("collapsed");
