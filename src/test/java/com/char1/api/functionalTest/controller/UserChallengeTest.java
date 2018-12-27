@@ -3,6 +3,8 @@ package com.char1.api.functionalTest.controller;
 import com.char1.api.entity.*;
 import com.char1.api.functionalTest.FunctionalTest;
 import com.char1.api.repository.*;
+import com.char1.api.request.DailyProgressRequest;
+import com.char1.api.request.ProgressRequest;
 import com.char1.api.request.UserChallengeRequest;
 import org.junit.After;
 import org.junit.Before;
@@ -92,7 +94,7 @@ public class UserChallengeTest extends FunctionalTest {
         dummyUserChallenge.setAmountToComplete(50);
         dummyUserChallenge.setChallenge(dummyChallenge1);
         dummyUserChallenge.setStartDate(LocalDateTime.now());
-        dummyUserChallenge.setAmountToCompleteDaily(5);
+        dummyUserChallenge.setAmountToCompleteDaily(2);
 
         dummyUserChallengeDifferentUser = new UserChallenge();
 
@@ -320,5 +322,93 @@ public class UserChallengeTest extends FunctionalTest {
                 .when().delete("/userchallenge/" + dummyUserChallenge.getId())
                 .then().statusCode(200);
     }
+
+    @Test
+    public void createDailyProgress() {
+        DailyProgressRequest dailyProgressRequest = new DailyProgressRequest();
+        dailyProgressRequest.setUserChallengeId(dummyUserChallenge.getId());
+
+        given()
+                .spec(super.requestSpecification)
+                .body(dailyProgressRequest)
+                .when().post("/dailyprogress")
+                .then().statusCode(200);
+    }
+
+    @Test
+    public void createToManyDailyProgress() {
+        DailyProgressRequest dailyProgressRequest = new DailyProgressRequest();
+        dailyProgressRequest.setUserChallengeId(dummyUserChallenge.getId());
+
+        given()
+                .spec(super.requestSpecification)
+                .body(dailyProgressRequest)
+                .when().post("/dailyprogress")
+                .then().statusCode(200);
+
+        given()
+                .spec(super.requestSpecification)
+                .body(dailyProgressRequest)
+                .when().post("/dailyprogress")
+                .then().statusCode(200);
+
+        given()
+                .spec(super.requestSpecification)
+                .body(dailyProgressRequest)
+                .when().post("/dailyprogress")
+                .then().statusCode(400);
+    }
+
+    @Test
+    public void createDailyProgressBadUserChallenge() {
+        DailyProgressRequest dailyProgressRequest = new DailyProgressRequest();
+        dailyProgressRequest.setUserChallengeId(9999);
+
+        given()
+                .spec(super.requestSpecification)
+                .body(dailyProgressRequest)
+                .when().post("/dailyprogress")
+                .then().statusCode(404);
+    }
+
+    @Test
+    public void createTotalProgress() {
+        ProgressRequest progressRequest = new ProgressRequest();
+        progressRequest.setUserChallengeId(dummyUserChallenge.getId());
+        progressRequest.setCurrentAmount(5);
+
+        given()
+                .spec(super.requestSpecification)
+                .body(progressRequest)
+                .when().post("/progress")
+                .then().statusCode(200);
+    }
+
+    @Test
+    public void createTotalProgressWithoutCurrentAmount() {
+        ProgressRequest progressRequest = new ProgressRequest();
+        progressRequest.setUserChallengeId(dummyUserChallenge.getId());
+
+        given()
+                .spec(super.requestSpecification)
+                .body(progressRequest)
+                .when().post("/progress")
+                .then().statusCode(200);
+    }
+
+    @Test
+    public void createTotalProgressBadUserChallenge() {
+        ProgressRequest progressRequest = new ProgressRequest();
+        progressRequest.setUserChallengeId(99999999);
+        progressRequest.setCurrentAmount(5);
+
+        given()
+                .spec(super.requestSpecification)
+                .body(progressRequest)
+                .when().post("/progress")
+                .then().statusCode(404);
+    }
+
+
 
 }
