@@ -15,7 +15,7 @@ $(document).ready(function() {
           activeChallenges.push(challenge);
         }
       });
-      console.log(data);
+      
       if (activeChallenges.length > 0) {
         $.each(activeChallenges, function(i, userChallenge) {
           if (userChallenge.completed == false) {
