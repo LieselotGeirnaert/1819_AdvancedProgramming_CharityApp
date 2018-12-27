@@ -26,12 +26,12 @@ $(document).ready(function() {
               '" alt=""><div class="challengetile__text"><p>' +
               userChallenge.challenge.category[0].name +
               "</p><p>" +
-              userChallenge.challenge.description +
+              userChallenge.challenge.title +
               "</p><p>" +
               userChallenge.challenge.unitToMeasure +
               '</p></div><div class="progressbar"><div class="progressbar__status" style="width:' +
               userChallenge.challenge.progressPercentage +
-              '%"></div></div></div></a><div class="challengetile__add"><p>&#10003;</p></div></section>';
+              '%"></div></div></a><div class="challengetile__add"><p>&#10003;</p></div></section>';
             $("#challenges").append(chall);
           }
         });
