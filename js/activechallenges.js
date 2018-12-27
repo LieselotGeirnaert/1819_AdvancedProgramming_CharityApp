@@ -15,10 +15,14 @@ $(document).ready(function() {
           activeChallenges.push(challenge);
         }
       });
-      
+      console.log(data);
       if (activeChallenges.length > 0) {
         $.each(activeChallenges, function(i, userChallenge) {
           if (userChallenge.completed == false) {
+            var completed = '';
+            if (userChallenge.dailyProgressPercentage >= 100) {
+              completed = 'completed';
+            }
             var chall =
               '<section class="challengetile"><a href="detailchallenge.html?id=' +
               userChallenge.id +
@@ -32,12 +36,7 @@ $(document).ready(function() {
               userChallenge.amountToCompleteDaily + ' ' + userChallenge.challenge.unitToMeasure.toLowerCase() +
               '</p></div><div class="progressbar"><div class="progressbar__status" style="width:' +
               userChallenge.dailyProgressPercentage +
-              '%"></div></div></div></a>;<div id="userchallenge-'+ userChallenge.id +'" class="challengetile__add"><p>&#10003;</p></div></section>';
-
-              if (userChallenge.dailyProgressPercentage = 100) {
-                var id = "userchallenge-" + userChallenge.id;
-                $('#' + id).addClass('completed');
-              }
+              '%"></div></div></div></a>;<div id="userchallenge-'+ userChallenge.id +'" class="challengetile__add ' + completed + '"><p>&#10003;</p></div></section>';
             $("#challenges").append(chall);
           }
         });
