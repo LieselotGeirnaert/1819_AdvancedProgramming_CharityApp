@@ -46,7 +46,7 @@ public class Challenge {
         this.category = category;
     }
 
-    @OneToMany(cascade={PERSIST, MERGE, REFRESH, DETACH, REMOVE})
+    @ManyToMany(cascade={PERSIST, MERGE, REFRESH, DETACH, REMOVE})
     private Set<Category> category;
 
     public String getTitle() {
