@@ -45,7 +45,7 @@ public final class Char1Utils {
         return dailyProgressPercentagePerDate;
     }
 
-    private static float calculateProgressFilteredOnDate(List<DailyProgress> dailyProgresses, LocalDate localDate, int amountToCompleteDaily) {
+    public static float calculateProgressFilteredOnDate(List<DailyProgress> dailyProgresses, LocalDate localDate, int amountToCompleteDaily) {
         float currentAmount = 0;
         if (dailyProgresses != null) {
             dailyProgresses = dailyProgresses.stream().filter(progress -> localDate.isEqual(progress.getEntryDate().toLocalDate())).collect(Collectors.toList());
