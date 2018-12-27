@@ -32,7 +32,7 @@ public class ChallengeController {
     
     @GetMapping(value = "/{id}/category")
     public List<Challenge> getAllChallengesByCategory(@PathVariable int id) {
-        if (!categoryRepository.existsById(id)) throw new EntityNotFoundException();
+        if (!categoryRepository.existsById(id)) throw new EntityNotFoundException("category");
         return challengeRepository.findByCategory(categoryRepository.findById(id));
     }
 

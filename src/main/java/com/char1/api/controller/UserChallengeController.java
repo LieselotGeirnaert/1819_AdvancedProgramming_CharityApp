@@ -6,7 +6,9 @@
 package com.char1.api.controller;
 
 import com.char1.api.controller.exception.EntityNotFoundException;
+import com.char1.api.controller.exception.MissingValuesException;
 import com.char1.api.controller.exception.UnautherizedException;
+import com.char1.api.controller.exception.UserChallengeDateTimeExeption;
 import com.char1.api.entity.UserChallenge;
 import com.char1.api.repository.ChallengeRepository;
 import com.char1.api.repository.CharityRepository;
@@ -51,18 +53,21 @@ public class UserChallengeController {
 
     @GetMapping(params = { "completed" })
     public List<UserChallenge> getAllUserChallengesWithCompletedAndUser(OAuth2Authentication auth, @RequestParam("completed") boolean completed) {
-        System.out.println(auth.getPrincipal());
         return userChallengeRepository.findAllByUserAndAndCompleted(userRepository.findUserByEmailAddress(auth.getPrincipal().toString()), completed);
     }
 
     @GetMapping
     public List<UserChallenge> getAllUserChallengesWithUser(OAuth2Authentication auth) {
-        System.out.println(auth.getPrincipal());
         return userChallengeRepository.findAllByUser(userRepository.findUserByEmailAddress(auth.getPrincipal().toString()));
     }
     
     @PostMapping
     public UserChallenge createUserChallenge(OAuth2Authentication auth, @RequestBody UserChallengeRequest userChallengeRequest) {
+        if (userChallengeRequest.getDeadlineDate() == null) throw new MissingValuesException("deadlineDate");
+        if (userChallengeRequest.getStartDate() == null) throw new MissingValuesException("startdate");
+        if (userChallengeRequest.getStartDate().isAfter(userChallengeRequest.getDeadlineDate())) throw new UserChallengeDateTimeExeption();
+        if (userChallengeRequest.getAmountToCompleteDaily() == 0) throw new MissingValuesException("amountToCompleteDaily");
+
         UserChallenge userChallenge = new UserChallenge();
         userChallenge.setAmountToComplete(userChallengeRequest.getAmountToComplete());
         userChallenge.setAmountToDonate(userChallengeRequest.getAmountToDonate());
@@ -74,6 +79,11 @@ public class UserChallengeController {
         userChallenge.setStartDate(userChallengeRequest.getStartDate());
         userChallenge.setDeadlineDate(userChallengeRequest.getDeadlineDate());
         userChallenge.setAmountToCompleteDaily(userChallengeRequest.getAmountToCompleteDaily());
+
+        if (userChallenge.getUser() == null) throw new EntityNotFoundException("user");
+        if (userChallenge.getChallenge() == null) throw new EntityNotFoundException("challenge");
+        if (userChallenge.getCharity() == null) throw new EntityNotFoundException("charity");
+
         return userChallengeRepository.save(userChallenge);
     }
     
