@@ -12,7 +12,6 @@ $(document).ready(function() {
       xhr.setRequestHeader("Authorization", "Bearer " + access_token);
     },
     success: function(data, textStatus, jqXHR) {
-      console.log(data);
       var startdate = new Date(data.startDate);
       var enddate = new Date(data.deadlineDate);
 
@@ -42,11 +41,22 @@ $(document).ready(function() {
       $("#amount").append(data.amountToDonate);
 
       $("#totalprogressbar").append(totalprogress);
-      // $.each(data, function(i, challenge) {
-      //   var progress =
-      //     '<section class="progress__day"><h4>vandaag</h4><div class="progressbar"><div class="progressbar__status" style="width:20%"></div></div></section >';
-      //   $("#progress").appendTo(progress);
-      // });
+
+      $.each(data.dailyProgressesPercentages, function(day, progress) {
+        var date = new Date(day);
+
+        var progress =
+          '<section class="progress__day"><h4>' +
+          (date.getDate() +
+            "/" +
+            (date.getMonth() + 1) +
+            "/" +
+            date.getFullYear()) +
+          '</h4><div class="progressbar"><div class="progressbar__status" style="width:' +
+          progress +
+          '%"></div></div></section >';
+        $("#progress").append(progress);
+      });
     },
     error: function(jqXhr, textStatus, errorThrown) {
       //Check if the authentication was invalid, in which case return to index
