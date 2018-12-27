@@ -18,7 +18,11 @@ public final class Char1Utils {
             for (TotalProgress pr : userChallenge.getTotalProgress()) {
                 currentAmount += pr.getCurrentAmount();
             }
-            return (currentAmount / userChallenge.getAmountToComplete()) * 100;
+            if (userChallenge.getAmountToComplete() == 0) {
+                return (currentAmount / (ChronoUnit.DAYS.between(userChallenge.getStartDate(), userChallenge.getDeadlineDate()) + 1)) * 100;
+            } else {
+                return (currentAmount / userChallenge.getAmountToComplete()) * 100;
+            }
         } else {
             return currentAmount;
         }

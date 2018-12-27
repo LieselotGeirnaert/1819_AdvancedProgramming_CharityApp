@@ -34,14 +34,14 @@ public class DailyProgressController {
     ProgressService progressService;
 
     @PostMapping
-    public DailyProgress createDailyProgress(OAuth2Authentication auth, @RequestBody DailyProgressRequest progressRequest) {
+    public UserChallenge createDailyProgress(OAuth2Authentication auth, @RequestBody DailyProgressRequest progressRequest) {
         UserChallenge userChallenge = userChallengeService.getUserChallengeByIdSecure(progressRequest.getUserChallengeId(), auth.getPrincipal().toString());
         DailyProgress dailyProgress = progressService.newDailyProgress(userChallenge);
 
         if (userChallenge.getDailyProgressPercentage() >= 100) {
             progressService.newTotalProgress(userChallenge, 0);
         }
-        return dailyProgress;
+        return userChallenge;
 
     }
 
