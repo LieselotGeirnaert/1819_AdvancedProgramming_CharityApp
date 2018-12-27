@@ -21,6 +21,10 @@ navbar {
   width: 100%;
 }
 
+.challengetile > a {
+  width: 85%;
+}
+
 .challengetile__info {
   background-color: #2e4756;
   border-radius: 10px 0px 0px 10px;
@@ -28,7 +32,6 @@ navbar {
   flex-wrap: wrap;
   height: 30rem;
   padding: 4rem 4rem;
-  width: 80%;
 }
 
 .challengetile img {
@@ -65,7 +68,15 @@ navbar {
   font-size: 10rem;
   height: 30rem;
   justify-content: center;
-  width: 20%;
+  width: 15%;
+}
+
+.challengetile__add.completed {
+  background-color: #16262e;
+}
+
+.challengetile__add.completed p {
+  color: #2e4756;
 }
 
 .progressbar {
