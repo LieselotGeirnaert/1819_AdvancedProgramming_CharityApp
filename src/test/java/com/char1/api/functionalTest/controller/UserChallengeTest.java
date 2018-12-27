@@ -140,6 +140,7 @@ public class UserChallengeTest extends FunctionalTest {
         UserChallengeRequest userChallengeRequest = new UserChallengeRequest();
         userChallengeRequest.setAmountToComplete(10);
         userChallengeRequest.setAmountToDonate(10);
+        userChallengeRequest.setAmountToCompleteDaily(5);
         userChallengeRequest.setChallengeId(dummyChallenge1.getId());
         userChallengeRequest.setCharityId(dummyCharity1.getId());
         userChallengeRequest.setDeadlineDate(LocalDateTime.now().plus(5l, ChronoUnit.DAYS));
@@ -150,6 +151,108 @@ public class UserChallengeTest extends FunctionalTest {
                 .body(userChallengeRequest)
                 .when().post("/userchallenge")
                 .then().statusCode(200);
+    }
+
+    @Test
+    public void createUserChallengeMissingDeadlineDate() {
+        UserChallengeRequest userChallengeRequest = new UserChallengeRequest();
+        userChallengeRequest.setAmountToComplete(10);
+        userChallengeRequest.setAmountToDonate(10);
+        userChallengeRequest.setAmountToCompleteDaily(5);
+        userChallengeRequest.setChallengeId(dummyChallenge1.getId());
+        userChallengeRequest.setCharityId(dummyCharity1.getId());
+        userChallengeRequest.setStartDate(LocalDateTime.now());
+
+        given()
+                .spec(super.requestSpecification)
+                .body(userChallengeRequest)
+                .when().post("/userchallenge")
+                .then().statusCode(400);
+    }
+
+    @Test
+    public void createUserChallengeMissingStartDate() {
+        UserChallengeRequest userChallengeRequest = new UserChallengeRequest();
+        userChallengeRequest.setAmountToComplete(10);
+        userChallengeRequest.setAmountToDonate(10);
+        userChallengeRequest.setAmountToCompleteDaily(5);
+        userChallengeRequest.setChallengeId(dummyChallenge1.getId());
+        userChallengeRequest.setCharityId(dummyCharity1.getId());
+        userChallengeRequest.setDeadlineDate(LocalDateTime.now().plus(5l, ChronoUnit.DAYS));
+
+        given()
+                .spec(super.requestSpecification)
+                .body(userChallengeRequest)
+                .when().post("/userchallenge")
+                .then().statusCode(400);
+    }
+
+    @Test
+    public void createUserChallengeWrongOrderDates() {
+        UserChallengeRequest userChallengeRequest = new UserChallengeRequest();
+        userChallengeRequest.setAmountToComplete(10);
+        userChallengeRequest.setAmountToDonate(10);
+        userChallengeRequest.setAmountToCompleteDaily(5);
+        userChallengeRequest.setChallengeId(dummyChallenge1.getId());
+        userChallengeRequest.setCharityId(dummyCharity1.getId());
+        userChallengeRequest.setDeadlineDate(LocalDateTime.now());
+        userChallengeRequest.setStartDate(LocalDateTime.now().plus(5l, ChronoUnit.DAYS));
+
+        given()
+                .spec(super.requestSpecification)
+                .body(userChallengeRequest)
+                .when().post("/userchallenge")
+                .then().statusCode(417);
+    }
+
+    @Test
+    public void createUserChallengeMissingSChallenge() {
+        UserChallengeRequest userChallengeRequest = new UserChallengeRequest();
+        userChallengeRequest.setAmountToComplete(10);
+        userChallengeRequest.setAmountToDonate(10);
+        userChallengeRequest.setAmountToCompleteDaily(5);
+        userChallengeRequest.setChallengeId(0);
+        userChallengeRequest.setCharityId(dummyCharity1.getId());
+        userChallengeRequest.setDeadlineDate(LocalDateTime.now().plus(5l, ChronoUnit.DAYS));
+
+        given()
+                .spec(super.requestSpecification)
+                .body(userChallengeRequest)
+                .when().post("/userchallenge")
+                .then().statusCode(400);
+    }
+
+    @Test
+    public void createUserChallengeMissingSCharity() {
+        UserChallengeRequest userChallengeRequest = new UserChallengeRequest();
+        userChallengeRequest.setAmountToComplete(10);
+        userChallengeRequest.setAmountToDonate(10);
+        userChallengeRequest.setAmountToCompleteDaily(5);
+        userChallengeRequest.setChallengeId(dummyChallenge1.getId());
+        userChallengeRequest.setCharityId(0);
+        userChallengeRequest.setDeadlineDate(LocalDateTime.now().plus(5l, ChronoUnit.DAYS));
+
+        given()
+                .spec(super.requestSpecification)
+                .body(userChallengeRequest)
+                .when().post("/userchallenge")
+                .then().statusCode(400);
+    }
+
+    @Test
+    public void createUserChallengeMissingAmountToComplete() {
+        UserChallengeRequest userChallengeRequest = new UserChallengeRequest();
+        userChallengeRequest.setAmountToComplete(10);
+        userChallengeRequest.setAmountToDonate(10);
+        userChallengeRequest.setChallengeId(dummyChallenge1.getId());
+        userChallengeRequest.setCharityId(0);
+        userChallengeRequest.setDeadlineDate(LocalDateTime.now().plus(5l, ChronoUnit.DAYS));
+
+        given()
+                .spec(super.requestSpecification)
+                .body(userChallengeRequest)
+                .when().post("/userchallenge")
+                .then().statusCode(400);
     }
 
     @Test
