@@ -16,22 +16,37 @@ $(document).ready(function() {
       var startdate = new Date(data.startDate);
       var enddate = new Date(data.deadlineDate);
 
-      console.log(startdate);
+      var totalprogress =
+        '<div class="progressbar__status" style="width:' +
+        data.progressPercentage +
+        '% "></div>';
+
       $("#title").append(data.challenge.title);
-      $("#category").append(data.challenge.category.name);
-      $("#unit").append(data.challenge.unitToMeasure);
+      $("#category").append(data.challenge.category[0].name);
+      $("#unit").append(data.challenge.description);
       $("#start").append(
-        startdate.getDay() + "/" + startdate.getMonth() + "/" + startdate.getFullYear()
+        startdate.getDate() +
+          "/" +
+          (startdate.getMonth() + 1) +
+          "/" +
+          startdate.getFullYear()
       );
       $("#end").append(
-        enddate.getDay() +
+        enddate.getDate() +
           "/" +
-          enddate.getMonth() +
+          (enddate.getMonth() + 1) +
           "/" +
           enddate.getFullYear()
       );
       $("#charity").append(data.charity.name);
       $("#amount").append(data.amountToDonate);
+
+      $("#totalprogressbar").append(totalprogress);
+      // $.each(data, function(i, challenge) {
+      //   var progress =
+      //     '<section class="progress__day"><h4>vandaag</h4><div class="progressbar"><div class="progressbar__status" style="width:20%"></div></div></section >';
+      //   $("#progress").appendTo(progress);
+      // });
     },
     error: function(jqXhr, textStatus, errorThrown) {
       //Check if the authentication was invalid, in which case return to index

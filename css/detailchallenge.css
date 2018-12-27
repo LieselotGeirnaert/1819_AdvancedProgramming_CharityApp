@@ -35,17 +35,17 @@ p {
   background-color: #2e4756;
   border-radius: 10px;
   padding: 4.5rem;
+  text-align: center;
   width: 80%;
 }
 
-.challenge__info p {
-  font-weight: 100;
-  text-align: center;
+.challenge__info #category {
+  font-weight: 500;
   text-transform: uppercase;
 }
 
-.challenge__info p:nth-child(2) {
-  font-weight: 300;
+.challenge__info #unit {
+  font-weight: 100;
   text-transform: none;
 }
 
@@ -68,25 +68,27 @@ p {
   text-transform: uppercase;
 }
 
-.challenge__day {
-  background-color: #3c7a89;
-  border-radius: 10px;
-  height: 18rem;
-  margin: 2rem;
+#progress {
   width: 80%;
 }
 
-.challenge__day--last {
-  height: 135px;
-  text-align: center;
+#totalprogress {
+  margin-top: 3rem;
+  width: 80%;
 }
 
-/* .challenge__day span {
-  color: #7bcdba;
-  font-size: 16rem;
-  width: 1rem;
-} */
+#totalprogress .progress__day {
+  margin: 0;
+}
 
+.progress__day {
+  background-color: #3c7a89;
+  border-radius: 10px;
+  height: 18rem;
+  margin: 2rem 0rem;
+}
+
+.totalprogressbar,
 .progressbar {
   background-color: #16262e;
   height: 25px;
@@ -100,29 +102,26 @@ p {
 }
 
 .donation {
+  align-items: center;
+  background-color: #7bcdba;
   border-radius: 10px;
+  color: #e5e5e5;
   display: flex;
   flex-direction: row;
   font-size: 125%;
-  height: 100px;
+  padding: 2rem;
   text-align: center;
   width: 80%;
 }
 
 .donation #charity {
-  background-color: #7bcdba;
-  border-radius: 10px 0px 0px 10px;
-  color: #16262e;
-  padding: 20px;
   width: 60%;
 }
 
 .donation #amount {
-  background-color: #3c7a89;
-  border-radius: 0px 10px 10px 0px;
-  color: #e5e5e5;
-  font-weight: 300;
-  padding: 20px;
+  color: #2e4756;
+  font-size: 8rem;
+  font-weight: 700;
   width: 40%;
 }
 
