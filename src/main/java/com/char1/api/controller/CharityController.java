@@ -19,7 +19,7 @@ public class CharityController {
 
     @GetMapping(value = "/{id}")
     public Charity getCharity(@PathVariable int id) {
-        if (!charityRepository.existsById(id)) throw new EntityNotFoundException();
+        if (!charityRepository.existsById(id)) throw new EntityNotFoundException("charity");
         return charityRepository.findById(id);
     }
 
@@ -36,7 +36,7 @@ public class CharityController {
 
     @DeleteMapping(value = "/{id}")
     public void deleteCharity(@PathVariable int id) {
-        if (!charityRepository.existsById(id)) throw new EntityNotFoundException();
+        if (!charityRepository.existsById(id)) throw new EntityNotFoundException("charity");
         charityRepository.deleteById(id);
         return;
     }

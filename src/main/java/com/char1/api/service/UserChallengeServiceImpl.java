@@ -17,7 +17,7 @@ public class UserChallengeServiceImpl implements UserChallengeService {
         UserChallenge userChallenge;
         userChallenge = userChallengeRepository.findById(userChallengeId);
 
-        if (userChallenge == null) throw new EntityNotFoundException();
+        if (userChallenge == null) throw new EntityNotFoundException("userChallenge");
         if (!user.equals(userChallenge.getUser().getEmailAddress())) {
             throw new UnautherizedException();
         }

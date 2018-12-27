@@ -5,8 +5,10 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
+import java.util.HashMap;
 import java.util.List;
 
 import static javax.persistence.CascadeType.*;
@@ -77,6 +79,10 @@ public class UserChallenge {
 
     public Float getDailyProgressPercentage() {
         return Char1Utils.calculateDailyProgress(this);
+    }
+
+    public HashMap<LocalDate, Float> getDailyProgressesPercentages() {
+        return Char1Utils.returnDailyProgress(this.getDailyProgress(), amountToCompleteDaily, this.getStartDate().toLocalDate());
     }
 
     public int getAmountToCompleteDaily() {

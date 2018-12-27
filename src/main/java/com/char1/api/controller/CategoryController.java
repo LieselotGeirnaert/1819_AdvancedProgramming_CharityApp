@@ -18,7 +18,7 @@ public class CategoryController {
 
     @GetMapping(value = "/{id}")
     public Category getCategory(@PathVariable int id) {
-        if (!categoryRepository.existsById(id)) throw new EntityNotFoundException();
+        if (!categoryRepository.existsById(id)) throw new EntityNotFoundException("category");
         return categoryRepository.findById(id);
     }
 
@@ -35,7 +35,7 @@ public class CategoryController {
 
     @DeleteMapping(value = "/{id}")
     public void deleteCategory(@PathVariable int id) {
-        if (!categoryRepository.existsById(id)) throw new EntityNotFoundException();
+        if (!categoryRepository.existsById(id)) throw new EntityNotFoundException("category");
         categoryRepository.deleteById(id);
         return;
     }
