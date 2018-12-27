@@ -21,7 +21,7 @@ public class ChallengeController {
 
     @GetMapping(value = "/{idChallenge}")
     public Challenge getChallenge(@PathVariable int idChallenge) {
-        if (!challengeRepository.existsById(idChallenge)) throw new EntityNotFoundException();
+        if (!challengeRepository.existsById(idChallenge)) throw new EntityNotFoundException("challenge");
         return challengeRepository.findById(idChallenge);
     }
 
