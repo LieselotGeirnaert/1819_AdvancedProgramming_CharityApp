@@ -284,7 +284,7 @@ $(document).ready(function() {
 					xhr.setRequestHeader('Authorization','Bearer ' + access_token);
 				},
 				data: JSON.stringify({
-					amountToComplete: parseInt($count.val()),
+					amountToCompleteDaily: parseInt($count.val()),
 					amountToDonate: parseInt($amount.val()),
 					challengeId: parseInt($challenge.val()),
 					charityId: parseInt($charity.val()),
