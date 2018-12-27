@@ -1,0 +1,9 @@
+stages:
+    - deploy
+
+deploy:
+    stage: deploy
+    script:
+        - rsync -a --exclude="./.git" ./ gitlab-deploy@10.129.32.15:/var/www/html
+    only:
+        - frontend-master
