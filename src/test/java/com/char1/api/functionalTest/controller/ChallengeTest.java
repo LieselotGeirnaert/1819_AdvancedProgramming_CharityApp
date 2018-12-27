@@ -25,9 +25,8 @@ public class ChallengeTest extends FunctionalTest {
     @Autowired
     private CategoryRepository categoryRepository;
 
-    public ChallengeTest() {
-        // Create Dummy data
-
+    public ChallengeTest() {     
+      
         dummyCategory = new Category();
         dummyCategory.setName("Sports");
         Set<Category> dummyCategorySet = new HashSet<>();
@@ -39,7 +38,7 @@ public class ChallengeTest extends FunctionalTest {
         dummyChallenge.setLinkToLogo("http://something.com");
         dummyChallenge.setTitle("HOTDOGS");
         dummyChallenge.setUnitToMeasure("hotdogs");
-
+        
     }
 
     @Before
