@@ -19,7 +19,7 @@ public final class Char1Utils {
                 currentAmount += pr.getCurrentAmount();
             }
             if (userChallenge.getAmountToComplete() == 0) {
-                return (currentAmount / (ChronoUnit.DAYS.between(userChallenge.getStartDate(), userChallenge.getDeadlineDate()) + 1));
+                return (currentAmount / (ChronoUnit.DAYS.between(userChallenge.getStartDate(), userChallenge.getDeadlineDate()) + 1)) * 100;
             } else {
                 return (currentAmount / userChallenge.getAmountToComplete()) * 100;
             }
