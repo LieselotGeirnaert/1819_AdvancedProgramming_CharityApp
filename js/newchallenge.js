@@ -1,4 +1,5 @@
 $(document).ready(function() {
+	// Load categories, challenges 	nd charities
 	$.ajax({
 		url: 'http://10.129.32.15:8080/category',
 		type: 'get',
@@ -71,62 +72,7 @@ $(document).ready(function() {
 		}
 	});
 
-	var errormessages = "";
-
-	var validateCategory = function() {
-		var catOK = true;
-
-		var $category = $('#category');
-
-		// check category
-		if ($category.val() <= '0') {
-			catOK = false;
-			errormessages += "Gelieve een categorie te kiezen";	
-		}
-
-		return catOK;
-	}
-
-	var validateChallenge = function() {
-		var cahllOK = true;
-
-		var $challenge = $('#challenge');
-
-		// check challenge
-		if ($challenge.val() <= '0') {
-			challOK = false;
-			errormessages += "Gelieve een challenge te kiezen";	
-		}
-
-		return cahllOK;
-	}
-
-	var getMeasure = function($challenge) {
-		$('#measure').html("");
-		if (validateChallenge()) {
-			$.ajax({
-				url: 'http://10.129.32.15:8080/challenge/' + $challenge,
-				type: 'get',
-				dataType: 'json',
-				beforeSend: function(xhr, settings) { 
-					var access_token = readCookie("access_token");
-					xhr.setRequestHeader('Authorization','Bearer ' + access_token);
-				},
-				success: function(data, textStatus, jqXHR) {
-					$('#measure').html(data.unitToMeasure);
-				},
-				error : function(jqXhr, textStatus, errorThrown) {
-					//Check if the authentication was invalid, in which case return to index
-					if (jqXhr.status == 401) {
-						eraseCookie("access_token");
-						window.location.href = "index.html";
-					}
-					console.log( errorThrown );
-				}
-			});
-		}
-	}
-
+	// Get challenges from category
 	$("#category").change(function() {
 		$('#challenge').find('option').remove();
 		if (validateCategory()) {
@@ -160,12 +106,74 @@ $(document).ready(function() {
 		}
 	});
 
+	// Get unitToMeasure from challenge
+	var getMeasure = function($challenge) {
+		$('#measure').html("");
+		if (validateChallenge()) {
+			$.ajax({
+				url: 'http://10.129.32.15:8080/challenge/' + $challenge,
+				type: 'get',
+				dataType: 'json',
+				beforeSend: function(xhr, settings) { 
+					var access_token = readCookie("access_token");
+					xhr.setRequestHeader('Authorization','Bearer ' + access_token);
+				},
+				success: function(data, textStatus, jqXHR) {
+					$('#measure').html(data.unitToMeasure);
+				},
+				error : function(jqXhr, textStatus, errorThrown) {
+					//Check if the authentication was invalid, in which case return to index
+					if (jqXhr.status == 401) {
+						eraseCookie("access_token");
+						window.location.href = "index.html";
+					}
+					console.log( errorThrown );
+				}
+			});
+		}
+	}
+
 	$("#challenge").change(function() {
 		getMeasure($(this).val());
 	});
+	
+
+	// Validation
+	var errormessages = [];
+
+	var validateCategory = function() {
+		errormessages = [];
+		var catOK = true;
+
+		var $category = $('#category');
+
+		// check category
+		if ($category.val() <= '0') {
+			catOK = false;
+			errormessages.push('Gelieve een categorie te kiezen');	
+		}
+
+		return catOK;
+	}
+
+	var validateChallenge = function() {
+		errormessages = [];
+		var cahllOK = true;
+
+		var $challenge = $('#challenge');
+
+		// check challenge
+		if ($challenge.val() <= '0') {
+			challOK = false;
+			errormessages.push('Gelieve een challenge te kiezen');	
+		}
+
+		return cahllOK;
+	}
 
 	var validateForm = function() {
 		var allOk = true;
+		errormessages = [];
 
 		// input shortcuts
 		var $count = $('#count');
@@ -181,42 +189,61 @@ $(document).ready(function() {
 		if (!challCheck) {
 			allOk = false;
 		}
-		// check count
-		if ($count.val() <= '0') {
-			allOk = false;
-			$errName.html('Gelieve een groter aantal dan 0 in te vullen');		
-		}
 
+		// check count
 		if ($count.val() == '') {
 			allOk = false;
-			$errName.html('Gelieve een aantal in te vullen');		
+			errormessages.push('Gelieve een aantal in te vullen');		
+		} else if ($count.val() <= '0') {
+			allOk = false;
+			errormessages.push('Gelieve een groter aantal dan 0 in te vullen');		
 		}
 		
-		// check charity
-		if ($charity.val() <= '0') {
-			allOk = false;
-			$errCountry.html('Gelieve een charity te kiezen');			
-		}
+		var dateReg = /^\d{4}-\d{2}-\d{2}$/;
+		var currDate = new Date().toISOString().slice(0,10);
 
 		// check startDate
-
-		// check endDate
-
-		// check amount
-		if ($amount.val() <= '0') {
+		if ($startDate.val() == '') {
 			allOk = false;
-			errName.innerHTML = 'Gelieve een bedrag groter dan 0 in te vullen';		
+			errormessages.push('Geef een startdatum op');
+		} else if (!$startDate.val().match(dateReg)) {
+			allOk = false;
+			errormessages.push('Geef een correcte startdatum');			
+		} else if (new Date($startDate.val()) < new Date(currDate)) {
+			allOk = false;
+			errormessages.push('Startdatum moet in de toekomst liggen');	
 		}
 
-		if ($amount.val() == '') {
+		// check endDate
+		if ($endDate.val() == '') {
 			allOk = false;
-			errName.innerHTML = 'Gelieve een bedrag in te vullen';		
+			errormessages.push('Geef een einddatum op');
+		} else if (!$startDate.val().match(dateReg)) {
+			allOk = false;
+			errormessages.push('Geef een correcte einddatum');			
+		} else if (new Date($endDate.val()) < new Date($startDate.val())) {
+			allOk = false;
+			errormessages.push('Einddatum moet in de na de begindatum liggen');	
 		}
 
 		// check result
 		if ($result.val() != 'false' && $result.val() != 'true') {
 			allOk = false;
-			console.log("error result");
+		}
+
+		// check amount
+		if ($amount.val() == '') {
+			allOk = false;
+			errormessages.push('Gelieve een bedrag in te vullen');		
+		} else if ($amount.val() <= '0') {
+			allOk = false;
+			errormessages.push('Gelieve een bedrag groter dan 0 in te vullen');		
+		}
+
+		// check charity
+		if ($charity.val() <= '0') {
+			allOk = false;
+			errormessages.push('Gelieve een charity te kiezen');			
 		}
 
 		return allOk;
@@ -232,6 +259,9 @@ $(document).ready(function() {
 
 		// form checking
 		var allOk = validateForm();
+
+		// clear errormessagesummaryblock
+		$('#summary').empty();
 
 		// draw conclusion
 		if (allOk) {
@@ -275,12 +305,17 @@ $(document).ready(function() {
 					console.log( errorThrown );
 				}
 			});
+
+			// hide summary
+			$('#summary').css('display','none');
 			$('#summary').removeClass('showSummary');
 		} else {
 			// show summary
+			$.each(errormessages, function( index, message ) {
+				$('#summary').append("<p>" + message + "</p>");
+			});
 			$('#summary').addClass('showSummary');
 			$('#summary').css('display','block');
 		}
-
 	});
 });
