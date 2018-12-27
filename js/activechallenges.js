@@ -69,8 +69,7 @@ $(document).ready(function() {
       }),
       processData: false,
       success: function(data, textStatus, jqXHR) {
-        console.log(data);
-        $that.prev('a').find('.progressbar__status').css('width', data.userChallenge.dailyProgressPercentage);
+        $that.prev('a').find('.progressbar__status').css('width', data.dailyProgressPercentage);
       },
       error : function(jqXhr, textStatus, errorThrown) {
         //Check if the authentication was invalid, in which case return to index
