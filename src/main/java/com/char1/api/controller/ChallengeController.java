@@ -4,7 +4,6 @@ import com.char1.api.controller.exception.EntityNotFoundException;
 import com.char1.api.entity.Challenge;
 import com.char1.api.repository.CategoryRepository;
 import com.char1.api.repository.ChallengeRepository;
-import org.apache.commons.lang.math.NumberUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,6 +21,7 @@ public class ChallengeController {
 
     @GetMapping(value = "/{idChallenge}")
     public Challenge getChallenge(@PathVariable int idChallenge) {
+        if (!challengeRepository.existsById(idChallenge)) throw new EntityNotFoundException();
         return challengeRepository.findById(idChallenge);
     }
 

@@ -1,6 +1,5 @@
 package com.char1.api.functionalTest.controller;
 
-
 import com.char1.api.entity.*;
 import com.char1.api.functionalTest.FunctionalTest;
 import com.char1.api.repository.*;
@@ -43,7 +42,7 @@ public class ChallengeTest extends FunctionalTest {
 
     @Before
     public void createDummyData() {
-        challengeRepository.saveAndFlush(dummyChallenge);
+        challengeRepository.save(dummyChallenge);
     }
 
     @After
@@ -56,20 +55,22 @@ public class ChallengeTest extends FunctionalTest {
     public void createChallenge() {
         Challenge newChallenge = new Challenge();
         
-        Set<Category> dummyCategorySet = new HashSet<>();
-        dummyCategorySet.add(dummyCategory);
+        Category newCategory = new Category();
+        newCategory.setName("Relaxation");
+        Set<Category> newCategorySet = new HashSet<>();
+        newCategorySet.add(newCategory);
 
         newChallenge = new Challenge();
-        newChallenge.setCategory(dummyCategorySet);
-        newChallenge.setDescription("hotdogs eten");
-        newChallenge.setLinkToLogo("http://something.com");
-        newChallenge.setTitle("HOTDOGS");
+        newChallenge.setCategory(newCategorySet);
+        newChallenge.setDescription("hotdogs eten 2");
+        newChallenge.setLinkToLogo("something.com");
+        newChallenge.setTitle("HMEER OTDOGS");
         newChallenge.setUnitToMeasure("hotdogs");
 
         given()
                 .spec(super.requestSpecification)
                 .body(newChallenge)
-                .when().post("/userchallenge")
+                .when().post("/challenge")
                 .then().statusCode(200);
     }
 
@@ -105,28 +106,12 @@ public class ChallengeTest extends FunctionalTest {
                 .when().get("/challenge/0")
                 .then().statusCode(404);
     }
-
+    
     @Test
-    public void deleteChallengeWithInvalidId() {
+    public void getChallengesByCategory() {
         given()
                 .spec(super.requestSpecification)
-                .when().delete("/challenge/1a")
-                .then().statusCode(400);
-    }
-
-    @Test
-    public void deleteChallengeWithZeroId() {
-        given()
-                .spec(super.requestSpecification)
-                .when().delete("/challenge/0")
-                .then().statusCode(404);
-    }
-
-    @Test
-    public void deleteChallenge() {
-        given()
-                .spec(super.requestSpecification)
-                .when().delete("/challenge/" + dummyChallenge.getId())
-                .then().statusCode(200);
+                .when().get("/challenge/" + dummyCategory.getId() + "/category")
+                .then().statusCode(200).and().body("size()", equalTo(1));
     }
 }
