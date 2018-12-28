@@ -34,6 +34,10 @@ navbar {
   padding: 4rem 4rem;
 }
 
+.pending .challengetile__info {
+  height: 25rem;
+}
+
 .challengetile img {
   background-color: gray;
   height: 15rem;
@@ -71,6 +75,15 @@ navbar {
   width: 15%;
 }
 
+.challengetile__add.pending {
+  height: 25rem;
+  background-color: #16262e;
+}
+
+.challengetile__add.pending p {
+  color: #2e4756;
+}
+
 .challengetile__add.completed {
   background-color: #16262e;
 }
@@ -84,6 +97,10 @@ navbar {
   height: 25px;
   margin: 45px 0px 5px;
   width: 100%;
+}
+
+.pending .progressbar {
+  display: none;
 }
 
 .progressbar__status {
