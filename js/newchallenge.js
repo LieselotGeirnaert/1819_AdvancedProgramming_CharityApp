@@ -216,13 +216,13 @@ $(document).ready(function() {
     // check startDate
     if ($startDate.val() == "") {
       allOk = false;
-      errormessages.push("Geef een startdatum op");
+      errormessages.push("&#9888; Gelieve een startdatum te kiezen");
     } else if (!$startDate.val().match(dateReg)) {
       allOk = false;
-      errormessages.push("&#9888; Geef een correcte startdatum");
+      errormessages.push("&#9888; Gelieve een correcte startdatum te kiezen");
     } else if (new Date($startDate.val()) < new Date(currDate)) {
       allOk = false;
-      errormessages.push("&#9888; Startdatum moet in de toekomst liggen");
+      errormessages.push("&#9888; De startdatum moet in de toekomst liggen");
     }
 
     // check endDate
@@ -231,10 +231,10 @@ $(document).ready(function() {
       errormessages.push("&#9888; Geef een einddatum op");
     } else if (!$startDate.val().match(dateReg)) {
       allOk = false;
-      errormessages.push("&#9888; Geef een correcte einddatum");
+      errormessages.push("&#9888; Gelieve een correcte einddatum te kiezen");
     } else if (new Date($endDate.val()) < new Date($startDate.val())) {
       allOk = false;
-      errormessages.push("&#9888; Einddatum moet na de begindatum liggen");
+      errormessages.push("&#9888; De einddatum moet na de begindatum liggen");
     }
 
     // check result
@@ -298,7 +298,7 @@ $(document).ready(function() {
         },
         data: JSON.stringify({
           amountToCompleteDaily: parseInt($count.val()),
-          amountToDonate: parseInt($amount.val()),
+          amountToDonate: parseFloat($amount.val()),
           challengeId: parseInt($challenge.val()),
           charityId: parseInt($charity.val()),
           completeToDonate: $result.val() == "true",
