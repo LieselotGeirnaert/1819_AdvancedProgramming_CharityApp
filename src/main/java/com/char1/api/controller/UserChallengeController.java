@@ -53,7 +53,12 @@ public class UserChallengeController {
 
     @GetMapping(params = { "completed" })
     public List<UserChallenge> getAllUserChallengesWithCompletedAndUser(OAuth2Authentication auth, @RequestParam("completed") boolean completed) {
-        return userChallengeRepository.findAllByUserAndAndCompletedOrDeadlineDateBefore(userRepository.findUserByEmailAddress(auth.getPrincipal().toString()), completed, LocalDateTime.now());
+        if (completed) {
+            return userChallengeRepository.findAllByUserAndAndCompletedOrDeadlineDateBefore(userRepository.findUserByEmailAddress(auth.getPrincipal().toString()), completed, LocalDateTime.now());
+        } else {
+            return userChallengeRepository.findAllByUserAndCompletedAndDeadlineDateAfterAndStartDateBefore(userRepository.findUserByEmailAddress(auth.getPrincipal().toString()), completed, LocalDateTime.now(), LocalDateTime.now());
+        }
+
     }
 
     @GetMapping
