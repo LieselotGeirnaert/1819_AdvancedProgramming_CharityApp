@@ -36,7 +36,11 @@ public class ProgressServiceImpl implements ProgressService {
         if (requestCurrentAmount == 0) {
             if (userChallenge.getStartDate() != null && userChallenge.getDeadlineDate() != null) {
                 long daysToComplete = ChronoUnit.DAYS.between(userChallenge.getStartDate(), userChallenge.getDeadlineDate());
-                totalProgress.setCurrentAmount(userChallenge.getAmountToComplete() / (int) daysToComplete);
+                if (userChallenge.getAmountToComplete() == 0) {
+                    totalProgress.setCurrentAmount(1);
+                } else {
+                    totalProgress.setCurrentAmount(userChallenge.getAmountToComplete() / (int) daysToComplete);
+                }
             } else {
                 throw new UserChallengeDateTimeExeption();
             }
