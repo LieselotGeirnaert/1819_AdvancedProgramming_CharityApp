@@ -58,12 +58,4 @@ public class Progress {
     public void setCurrentAmount(int currentAmount) {
         this.currentAmount = currentAmount;
     }
-
-    @Override
-    public String toString() {
-        return "Progress{" +
-                "entryDate=" + entryDate +
-                ", currentAmount=" + currentAmount +
-                '}';
-    }
 }

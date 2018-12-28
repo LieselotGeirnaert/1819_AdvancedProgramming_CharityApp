@@ -72,14 +72,4 @@ public class Challenge {
     public void setUnitToMeasure(String unitToMeasure) {
         this.unitToMeasure = unitToMeasure;
     }
-
-    @Override
-    public String toString() {
-        return "Challenge{" +
-                "title='" + title + '\'' +
-                ", description='" + description + '\'' +
-                ", unitToMeasure='" + unitToMeasure + '\'' +
-                ", category=" + category +
-                '}';
-    }
 }

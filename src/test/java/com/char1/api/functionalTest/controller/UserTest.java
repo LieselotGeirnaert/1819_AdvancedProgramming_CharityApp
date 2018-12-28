@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import static io.restassured.module.mockmvc.RestAssuredMockMvc.given;
 import static org.hamcrest.core.IsEqual.equalTo;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.httpBasic;
 
 public class UserTest extends FunctionalTest {
 
@@ -75,5 +76,16 @@ public class UserTest extends FunctionalTest {
                 .when().get("/user")
                 .then().statusCode(200)
                 .body("id", equalTo(super.authenticatedUser.getId()));
+    }
+
+    @Test
+    public void obtainAccessTokenFault() {
+        given().auth().with(httpBasic("char1Client", "f2a1ed52710d4533bde25be6da03b6e3"))
+                .formParam("grant_type", "password")
+                .formParam("username", "non existent")
+                .formParam("password", "nothing")
+                .formParam("scope", "read")
+                .when().post("/oauth/token")
+                .then().statusCode(400);
     }
 }

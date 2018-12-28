@@ -35,7 +35,7 @@ public class UserChallenge {
     private boolean completeToDonate;
     private LocalDateTime startDate;
     private LocalDateTime deadlineDate;
-    private int amountToDonate;
+    private float amountToDonate;
     @Column(name = "amount_to_complete")
     private int amountToComplete = 0;
     private int amountToCompleteDaily;
@@ -82,7 +82,7 @@ public class UserChallenge {
     }
 
     public HashMap<LocalDate, Float> getDailyProgressesPercentages() {
-        return Char1Utils.returnDailyProgress(this.getDailyProgress(), amountToCompleteDaily, this.getStartDate().toLocalDate());
+        return Char1Utils.returnDailyProgress(this.getDailyProgress(), amountToCompleteDaily, this.getStartDate().toLocalDate(), this.getDeadlineDate().toLocalDate());
     }
 
     public int getAmountToCompleteDaily() {
@@ -134,11 +134,11 @@ public class UserChallenge {
         this.deadlineDate = deadlineDate;
     }
 
-    public int getAmountToDonate() {
+    public float getAmountToDonate() {
         return amountToDonate;
     }
 
-    public void setAmountToDonate(int amountToDonate) {
+    public void setAmountToDonate(float amountToDonate) {
         this.amountToDonate = amountToDonate;
     }
 
@@ -172,18 +172,5 @@ public class UserChallenge {
 
     public void setAmountToComplete(int amountToComplete) {
         this.amountToComplete = amountToComplete;
-    }
-
-    @Override
-    public String toString() {
-        return "UserChallenge{" +
-                "id=" + id +
-                ", completed=" + completed +
-                ", completeToDonate=" + completeToDonate +
-                ", startDate=" + startDate +
-                ", deadlineDate=" + deadlineDate +
-                ", amountToDonate=" + amountToDonate +
-                ", amountToComplete=" + amountToComplete +
-                '}';
     }
 }

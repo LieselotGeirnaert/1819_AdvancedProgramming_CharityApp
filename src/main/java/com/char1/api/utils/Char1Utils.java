@@ -5,6 +5,7 @@ import com.char1.api.entity.TotalProgress;
 import com.char1.api.entity.UserChallenge;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -30,18 +31,28 @@ public final class Char1Utils {
 
     public static float calculateDailyProgress(UserChallenge userChallenge) {
         List<DailyProgress> dailyProgresses = userChallenge.getDailyProgress();
+        if (userChallenge.getStartDate().toLocalDate().isAfter(LocalDateTime.now().toLocalDate())) {
+            return 0;
+        }
         return calculateProgressFilteredOnDate(dailyProgresses, LocalDate.now(), userChallenge.getAmountToCompleteDaily());
     }
 
-    public static HashMap<LocalDate, Float> returnDailyProgress(List<DailyProgress> dailyProgresses, int amountToCompleteDaily, LocalDate startDate) {
+    public static HashMap<LocalDate, Float> returnDailyProgress(List<DailyProgress> dailyProgresses, int amountToCompleteDaily, LocalDate startDate, LocalDate deadlineDate) {
         HashMap<LocalDate,Float> dailyProgressPercentagePerDate = new HashMap<>();
         Set<LocalDate> setDates;
-        long numOfDaysBetween = ChronoUnit.DAYS.between(startDate, LocalDate.now()) + 1;
-        setDates = IntStream.iterate(0, i -> i + 1)
-                .limit(numOfDaysBetween)
-                .mapToObj(i -> startDate.plusDays(i))
-                .collect(Collectors.toSet());
-        setDates.forEach(d -> dailyProgressPercentagePerDate.put(d, calculateProgressFilteredOnDate(dailyProgresses, d, amountToCompleteDaily)));
+        long numOfDaysBetween;
+        if (!startDate.isAfter(LocalDate.now())) {
+            if (LocalDate.now().isBefore(deadlineDate)) {
+                numOfDaysBetween = ChronoUnit.DAYS.between(startDate, LocalDate.now()) + 1;
+            } else {
+                numOfDaysBetween =ChronoUnit.DAYS.between(startDate, deadlineDate) + 1;
+            }
+            setDates = IntStream.iterate(0, i -> i + 1)
+                    .limit(numOfDaysBetween)
+                    .mapToObj(i -> startDate.plusDays(i))
+                    .collect(Collectors.toSet());
+            setDates.forEach(d -> dailyProgressPercentagePerDate.put(d, calculateProgressFilteredOnDate(dailyProgresses, d, amountToCompleteDaily)));
+        }
         return dailyProgressPercentagePerDate;
     }
 

@@ -6,7 +6,7 @@ import java.time.LocalDateTime;
 public class UserChallengeRequest {
     private int amountToComplete;
     private int amountToCompleteDaily;
-    private int amountToDonate;
+    private float amountToDonate;
     private int challengeId;
     private int charityId;
     private boolean completeToDonate;
@@ -21,11 +21,11 @@ public class UserChallengeRequest {
         this.amountToComplete = amountToComplete;
     }
 
-    public int getAmountToDonate() {
+    public float getAmountToDonate() {
         return amountToDonate;
     }
 
-    public void setAmountToDonate(int amountToDonate) {
+    public void setAmountToDonate(float amountToDonate) {
         this.amountToDonate = amountToDonate;
     }
 
