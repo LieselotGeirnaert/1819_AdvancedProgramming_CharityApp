@@ -10,11 +10,20 @@ $(document).ready(function() {
     success: function(data, textStatus, jQxhr) {
       //Do something with the returned data here
       $.each(data, function(i, charity) {
+        var bankAccount;
+        if (charity.bankAccount == null) {
+          bankAccount = "";
+        } else {
+          bankAccount = charity.bankAccount.bankAccount;
+        }
+
         var $charity =
           '<section class="charitytile collapsed"><img src="' +
           charity.linkToLogo +
           '" alt=""><div class="charitytile__info"><p>' +
           charity.name +
+          "</p><p>" +
+          bankAccount +
           "</p><p>" +
           charity.description +
           "</p></div></section>";
