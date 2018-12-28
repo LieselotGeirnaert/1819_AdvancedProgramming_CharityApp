@@ -1,7 +1,7 @@
 $(document).ready(function() {
   // Get active userchallenges
   $.ajax({
-    url: "http://10.129.32.15:8080/userchallenge",
+    url: "http://10.129.32.15:8080/userchallenge?completed=false",
     type: "get",
     dataType: "json",
     beforeSend: function(xhr, settings) {
