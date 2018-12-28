@@ -14,6 +14,6 @@ public interface UserChallengeRepository extends JpaRepository<UserChallenge, In
     UserChallenge findById(int id);
     List<UserChallenge> findAllByUser(User user);
     List<UserChallenge> findAllByUserAndAndCompletedOrDeadlineDateBefore(User user, boolean completed, LocalDateTime deadline);
-    List<UserChallenge> findAllByUserAndCompletedAndDeadlineDateAfterAndStartDateBefore(User user, boolean completed, LocalDateTime deadline, LocalDateTime startdate);
+    List<UserChallenge> findAllByUserAndCompletedAndDeadlineDateAfter(User user, boolean completed, LocalDateTime deadline);
     void deleteById(int id);
 }

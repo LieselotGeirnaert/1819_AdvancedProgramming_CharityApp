@@ -56,7 +56,7 @@ public class UserChallengeController {
         if (completed) {
             return userChallengeRepository.findAllByUserAndAndCompletedOrDeadlineDateBefore(userRepository.findUserByEmailAddress(auth.getPrincipal().toString()), completed, LocalDateTime.now());
         } else {
-            return userChallengeRepository.findAllByUserAndCompletedAndDeadlineDateAfterAndStartDateBefore(userRepository.findUserByEmailAddress(auth.getPrincipal().toString()), completed, LocalDateTime.now(), LocalDateTime.now());
+            return userChallengeRepository.findAllByUserAndCompletedAndDeadlineDateAfter(userRepository.findUserByEmailAddress(auth.getPrincipal().toString()), completed, LocalDateTime.now());
         }
 
     }
