@@ -1,6 +1,6 @@
 $(document).ready(function() {
   $.ajax({
-    url: "http://10.129.32.15:8080/userchallenge",
+    url: "http://10.129.32.15:8080/userchallenge?completed=true",
     type: "get",
     dataType: "json",
     beforeSend: function(xhr, settings) {
@@ -10,9 +10,7 @@ $(document).ready(function() {
     success: function(data, textStatus, jqXHR) {
       var completedChallenges = [];
       $.each(data, function(i, challenge) {
-        if (challenge.completed == true) {
           completedChallenges.push(challenge);
-        }
       });
 
       if (completedChallenges.length > 0) {
