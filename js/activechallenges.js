@@ -74,7 +74,7 @@ $(document).ready(function() {
       .attr("id")
       .replace("userchallenge-", "");
 
-    if (!$(this).hasClass("completed")) {
+    if (!$(this).hasClass("completed") && !$(this).hasClass("pending")) {
       $.ajax({
         url: "http://10.129.32.15:8080/dailyprogress",
         type: "post",
