@@ -14,8 +14,7 @@ $(document).ready(function() {
     success: function(data, textStatus, jqXHR) {
       var startdate = new Date(data.startDate);
       var enddate = new Date(data.deadlineDate);
-      console.log(data);
-      console.log(data.progressPercentage);
+
       var totalprogress =
         '<div class="progressbar__status" style="width:' +
         data.progressPercentage +
@@ -41,7 +40,7 @@ $(document).ready(function() {
       $("#charity").append(data.charity.name);
       $("#amount").append(data.amountToDonate);
 
-      $("#totalprogressbar").append(totalprogress);
+      $(".totalprogressbar").append(totalprogress);
 
       $.each(data.dailyProgressesPercentages, function(day, progress) {
         var date = new Date(day);
@@ -65,7 +64,6 @@ $(document).ready(function() {
         eraseCookie("access_token");
         window.location.href = "index.html";
       }
-      console.log(errorThrown);
     }
   });
 });
