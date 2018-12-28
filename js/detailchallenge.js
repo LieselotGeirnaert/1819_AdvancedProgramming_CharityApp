@@ -40,7 +40,7 @@ $(document).ready(function() {
       $("#charity").append(data.charity.name);
       $("#amount").append(data.amountToDonate);
 
-      $(".totalprogressbar").append(totalprogress);
+      $("#totalprogressbar").append(totalprogress);
 
       $.each(data.dailyProgressesPercentages, function(day, progress) {
         var date = new Date(day);
