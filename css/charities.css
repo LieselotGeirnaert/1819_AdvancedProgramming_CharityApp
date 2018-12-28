@@ -48,6 +48,11 @@ p {
 }
 
 .charitytile__info p:nth-child(2) {
+  color: #7bcdba;
+  padding: 1rem 0rem;
+}
+
+.charitytile__info p:nth-child(3) {
   font-size: 3.5rem;
   font-weight: 200;
 }
