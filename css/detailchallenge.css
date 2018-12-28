@@ -89,7 +89,7 @@ p {
   margin: 2rem 0rem;
 }
 
-.totalprogressbar,
+#totalprogressbar,
 .progressbar {
   background-color: #16262e;
   height: 25px;
