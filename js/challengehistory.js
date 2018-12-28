@@ -27,7 +27,9 @@ $(document).ready(function() {
             "</p><p>" +
             challenge.challenge.title +
             "</p><p>" +
-            challenge.challenge.unitToMeasure +
+            challenge.amountToCompleteDaily +
+            " " +
+            challenge.challenge.unitToMeasure.toLowerCase() +
             '</p></div><div class="progressbar"><div class="progressbar__status" style="width:' +
             challenge.challenge.progressPercentage +
             '%"></div></div></a>';
