@@ -25,7 +25,7 @@ $(document).ready(function() {
             '" alt=""><div class="challengetile__text"><p>' +
             challenge.challenge.category[0].name +
             "</p><p>" +
-            challenge.challenge.description +
+            challenge.challenge.title +
             "</p><p>" +
             challenge.challenge.unitToMeasure +
             '</p></div><div class="progressbar"><div class="progressbar__status" style="width:' +
