@@ -10,7 +10,6 @@ $(document).ready(function() {
     success: function(data, textStatus, jqXHR) {
       $("#name").append(data.firstName + "</br>" + data.lastName);
       $("#emailaddress").append(data.emailAddress);
-      $("#bankaccount").append(data.bankAccount);
     },
     error: function(jqXhr, textStatus, errorThrown) {
       //Check if the authentication was invalid, in which case return to index
