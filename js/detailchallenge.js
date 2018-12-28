@@ -14,7 +14,8 @@ $(document).ready(function() {
     success: function(data, textStatus, jqXHR) {
       var startdate = new Date(data.startDate);
       var enddate = new Date(data.deadlineDate);
-
+      console.log(data);
+      console.log(data.progressPercentage);
       var totalprogress =
         '<div class="progressbar__status" style="width:' +
         data.progressPercentage +

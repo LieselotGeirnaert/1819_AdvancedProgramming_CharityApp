@@ -17,15 +17,19 @@ select {
   margin: 30px;
 }
 
+#addchallenge {
+  width: 100%;
+}
+
 .input--underline {
   border-bottom-color: #2e4756;
   margin: 15px 30px;
   padding-bottom: 0px;
 }
 
-#count .input--underline {
+#count.input--underline {
   text-align: center;
-  width: 5rem;
+  width: 10rem;
 }
 
 #info .input--underline {
@@ -35,7 +39,7 @@ select {
 
 #category,
 #challenge {
-  width: 45rem;
+  width: 50rem;
 }
 
 #start input,
@@ -66,30 +70,30 @@ select {
 #end {
   margin-bottom: 8rem;
 }
+
 .btn {
   color: #3c7a89;
   margin: 5rem 10rem 5rem 10rem;
 }
 
-#count {
-  width: 60px;
+#summary {
+  color: #7bcdba;
+  display: none;
+  font-size: 2rem;
+  margin: 1rem 0 3rem 0;
+  overflow: hidden;
+  padding: 1rem;
+  text-align: center;
+  text-transform: lowercase;
+  transition: padding 2s ease-in-out 2s, height 2s ease-in-out 2s;
 }
 
-#summary {
-  background-color: rgba(227, 64, 100, 0.2);
-	border: 4px ridge;
-	border-color: rgba(227, 64, 100, 0.2);
-	display: none;
-	margin: 1rem 0 3rem 0;
-	padding: 1rem;
-	overflow: hidden;
-  transition: padding 2s ease-in-out 2s, height 2s ease-in-out 2s;
-  font-size: 2.5rem;
-  color: #2e4756;
+#summary p {
+  padding: 1rem 2rem;
 }
 
 .showSummary {
-	display: block;
-	height: auto;
-	padding: 2rem;
+  display: block;
+  height: auto;
+  padding: 2rem;
 }
