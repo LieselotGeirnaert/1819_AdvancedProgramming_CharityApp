@@ -7,7 +7,6 @@ package com.char1.api.controller;
 
 import com.char1.api.controller.exception.EntityNotFoundException;
 import com.char1.api.controller.exception.MissingValuesException;
-import com.char1.api.controller.exception.UnautherizedException;
 import com.char1.api.controller.exception.UserChallengeDateTimeExeption;
 import com.char1.api.entity.UserChallenge;
 import com.char1.api.repository.ChallengeRepository;
@@ -20,6 +19,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.oauth2.provider.OAuth2Authentication;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -53,7 +53,7 @@ public class UserChallengeController {
 
     @GetMapping(params = { "completed" })
     public List<UserChallenge> getAllUserChallengesWithCompletedAndUser(OAuth2Authentication auth, @RequestParam("completed") boolean completed) {
-        return userChallengeRepository.findAllByUserAndAndCompleted(userRepository.findUserByEmailAddress(auth.getPrincipal().toString()), completed);
+        return userChallengeRepository.findAllByUserAndAndCompletedOrDeadlineDateBefore(userRepository.findUserByEmailAddress(auth.getPrincipal().toString()), completed, LocalDateTime.now());
     }
 
     @GetMapping

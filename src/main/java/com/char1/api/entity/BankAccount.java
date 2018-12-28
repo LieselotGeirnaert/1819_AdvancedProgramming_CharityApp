@@ -27,12 +27,4 @@ public class BankAccount {
     public void setId(int id) {
         this.id = id;
     }
-
-    @Override
-    public String toString() {
-        return "BankAccount{" +
-                "BankAccount='" + BankAccount + '\'' +
-                '}';
-    }
-
 }
